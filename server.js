@@ -2,11 +2,11 @@
 var express = require("express"),
     bodyParser = require("body-parser"),
     exphbs = require("express-handlebars"),
-    mongoose = require("mongoose");
+    mongoose = require("mongoose"),
 
-// Sets up the Express App
-var app = express();
-var PORT = process.env.PORT || 3000;
+    // Sets up the Express App
+    app = express(),
+    PORT = process.env.PORT || 3000;
 
 // serve public files as static
 app.use(express.static("public"));
@@ -18,7 +18,7 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 // // Database configuration with mongoose
-// mongoose.connect("mongodb:/localhost/hello");
+// mongoose.connect("mongodb:/localhost/pulse");
 // var db = mongoose.connection;
 //
 // // Show any mongoose errors
@@ -32,7 +32,7 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // });
 
 // router
-var routes  = require("./controllers/controller.js");
+var routes  = require("./controllers/controller");
 app.use('/', routes);
 
 // set up handlebars engine
