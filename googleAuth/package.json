@@ -1,0 +1,27 @@
+{
+  "name": "pulse",
+  "dependencies": {
+    "express": "*",
+    "googleapis": "*"
+  },
+  "version": "1.0.0",
+  "description": "pulse app google auth",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github/bspille/pulse.git"
+  },
+  "keywords": [
+    "pulse",
+    "app",
+    "google",
+    "auth",
+    "login"
+  ],
+  "author": "Greg Barone",
+  "license": "ISC"
+}
