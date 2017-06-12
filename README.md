@@ -22,5 +22,5 @@ touch server.js &&
 touch webpack.config.js &&
 echo native | tee .slugignore &&
 npm init --yes &&
-npm install react react-dom express mongoose axios geocoder twilio react-router-dom body-parser --save &&
+npm install react react-dom express express-handlebars mongoose axios geocoder twilio react-router-dom body-parser --save &&
 npm install babel-core babel-loader babel-preset-env webpack --save-dev

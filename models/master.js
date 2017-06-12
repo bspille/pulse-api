@@ -1,99 +1,105 @@
-
+// TODO: update the nameing to match the token when that is up
 // Require mongoose
-var mongoose = require("mongoose");
-// Create Schema class
-var Schema = mongoose.Schema;
+var mongoose = require("mongoose"),
 
-// Create article schema
-var userSchema = new Schema({
+    // Create Schema class
+    Schema = mongoose.Schema,
 
-  // token id hash from authentication token
-  token_id: {
-    type: String,
-    required: true
-  },
+    // Create article schema
+    userSchema = new Schema({
 
-  // users first name
-  first_name: {
-    type: String,
-    required: true
-  },
+      // token id hash from authentication token
+      token_sub: {
+        type: String,
+        required: true
+      },
 
-  // users last name
-  last_name: {
-    type: String,
-    required: true
-  },
+      // users first name
+      first_name: {
+        type: String,
+        required: true
+      },
 
-  // users zip code
-  zip: {
-    type: Number,
-    required: true
-  },
+      // users last name
+      last_name: {
+        type: String,
+        required: true
+      },
 
-  // users pin number doubles as a identification question
-  pin: {
-    type: Number,
-    required: true
-  },
+      profile_image: {
+        type: String,
+        required: false,
+      },
 
-  // users set time for automatic pulse contacts
-  time_set: {
-    type: Date,
-    required: false
-  },
+      // users zip code
+      zip: {
+        type: Number,
+        required: false
+      },
 
-  // time stamp when the geo_location is is submitted
-  time_stamp: {
-    type: Date,
-    required: false
-  },
+      // users pin number doubles as a identification question
+      pin: {
+        type: Number,
+        required: true
+      },
 
-  // geo location information for pinning user location
-  geo_location: {
-    type: String,
-    required: false
-  },
+      // users set time for automatic pulse contacts
+      time_set: {
+        type: Date,
+        required: false
+      },
 
-  // user contact phone number
-  phone_number: {
-    type: Number,
-    required: true
-  },
+      // time stamp when the geo_location is is submitted
+      time_stamp: {
+        type: Date,
+        required: false
+      },
 
-  // users selected contacts
-  contacts: [{
+      // geo location information for pinning user location
+      geo_location: {
+        type: String,
+        required: false
+      },
 
-    // contacts first name
-    first_name:{
-      type: String,
-      required: true
-    },
+      // user contact phone number
+      phone_number: {
+        type: Number,
+        required: true
+      },
 
-    // contacts last name
-    last_name: {
-      type: String,
-      required: true
-    },
+      // users selected contacts
+      contacts: [{
 
-    // contact phone number
-    phone_number: {
-      type: Number,
-      required: true
-    },
+        // contacts first name
+        first_name:{
+          type: String,
+          required: true
+        },
 
-    // set true for the contact to be pulsed
-    active: {
-    type: Boolean,
-    required: true,
-    default: false
-    }
-  }] // end of contact field
+        // contacts last name
+        last_name: {
+          type: String,
+          required: true
+        },
 
-}); // end of schema
+        // contact phone number
+        phone_number: {
+          type: Number,
+          required: true
+        },
 
-// Create the User model
-var User = mongoose.model("User", userSchema);
+        // set true for the contact to be pulsed
+        active: {
+          type: Boolean,
+          required: true,
+          default: false
+        }
+      }] // end of contact field
+
+    }), // end of schema
+
+  // Create the User model
+  User = mongoose.model("User", userSchema);
 
 // Export the model
 module.exports = User;

@@ -1,65 +1,50 @@
 // TODO: add anonymous functions to provide CRUD operations in mongoose
+// TODO: token from google includes all the info for the user profile
+      // create a route to handle both get and create
 var express = require("express"),
     router = express.Router(),
     twilio = require("./utils/twilio.js"),
     crud = require("./utils/crud.js");
 
     // route to add new user
-    router.post("/new_user", (req, res) =>{
+    router.post("/user", (req, res) =>{
 
-      // checks the collection for existing entry
-      crud.read().then((err, results) => {
+      // get user information by subject hash taken from id token
+      var token = req.body.token
+          subject = token.sub,
+          user = crud.read(subject).then(() => {
 
-        // logs errors
-        if (err) {
-          console.log("read for new user: " + err);
+        // if user returns null there is no entry in existance
+        if (user == null){
+          // create a new entry
+          user = crud.create(token);
+          res.json(user);
         }
 
-        // if results are produced the entry exist
-        if(results){
-          console.log("user already in the system");
-        }
-
-        // if no results are produced there is no entry in existance
+        // if results return the users information
         else {
-          // create a new user entry
-          crud.create().then((err, results) =>{
-            if (err) {
-              console.log("create new user error: " + err);
-            }
-            else {
-              console.log("new entry: " + results);
-            }
-          }); // end of create.then
+          // send user information
+          res.json(user);
         }
-
-      }); // end of read.then
+      }); // end of then function to handle asynchronous return
     }); // end of post new_user
 
     // route to update user
     router.put("/update", (req, res) =>{
       // assumes the request body is a array of objects with a property of where
-      var fields = req.body;
-      // parses the array and runs update for each object
-      fields.map((x) => {
-        crud.update(x);
-      });
+      var updates = req.body,
+          user = crud.update(updates).then(() => {
+            res.json(user);
+          });
     });
 
     // route to delete contacts
     router.delete("/delete", (req, res) =>{
       // assumes request body will be a array of objects with a propery of where
       var fields = req.body;
-      // parse the array and runs delete for each object
-      fields.map((x) => {
-        crud.delete(x);
-      });
-    });
-
-    // route to get user profile
-    router.get("/user", (req, res) =>{
-      // res.render("index");
-      crud.read();
+          user = crud.delete(deletes).then(() => {
+            res.json(user);
+          });
     });
 
     // route to send out pulse
