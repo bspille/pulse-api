@@ -3,7 +3,7 @@ var User = require("../../models/master.js"),
       create: (token) => {
         // console.log("create new user");
         var entry = new User({
-              token_sub: token.sub
+              token_Sub: token.sub,
               first_name: token.first_name,
               last_name: token.last_name,
               profile_image: token.image_url
@@ -11,7 +11,7 @@ var User = require("../../models/master.js"),
           entry.save((err, results) => {
             if (err){
               console.log("crud error create: " + err);
-              break;
+
             }
             else {
               console.log("successfully created: " + results);
@@ -27,7 +27,7 @@ var User = require("../../models/master.js"),
           // log error if there is a read error
           if (err) {
             console.log("crud error read: " + err);
-            break;
+
           }
 
           // return the users information if found
@@ -50,7 +50,7 @@ var User = require("../../models/master.js"),
         .exec((err, results) => {
           if (err) {
             console.log("crud error update: " + err);
-            break;
+          
           }
           else {
             console.log("successfully updated: " + results);
@@ -66,7 +66,7 @@ var User = require("../../models/master.js"),
         .exec((err, results) => {
           if (err) {
             console.log("crud error delete: " + err);
-            break;
+
           }
           else {
             console.log("successfully deleted: " + results);
