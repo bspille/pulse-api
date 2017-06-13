@@ -46,11 +46,11 @@ var User = require("../../models/master.js"),
         // updates the user by array of objects updates must
         // recieve a method like $set: or $push: followed by the object to change
 
-        User.findOneAndUpdate({ "token_sub": updates.token.sub }, updates.update,{new: true})
+        User.findOneAndUpdate({ "token_sub": updates.token.sub }, updates.update)
         .exec((err, results) => {
           if (err) {
             console.log("crud error update: " + err);
-          
+
           }
           else {
             console.log("successfully updated: " + results);

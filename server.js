@@ -3,7 +3,7 @@ var express = require("express"),
     bodyParser = require("body-parser"),
     exphbs = require("express-handlebars"),
     mongoose = require("mongoose"),
-
+    seed = require("./test/seed.js"),
     // Sets up the Express App
     app = express(),
     PORT = process.env.PORT || 3000;
@@ -41,5 +41,8 @@ app.set("view engine", "handlebars");
 
 // starting express app
   app.listen(PORT, function() {
+    // initial seeding
+    seed.first_seed();
+    seed.update_user();
     console.log("App listening on PORT " + PORT);
   });
