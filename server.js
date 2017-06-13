@@ -32,12 +32,12 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // });
 
 // router
-// var routes  = require("./controllers/controller.js");
-// app.use('/', routes); TODO: uncomment these 2 ^
+var routes  = require("./controllers/controller.js");
+app.use('/', routes);
 
 // set up handlebars engine
-// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-// app.set("view engine", "handlebars"); TODO: these too!
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 // starting express app
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
