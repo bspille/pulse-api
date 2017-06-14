@@ -1,6 +1,10 @@
-var twilio = {
-  pulse: () => {
-    console.log("twilio pulse");
+
+var crud = require("./crud.js"),
+    twilio = {
+  pulse: (subject) => {
+    // console.log("twilio pulse");
+    // return user object with matching subject value see route
+    crud.read(subject);
 
     // TODO: move all of this into a function
     // TODO: export function
@@ -25,7 +29,7 @@ var twilio = {
           console.log(message.sid);
       });
     }
-    
+
   }
 };
 
