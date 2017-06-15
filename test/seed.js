@@ -11,22 +11,22 @@ var Seed = {
         {
         givenName: "chris",
         familyName: "callanjr",
-        phoneNumber: 6094406403
+        phoneNumber: "6094406403"
         },
         {
         givenName: "ben",
         familyName: "spille",
-        phoneNumber: 6094681411
+        phoneNumber: "6094681411"
         },
         {
         givenName: "greg",
         familyName: "barone",
-        phoneNumber: 7327701167
+        phoneNumber: "7327701167"
         },
         {
         givenName: "josh",
         familyName: "butler",
-        phoneNumber: 9084158831
+        phoneNumber: "9084158831"
         }
       ]
     });

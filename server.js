@@ -18,6 +18,7 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 // Database configuration with mongoose
+mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/pulse");
 var db = mongoose.connection;
 
