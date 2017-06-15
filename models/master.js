@@ -9,24 +9,24 @@ var mongoose = require("mongoose"),
     userSchema = new Schema({
 
       // token id hash from authentication token
-      token_sub: {
+      tokenSub: {
         type: String,
         required: true
       },
 
       // users first name
-      first_name: {
+      givenName: {
         type: String,
         required: true
       },
 
       // users last name
-      last_name: {
+      familyName: {
         type: String,
         required: true
       },
 
-      profile_image: {
+      imageUrl: {
         type: String,
         required: false,
       },
@@ -40,50 +40,50 @@ var mongoose = require("mongoose"),
       // users pin number doubles as a identification question
       pin: {
         type: Number,
-        required: true
+        required: false
       },
 
       // users set time for automatic pulse contacts
-      time_set: {
+      timeSet: {
         type: Date,
         required: false
       },
 
       // time stamp when the geo_location is is submitted
-      time_stamp: {
+      timeStamp: {
         type: Date,
         required: false
       },
 
       // geo location information for pinning user location
-      geo_location: {
+      geoLocation: {
         type: String,
         required: false
       },
 
       // user contact phone number
-      phone_number: {
+      phoneNumber: {
         type: Number,
-        required: true
+        required: false
       },
 
       // users selected contacts
       contacts: [{
 
         // contacts first name
-        first_name:{
+        givenName:{
           type: String,
           required: true
         },
 
         // contacts last name
-        last_name: {
+        familyName: {
           type: String,
           required: true
         },
 
         // contact phone number
-        phone_number: {
+        phoneNumber: {
           type: Number,
           required: true
         },
