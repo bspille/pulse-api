@@ -33,13 +33,13 @@ var mongoose = require("mongoose"),
 
       // users zip code
       zip: {
-        type: Number,
+        type: String,
         required: false
       },
 
       // users pin number doubles as a identification question
       pin: {
-        type: Number,
+        type: String,
         required: false
       },
 
@@ -63,7 +63,7 @@ var mongoose = require("mongoose"),
 
       // user contact phone number
       phoneNumber: {
-        type: Number,
+        type: String,
         required: false
       },
 
@@ -84,7 +84,7 @@ var mongoose = require("mongoose"),
 
         // contact phone number
         phoneNumber: {
-          type: Number,
+          type: String,
           required: true
         },
 
