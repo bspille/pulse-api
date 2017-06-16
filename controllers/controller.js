@@ -50,8 +50,9 @@ var express = require("express"),
 
     // route to send out pulse
     router.get("/pulse", (req, res) =>{
-      var token = req.body.token
-          subject = token.sub;
+
+      // var token = req.body.token
+      //     subject = token.sub;
           // replace 1 with subject for later use with http requests
           // 1 is the seed tokenSub created for querying the data collection
       twilio.pulse(1);
