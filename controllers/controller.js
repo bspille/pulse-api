@@ -1,18 +1,26 @@
-// TODO: add anonymous functions to provide CRUD operations in mongoose
-// TODO: token from google includes all the info for the user profile
+
+// TODO: token from google fetches all the info for the user profile
       // create a route to handle both get and create
 var express = require("express"),
     router = express.Router(),
     twilio = require("./utils/twilio.js"),
     crud = require("./utils/crud.js"),
-    path = require('path');
+    token = require("./utils/google.js"),
+    path = require('path'),
+    // front end application client id
+    CLIENT_ID = '533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com';
+
+
 
     // route to add new user
     router.post("/user", (req, res) =>{
 
+
+
       // get user information by subject hash taken from id token
-      var token = req.body.token
-          subject = token.sub,
+      var token = req.body.token,
+          verified = token.verifyToken(token, CLIENT_ID)
+          subject =
           user = crud.read(subject).then(() => {
 
         // if user returns null there is no entry in existance
