@@ -4,7 +4,8 @@
 var express = require("express"),
     router = express.Router(),
     twilio = require("./utils/twilio.js"),
-    crud = require("./utils/crud.js");
+    crud = require("./utils/crud.js"),
+    path = require('path');
 
     // route to add new user
     router.post("/user", (req, res) =>{
@@ -58,7 +59,7 @@ var express = require("express"),
 
     // route to render the welcome page
     router.get("/", (req, res) =>{
-      // res.render("index");
+      res.sendFile(path.join(__dirname + '/../public/test.html'));
       console.log('welcome');
     });
 

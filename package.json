@@ -25,6 +25,7 @@
     "express-handlebars": "^3.0.0",
     "geocoder": "^0.2.3",
     "mongoose": "^4.10.5",
+    "path": "^0.12.7",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",

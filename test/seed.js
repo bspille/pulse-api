@@ -3,7 +3,7 @@ var User = require("../models/master.js");
 var Seed = {
   firstSeed: () => {
     var newUser = new User({
-      tokenSub: 1,
+      tokenSub: '1',
       givenName: 'ben',
       familyName: 'spille',
       imageUrl: 'https://www.planwallpaper.com/static/images/maxresdefault1_edrCIjS.jpg',
