@@ -19,27 +19,17 @@ var User = require("../../models/master.js"),
             }
           });
       },
-      read: (subject) => {
+      read: (subject, cb) => {
         // console.log("find user");
         // takes in the token sub (subject) and searches for entries that match
-        User.find({sub: subject}).exec((err, results) => {
-
+        User.find({tokenSub: subject}).exec((err, results) => {
           // log error if there is a read error
           if (err) {
             console.log("crud error read: " + err);
-
           }
 
-          // return the users information if found
-          if (results){
-            return (results);
-          }
-
-          // return null if no results are found
-          else {
-            return (null);
-          }
-        })
+          cb(results);
+        });
       },
       update: (updates) => {
         // console.log("update user");

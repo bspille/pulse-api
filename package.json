@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed": "(cd test && node firstSeed)"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "express": "^4.15.3",
     "express-handlebars": "^3.0.0",
     "geocoder": "^0.2.3",
+    "google-auth-library": "^0.10.0",
     "mongoose": "^4.10.5",
     "path": "^0.12.7",
     "react": "^15.5.4",

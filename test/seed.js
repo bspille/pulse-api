@@ -1,7 +1,7 @@
 var User = require("../models/master.js");
 
 var Seed = {
-  firstSeed: () => {
+  firstSeed: (cb) => {
     var newUser = new User({
       tokenSub: '1',
       givenName: 'ben',
@@ -43,7 +43,7 @@ var Seed = {
        else {
          console.log("####### saved: " + doc);
        }
-
+       if (cb) cb();
      }); // save
    }
  }
