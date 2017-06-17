@@ -181,10 +181,9 @@ body {
   background-color: #656565;
 }
 
-
 .shadow {
-    -moz-box-shadow: 0 0 30px 2px #7d7d7d;
-    -webkit-box-shadow: 0 0 30px 2px #7d7d7d;
+  -moz-box-shadow: 0 0 30px 2px #7d7d7d;
+  -webkit-box-shadow: 0 0 30px 2px #7d7d7d;
 }
 
 
@@ -243,6 +242,8 @@ body {
   background-color: #ff0000;
   -moz-box-shadow: 0 0 30px 2px #7d7d7d;
   -webkit-box-shadow: 0 0 30px 2px #7d7d7d;
+  /*background-color: #115b8d;*/
+
 }
 
 .button-rounded-hover:hover:before,
@@ -252,6 +253,7 @@ body {
   transform: translateX(0%);
   opacity: 0.25;
 }
+
 
 /*------------------Footer------------------*/
 
