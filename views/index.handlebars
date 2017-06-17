@@ -39,7 +39,7 @@
     <li><a href="#">Help</a></li>
   </ul>
   <ul class="vertical menu">
-    <li><a href="#" data-onsuccess="onSignIn">Sign In</a></li>
+    {{!--<li><a href="#" data-onsuccess="onSignIn">Sign In</a></li> This button is not necessary. If user needs to sign in, they will be redirected to splash page--}}
     <li><a href="#" onclick="signOut();">Sign Out</a></li>
   </ul>
   <ul class="menu simple social-links">
@@ -87,7 +87,8 @@
     {{!--Begin New Activity Button--}}
     <a class="button app-button" href="#">Begin New Activity</a>
     <br> {{!--PULSE BUTTON!!!--}}
-    <button class="button button-rounded-hover"><i class="fa fa-ravelry" aria-hidden="true"></i></button>
+    {{!--<button class="button button-rounded-hover"><i class="fa fa-ravelry" aria-hidden="true"></i></button>--}}
+    <button id="pulse-button" class="button button-rounded-hover"><img src="../assets/images/radio2.png"></button>
   </div>
 </div>
 <div class="columns pulse-footer" data-sticky-container data-stick-to="bottom">
