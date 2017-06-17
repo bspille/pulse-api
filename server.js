@@ -3,6 +3,8 @@ var express = require("express"),
     bodyParser = require("body-parser"),
     exphbs = require("express-handlebars"),
     mongoose = require("mongoose"),
+    helpers = require('handlebars-helpers')();
+    //=> returns object with all (130+) helpers 
     // Sets up the Express App
     app = express(),
     PORT = process.env.PORT || 3000;
