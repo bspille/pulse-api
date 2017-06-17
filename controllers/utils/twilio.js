@@ -1,9 +1,11 @@
 
 var User = require("../../models/master.js")
 var twilio = {
+  // TODO: pass in google auth token for referencing user & grabbing contacts
+  // TODO: pass in lat and long coords for geolocation
   pulse: () => {
     console.log("twilio pulse");
-    // find emergency contacts associated with user
+    // find emergency contacts associated with user, will eventually change to google auth token
     User.findOne({ "tokenSub": 1 })
 
       .exec(function(error, doc) {
@@ -14,20 +16,17 @@ var twilio = {
         // Otherwise, send the doc to the browser as a json object
         else {
           console.log(doc.contacts);
-          // TODO: move all of this into a function
-          // TODO: export function
-          // TODO: move into a route
           // TODO: trigger route with button click event
           // Twilio Credentials
           var accountSid = 'AC28a7d147997ae94957f97fde9d4e8697';
           var authToken = '5b6559e6ef0997f8cf151165fc9e4559';
+          var userDisplayName = doc.givenName + " " + doc.familyName
           // this is a test location, will need to plug in user lat and lng when sent back from the browser
           var userLocation = "https://www.google.com/maps/place/40.535434,-74.52128700000002";
-          // TODO: code to access db for pulseRecipientNumber
           for (var i = 0; i < doc.contacts.length; i++) {
-            var phoneBook = doc.contacts[i].phoneNumber;
-            // can remove toString conversion once datatypes have been updated
-            var pulseRecipientNumber = phoneBook.toString();
+            // grabs emergency contact phone number
+            var pulseRecipientNumber = doc.contacts[i].phoneNumber;
+            // grabs emergency contact name
             var pulseRecipientName = doc.contacts[i].givenName;
             //require the Twilio module and create a REST client
             var client = require('twilio')(accountSid, authToken);
@@ -36,17 +35,16 @@ var twilio = {
                 to: "+1" + pulseRecipientNumber,
                 from: "+18562194209",
               // TODO: refine pulse message
-                body: "Hey " + pulseRecipientName + " welcome to the Pulse test message " + userLocation,
+                body: "Hey " + pulseRecipientName + ", " + userDisplayName + " needs some assistance, heres where they are: " + userLocation,
             }, function(err, message) {
                 console.log(message.sid);
-            });
-          }
+            });// end of client.messages.creat
+          } // end of for loop
         }
-      });
+      });  // end of .exec
 
-
-  }
-};
+  } //end of pulse function
+}; // end of module.exports
 
 module.exports = twilio;
 // test
