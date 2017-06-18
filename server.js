@@ -20,7 +20,10 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // Database configuration with mongoose
 // mongoose.Promise = global.Promise;
 Promise.promisifyAll(mongoose);
-mongoose.connect("mongodb://localhost/pulse");
+// localhost connection
+// mongoose.connect("mongodb://localhost/pulse");
+// heroku mLabs connection
+mongoose.connect("mongodb://heroku_nvjgbw4q:f10viekoqjf0va83nia9bpjq9f@ds131119.mlab.com:31119/heroku_nvjgbw4q")
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -31,6 +34,8 @@ db.on("error", function(error) {
 // Once logged in to the db through mongoose, log a success message
 db.once("open", function() {
   console.log("Mongoose connection successful.");
+  // first seed call
+  seed.firstSeed();
 });
 
 // router

@@ -1,6 +1,5 @@
 
 // TODO: token from google fetches all the info for the user profile
-      // create a route to handle both get and create
 var express = require("express"),
     router = express.Router(),
     twilio = require("./utils/twilio.js"),
@@ -86,6 +85,7 @@ var express = require("express"),
           // replace 1 with subject for later use with http requests
           // 1 is the seed tokenSub created for querying the data collection
       twilio.pulse("1");
+
     });
 
     // route to render the welcome page

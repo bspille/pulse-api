@@ -3,63 +3,7 @@
 
 <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>--}} {{!--
 <a href="#" onclick="signOut();">Sign out</a>--}}
-<script>
-  // stores the id token for the http request
-  function onSignIn(googleUser) {
-    // Useful data for your client-side scripts:
-    var profile = googleUser.getBasicProfile();
-    console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-    console.log('Full Name: ' + profile.getName());
-    console.log('Given Name: ' + profile.getGivenName());
-    console.log('Family Name: ' + profile.getFamilyName());
-    console.log("Image URL: " + profile.getImageUrl());
-    console.log("Email: " + profile.getEmail());
 
-    // The ID token you need to pass to your backend:
-    var id_token = googleUser.getAuthResponse().id_token;
-    console.log("ID Token: " + id_token);
-    http(id_token);
-  };
-  // sends the id token to the server
-  function http(id_token) {
-    $.post("/user/", {token: id_token},   (user) => {
-      console.log("signin successfull: " + user);
-      $.post("/update/",{token: id_token, updates: {contacts:
-        [
-          {
-          givenName: "ben",
-          familyName: "spille",
-          phoneNumber: "6094681411"
-        },
-        {
-          givenName: "chris",
-          familyName: "callanjr",
-          phoneNumber: "6094406403"
-        },
-        {
-          givenName: "greg",
-          familyName: "barone",
-          phoneNumber: "7327701167"
-        },
-        {
-          givenName: "josh",
-          familyName: "butler",
-          phoneNumber: "9084158831"
-        }
-      ]}}, (user) => {
-          console.log("update successfull: " + user);
-      });
-    });
-
-  };
-  function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
-  }
-
-</script>
 <!-- Set up Off-canvas -->
 <div class="multilevel-offcanvas off-canvas position-left" id="offCanvasLeft" data-off-canvas>
 
@@ -73,7 +17,7 @@
     <li><a href="#">Help</a></li>
   </ul>
   <ul class="vertical menu">
-    <!-- <li><a href="#" data-onsuccess="onSignIn">Sign In</a></li> -->
+    {{!--<li><a href="#" data-onsuccess="onSignIn">Sign In</a></li> This button is not necessary. If user needs to sign in, they will be redirected to splash page--}}
     <li><a href="#" onclick="signOut();">Sign Out</a></li>
   </ul>
   <ul class="menu simple social-links">
@@ -117,11 +61,13 @@
 
   </div>
   <div class="body-info">
-    <h4> Welcome, {{givenName}} </h4>
+    <!-- <h4> Welcome, {{givenName}} </h4> -->
+    <h4 id="welcome"></h4>
     {{!--Begin New Activity Button--}}
     <a class="button app-button" href="#">Begin New Activity</a>
     <br> {{!--PULSE BUTTON!!!--}}
-    <button class="button button-rounded-hover"><i class="fa fa-ravelry" aria-hidden="true"></i></button>
+    {{!--<button class="button button-rounded-hover"><i class="fa fa-ravelry" aria-hidden="true"></i></button>--}}
+    <button id="pulse-button" class="button button-rounded-hover"><img src="../assets/images/radio2.png"></button>
   </div>
 </div>
 <div class="columns pulse-footer" data-sticky-container data-stick-to="bottom">
@@ -131,3 +77,67 @@
     </div>
   </div>
 </div>
+
+<!-- relocated to suport selectors -->
+<script>
+  // stores the id token for the http request
+  function onSignIn(googleUser) {
+    // Useful data for your client-side scripts:
+    var profile = googleUser.getBasicProfile();
+    console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+    console.log('Full Name: ' + profile.getName());
+    console.log('Given Name: ' + profile.getGivenName());
+    console.log('Family Name: ' + profile.getFamilyName());
+    console.log("Image URL: " + profile.getImageUrl());
+    console.log("Email: " + profile.getEmail());
+
+    // The ID token you need to pass to your backend:
+    var id_token = googleUser.getAuthResponse().id_token;
+    console.log("ID Token: " + id_token);
+
+    // set welcome message alternative
+    var givenName = profile.getGivenName();
+    $("#welcome").text("Welcome, " + givenName);
+
+    http(id_token);
+  };
+  // sends the id token to the server
+  function http(id_token) {
+    $.post("/user/", {token: id_token},   (user) => {
+      console.log("signin successfull: " + user);
+      $.post("/update/",{token: id_token, updates: {contacts:
+        [
+          {
+          givenName: "ben",
+          familyName: "spille",
+          phoneNumber: "6094681411"
+        },
+        {
+          givenName: "chris",
+          familyName: "callanjr",
+          phoneNumber: "6094406403"
+        },
+        {
+          givenName: "greg",
+          familyName: "barone",
+          phoneNumber: "7327701167"
+        },
+        {
+          givenName: "josh",
+          familyName: "butler",
+          phoneNumber: "9084158831"
+        }
+      ]}}, (user) => {
+          console.log("update successfull: " + user);
+      });
+    });
+
+  };
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+
+</script>

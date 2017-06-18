@@ -27,6 +27,7 @@ var User = require("../../models/master.js"),
             console.log("crud error read: " + err);
           }
           // console.log("read " + results);
+
           cb(results);
         });
       },
