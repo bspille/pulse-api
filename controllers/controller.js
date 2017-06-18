@@ -6,9 +6,11 @@ var express = require("express"),
     twilio = require("./utils/twilio.js"),
     crud = require("./utils/crud.js"),
     token = require("./utils/google.js"),
-    path = require('path'),
+    path = require("path"),
+    google = require("./utils/google.js")
     // front end application client id
     CLIENT_ID = '533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com';
+    // lock in place for duplicate http request filtering
 var postlock = false;
 
 
@@ -16,38 +18,61 @@ var postlock = false;
     router.post("/user", (req, res) =>{
       console.log(postlock);
       if (!postlock){
-        console.log("http Hit" + JSON.stringify(req.body));
+        // console.log("http Hit" + JSON.stringify(req.body));
+        var token = req.body.token;
+            // verify the user and return the user object
+            google.verifyToken(token, (results) => {
+              console.log("verification results " + JSON.stringify(results, null, 1));
+              // check the collection for existing entry
+              var user = results;
+              console.log("sub " + user.sub);
+              crud.read(user.sub, (results) => {
+                // if there is a entry send it back as json
+                if (results != null){
+                  console.log("found entry " + JSON.stringify(results, null, 1));
+                  res.json(results)
+                }
+                // if there is no entry create one
+                else{
+                  console.log("has no read results");
+                  crud.create(user, (results) => {
+                    console.log("created new user " + JSON.stringify(results, null, 1));
+                    res.json(results);
+                  });
+                }
+              });
+            });
+        // sets postlock to prevent duplicate http request
         postlock = true;
-      }
-      // get user information by subject hash taken from id token
-      // var token = req.body.token;
-      // console.log("recieved token from the user " + token);
-          // verified = token.verifyToken(token, CLIENT_ID)
-          // subject =
-      //     user = crud.read(subject).then(() => {
-      //
-      //   // if user returns null there is no entry in existance
-      //   if (user == null){
-      //     // create a new entry
-      //     user = crud.create(token);
-      //     res.json(user);
-      //   }
-      //
-      //   // if results return the users information
-      //   else {
-      //     // send user information
-      //     res.json(user);
-      //   }
-      // }); // end of then function to handle asynchronous return
+      } // end of postlock
     }); // end of post user
 
     // route to update user
-    router.put("/update", (req, res) =>{
+    router.post("/update", (req, res) =>{
       // assumes the request body is a array of objects with a property of where
-      var updates = req.body,
-          user = crud.update(updates).then(() => {
-            res.json(user);
-          });
+      var updates = req.body.updates,
+          token = req.body.token;
+          // verify the user and return the user object
+          google.verifyToken(token, (results) => {
+            console.log("verification results " + JSON.stringify(results, null, 1));
+            // check the collection for existing entry
+            var user = results;
+            console.log("sub " + user.sub);
+            crud.read(user.sub, (results) => {
+              // if there is a entry send it back as json
+              if (results != null){
+                console.log("found entry " + JSON.stringify(results, null, 1));
+                crud.update(user.sub, updates, (results) => {
+                  console.log("updates completed " + results);
+                  res.json(results);
+                });
+              }
+              // if there is no entry create one
+              else{
+                console.log("error user not found for update");
+              }
+            });
+        });
     });
 
     // route to delete contacts
@@ -60,7 +85,7 @@ var postlock = false;
     });
 
     // route to send out pulse
-    router.get("/pulse", (req, res) =>{
+    router.post("/pulse", (req, res) =>{
 
       // var token = req.body.token
       //     subject = token.sub;
@@ -72,36 +97,6 @@ var postlock = false;
     // route to render the welcome page
     router.get("/", (req, res) => {
       res.render("index");
-      // var googleAuthToken = "1";//"eyJhbGciOiJSUzI1NiIsImtpZCI6ImEyOThhNTZiNmFjMDU0MzEyNTNkNDkwMzA4MTZhNWViZjk5YTEzYzUifQ.eyJhenAiOiI1MzM1MjQzMzk2MTMtbW0zdjcwb25xMzEwdnIwcWVwMml0MnBqNXZjajF0MzMuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI1MzM1MjQzMzk2MTMtbW0zdjcwb25xMzEwdnIwcWVwMml0MnBqNXZjajF0MzMuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTM4ODIxNjEyOTk0NDc2MDA4MTkiLCJlbWFpbCI6Impvc2hjYnV0bGVyQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiT3hQWVdSS3Vtd0ZvODJ5ZmJ6S3VJdyIsImlzcyI6ImFjY291bnRzLmdvb2dsZS5jb20iLCJpYXQiOjE0OTc2NzczMTMsImV4cCI6MTQ5NzY4MDkxMywibmFtZSI6Ikpvc2ggQnV0bGVyIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS8teGl2am84LWlYUTQvQUFBQUFBQUFBQUkvQUFBQUFBQUFRLTAvR2EwajB1ZF9NMFUvczk2LWMvcGhvdG8uanBnIiwiZ2l2ZW5fbmFtZSI6Ikpvc2giLCJmYW1pbHlfbmFtZSI6IkJ1dGxlciIsImxvY2FsZSI6ImVuIn0.2LFtX5mmKCDGh9vMha-xpenFE2B5aT_s_3nZF7za5e4JwSo2K6c4CGaKG2QsWEAXny1ucsHbaq3JqzmgJ5SvYWG8eEu03lBbVeVhivZfft-W7s6fixTqtvxcE6MBPvFPEIF7VIFlJOcuqRrj5Lpo8WUUq6bhCcDbAhEK_aHZd4oWHcn5PbYNme8lUMWWBOlC7xOqYdKWVdjWlthjo4w1M7BbJKfIhQ_CaKU4kIfkTdZmIvqigU28JMmGh7C3lT3FaVh8ugAE8myAzKnSmbWNQUM6vStbHmhkdEagIXFZT0ezxnErCK0Ccy_k7dAwcxXvuTRJj1nxPXFqAZQphxvj3w";
-      // TODO #GoogleAuth - Get token from request Google Auth session
-      //var googleAuthToken = req.<google auth>;
-      // crud.read(
-      //   googleAuthToken,
-      //   (users) => {
-      //     if (!users) {
-      //       console.error("No response from database");
-      //       res.statusCode = 500; // TODO choose proper code (internal server error)
-      //       res.end();
-      //       return;
-      //     }
-      //     console.log("users=%j", users);
-      //     // TODO decide what to do if multiple users have the same token
-      //     // possible assert...
-      //     if (users.length > 1) {
-      //       console.warn("%d users with same auth token", users.length);
-      //     }
-      //     var user = users[0];
-      //     if (user) {
-      //       var scriptParams = {
-      //         givenName: user.givenName
-      //       };
-      //       res.render("index", scriptParams);
-      //     } else { // No User for auth token
-      //       console.log("User Fetch Failed - No User for auth token = %s", googleAuthToken);
-      //       res.end();
-      //     }
-      //   }
-      // );
     });
 
 // export router here

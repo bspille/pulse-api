@@ -1,42 +1,41 @@
 var User = require("../../models/master.js"),
     crud = {
-      create: (token) => {
+      create: (user, cb) => {
         // console.log("create new user");
         var entry = new User({
-              token_Sub: token.sub,
-              first_name: token.first_name,
-              last_name: token.last_name,
-              profile_image: token.image_url
+              tokenSub: user.sub,
+              givenName: user.given_name,
+              familyName: user.family_name,
+              imageUrl: user.picture
           });
           entry.save((err, results) => {
             if (err){
               console.log("crud error create: " + err);
-
             }
             else {
               console.log("successfully created: " + results);
-              return (results);
+              cb(results);
             }
           });
       },
-      read: (subject, cb) => {
+      read: (sub, cb) => {
         // console.log("find user");
-        // takes in the token sub (subject) and searches for entries that match
-        User.find({tokenSub: subject}).exec((err, results) => {
+        // takes in the token sub (sub) and searches for entries that match
+        User.findOne({tokenSub: sub}).exec((err, results) => {
           // log error if there is a read error
           if (err) {
             console.log("crud error read: " + err);
           }
-
+          console.log("read " + results);
           cb(results);
         });
       },
-      update: (updates) => {
+      update: (sub, updates, cb) => {
         // console.log("update user");
         // updates the user by array of objects updates must
         // recieve a method like $set: or $push: followed by the object to change
 
-        User.findOneAndUpdate({ "token_sub": updates.token.sub }, updates.update)
+        User.findOneAndUpdate({ "tokenSub": sub }, updates.update)
         .exec((err, results) => {
           if (err) {
             console.log("crud error update: " + err);
@@ -44,7 +43,7 @@ var User = require("../../models/master.js"),
           }
           else {
             console.log("successfully updated: " + results);
-            return (results);
+            cb(results);
           }
         });
       },

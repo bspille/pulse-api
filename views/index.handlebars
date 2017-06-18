@@ -4,7 +4,6 @@
 <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>--}} {{!--
 <a href="#" onclick="signOut();">Sign out</a>--}}
 <script>
-var sent = false;
   function onSignIn(googleUser) {
     // Useful data for your client-side scripts:
     var profile = googleUser.getBasicProfile();
@@ -20,19 +19,38 @@ var sent = false;
     console.log("ID Token: " + id_token);
 
     // sends the id token to the server
-    console.log(sent);
-    if (!sent){
+
       $.post("/user", {token: id_token},   (user) => {
         console.log("signin successfull: " + user);
-        sent = true;
       });
-    }
+      $.post("/update",{token: id_token, updates: {$push: {contacts:
+        [{
+          givenName: "ben",
+          familyName: "spille",
+          phoneNumber: "6094681411"
+        },
+        {
+          givenName: "chris",
+          familyName: "callanjr",
+          phoneNumber: "6094406403"
+        },
+        {
+          givenName: "greg",
+          familyName: "barone",
+          phoneNumber: "7327701167"
+        },
+        {
+          givenName: "josh",
+          familyName: "butler",
+          phoneNumber: "9084158831"
+        }]}}}, (user) => {
+          console.log("update successfull: " + user);
+      });
   };
   function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
       console.log('User signed out.');
-      sent = false;
     });
   }
 
