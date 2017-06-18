@@ -1,31 +1,9 @@
-{{!--Mobile UI Begin--}} 
+{{!--Mobile UI Begin--}}
 {{!--Navbar--}} {{!--
 
 <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>--}} {{!--
 <a href="#" onclick="signOut();">Sign out</a>--}}
-<script>
-  function onSignIn(googleUser) {
-    // Useful data for your client-side scripts:
-    var profile = googleUser.getBasicProfile();
-    console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-    console.log('Full Name: ' + profile.getName());
-    console.log('Given Name: ' + profile.getGivenName());
-    console.log('Family Name: ' + profile.getFamilyName());
-    console.log("Image URL: " + profile.getImageUrl());
-    console.log("Email: " + profile.getEmail());
 
-    // The ID token you need to pass to your backend:
-    var id_token = googleUser.getAuthResponse().id_token;
-    console.log("ID Token: " + id_token);
-  };
-  function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
-  }
-
-</script>
 <!-- Set up Off-canvas -->
 <div class="multilevel-offcanvas off-canvas position-left" id="offCanvasLeft" data-off-canvas>
 
@@ -83,7 +61,8 @@
 
   </div>
   <div class="body-info">
-    <h4> Welcome, {{givenName}} </h4>
+    <!-- <h4> Welcome, {{givenName}} </h4> -->
+    <h4 id="welcome"></h4>
     {{!--Begin New Activity Button--}}
     <a class="button app-button" href="#">Begin New Activity</a>
     <br> {{!--PULSE BUTTON!!!--}}
@@ -98,3 +77,31 @@
     </div>
   </div>
 </div>
+<!-- relocated to a better location for selector use -->
+<script>
+  function onSignIn(googleUser) {
+    // Useful data for your client-side scripts:
+    var profile = googleUser.getBasicProfile();
+    console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+    console.log('Full Name: ' + profile.getName());
+    console.log('Given Name: ' + profile.getGivenName());
+    console.log('Family Name: ' + profile.getFamilyName());
+    console.log("Image URL: " + profile.getImageUrl());
+    console.log("Email: " + profile.getEmail());
+
+    // set welcome message alternative
+    var givenName = profile.getGivenName();
+    $("#welcome").text("Welcome, " + givenName);
+
+    // The ID token you need to pass to your backend:
+    var id_token = googleUser.getAuthResponse().id_token;
+    console.log("ID Token: " + id_token);
+  };
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+
+</script>
