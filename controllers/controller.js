@@ -12,7 +12,7 @@ var express = require("express"),
 
 
     // route to add new user
-    router.post("/user/", (req, res) =>{
+    router.post("/user", (req, res) =>{
         // console.log("http Hit" + JSON.stringify(req.body));
         var token = req.body.token;
             // verify the user and return the user object
@@ -24,7 +24,7 @@ var express = require("express"),
               crud.read(user.sub, (results) => {
                 // if there is a entry send it back as json
                 if (results != null){
-                  // console.log("found entry " + JSON.stringify(results, null, 1));
+                  console.log("found entry " + JSON.stringify(results, null, 1));
                   res.json(results)
                 }
                 // if there is no entry create one
@@ -40,7 +40,7 @@ var express = require("express"),
     }); // end of post user
 
     // route to update user
-    router.post("/update/", (req, res) =>{
+    router.post("/update", (req, res) =>{
       // TODO: still needs to prevent duplicate entries
       // assumes the request body is a array of objects with a property of where
       var updates = req.body.updates,
@@ -79,7 +79,7 @@ var express = require("express"),
 
     // route to send out pulse
     // TODO: pulse route recieves duplicate hits from http request
-    router.post("/pulse/", (req, res) =>{
+    router.post("/pulse", (req, res) =>{
 
       var token = req.body.token;
       console.log("pulse route token " + req.body.token);

@@ -1,10 +1,10 @@
 
 var User = require("../../models/master.js")
 var twilio = {
-  pulse: () => {
-    console.log("twilio pulse");
+  pulse: (sub) => {
+    console.log("twilio pulse" + sub);
     // find emergency contacts associated with user
-    User.findOne({ "tokenSub": 1 })
+    User.findOne({ "tokenSub": sub })
 
       .exec(function(error, doc) {
         // Log any errors
