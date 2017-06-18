@@ -12,7 +12,7 @@ var express = require("express"),
 
 
     // route to add new user
-    router.post("/user", (req, res) =>{
+    router.post("/user/", (req, res) =>{
         // console.log("http Hit" + JSON.stringify(req.body));
         var token = req.body.token;
             // verify the user and return the user object
@@ -40,7 +40,7 @@ var express = require("express"),
     }); // end of post user
 
     // route to update user
-    router.post("/update", (req, res) =>{
+    router.post("/update/", (req, res) =>{
       // TODO: still needs to prevent duplicate entries
       // assumes the request body is a array of objects with a property of where
       var updates = req.body.updates,
@@ -78,13 +78,23 @@ var express = require("express"),
     });
 
     // route to send out pulse
-    router.post("/pulse", (req, res) =>{
+    // TODO: pulse route recieves duplicate hits from http request
+    router.post("/pulse/", (req, res) =>{
 
-      // var token = req.body.token
-      //     subject = token.sub;
+      var token = req.body.token;
+      console.log("pulse route token " + req.body.token);
+      google.verifyToken(token, (results) => {
+        if (results != null){
+          console.log("pulse route verified user" + results.sub);
+          twilio.pulse(results.sub);
+        }
+        else {
+          console.log("could not verifiy user pulse failed");
+        }
+      });
           // replace 1 with subject for later use with http requests
           // 1 is the seed tokenSub created for querying the data collection
-      twilio.pulse("1");
+      // twilio.pulse("1");
 
     });
 
