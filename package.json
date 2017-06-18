@@ -27,12 +27,12 @@
     "express-handlebars": "^3.0.0",
     "geocoder": "^0.2.3",
     "google-auth-library": "^0.10.0",
-    "mongoose": "^4.10.5",
+    "mongoose": "^4.10.6",
     "path": "^0.12.7",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.1",
-    "twilio": "^3.3.0"
+    "twilio": "^3.4.0"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
