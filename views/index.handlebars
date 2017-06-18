@@ -4,6 +4,7 @@
 <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>--}} {{!--
 <a href="#" onclick="signOut();">Sign out</a>--}}
 <script>
+  // stores the id token for the http request
   function onSignIn(googleUser) {
     // Useful data for your client-side scripts:
     var profile = googleUser.getBasicProfile();
@@ -17,14 +18,15 @@
     // The ID token you need to pass to your backend:
     var id_token = googleUser.getAuthResponse().id_token;
     console.log("ID Token: " + id_token);
-
-    // sends the id token to the server
-
-      $.post("/user", {token: id_token},   (user) => {
-        console.log("signin successfull: " + user);
-      });
-      $.post("/update",{token: id_token, updates: {$push: {contacts:
-        [{
+    http(id_token);
+  };
+  // sends the id token to the server
+  function http(id_token) {
+    $.post("/user/", {token: id_token},   (user) => {
+      console.log("signin successfull: " + user);
+      $.post("/update/",{token: id_token, updates: {contacts:
+        [
+          {
           givenName: "ben",
           familyName: "spille",
           phoneNumber: "6094681411"
@@ -43,9 +45,12 @@
           givenName: "josh",
           familyName: "butler",
           phoneNumber: "9084158831"
-        }]}}}, (user) => {
+        }
+      ]}}, (user) => {
           console.log("update successfull: " + user);
       });
+    });
+
   };
   function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();

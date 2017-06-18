@@ -1,4 +1,4 @@
-// TODO: update the nameing to match the token when that is up
+// TODO: needs field validation to ensure data format is consistant
 // Require mongoose
 var mongoose = require("mongoose"),
 

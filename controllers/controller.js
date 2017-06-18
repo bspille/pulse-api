@@ -10,26 +10,22 @@ var express = require("express"),
     google = require("./utils/google.js")
     // front end application client id
     CLIENT_ID = '533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com';
-    // lock in place for duplicate http request filtering
-var postlock = false;
 
 
     // route to add new user
     router.post("/user", (req, res) =>{
-      console.log(postlock);
-      if (!postlock){
         // console.log("http Hit" + JSON.stringify(req.body));
         var token = req.body.token;
             // verify the user and return the user object
             google.verifyToken(token, (results) => {
-              console.log("verification results " + JSON.stringify(results, null, 1));
+              // console.log("verification results " + JSON.stringify(results, null, 1));
               // check the collection for existing entry
               var user = results;
-              console.log("sub " + user.sub);
+              // console.log("sub " + user.sub);
               crud.read(user.sub, (results) => {
                 // if there is a entry send it back as json
                 if (results != null){
-                  console.log("found entry " + JSON.stringify(results, null, 1));
+                  // console.log("found entry " + JSON.stringify(results, null, 1));
                   res.json(results)
                 }
                 // if there is no entry create one
@@ -42,28 +38,26 @@ var postlock = false;
                 }
               });
             });
-        // sets postlock to prevent duplicate http request
-        postlock = true;
-      } // end of postlock
     }); // end of post user
 
     // route to update user
     router.post("/update", (req, res) =>{
+      // TODO: still needs to prevent duplicate entries
       // assumes the request body is a array of objects with a property of where
       var updates = req.body.updates,
           token = req.body.token;
           // verify the user and return the user object
           google.verifyToken(token, (results) => {
-            console.log("verification results " + JSON.stringify(results, null, 1));
+            // console.log("verification results " + JSON.stringify(results, null, 1));
             // check the collection for existing entry
             var user = results;
-            console.log("sub " + user.sub);
+            // console.log("sub " + user.sub);
             crud.read(user.sub, (results) => {
               // if there is a entry send it back as json
               if (results != null){
-                console.log("found entry " + JSON.stringify(results, null, 1));
+                // console.log("found entry " + JSON.stringify(results, null, 1));
                 crud.update(user.sub, updates, (results) => {
-                  console.log("updates completed " + results);
+                  console.log("updates completed " + JSON.stringify(results, null, 1));
                   res.json(results);
                 });
               }

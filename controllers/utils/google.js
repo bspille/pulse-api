@@ -1,3 +1,4 @@
+// TODO: needs to check the aud matches one of our client ids
 var GoogleAuth = require('google-auth-library'),
     auth = new GoogleAuth,
     CLIENT_ID = ["904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com",

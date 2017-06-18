@@ -21,6 +21,7 @@
   "homepage": "https://github.com/bspille/pulse#readme",
   "dependencies": {
     "axios": "^0.16.2",
+    "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "express-handlebars": "^3.0.0",

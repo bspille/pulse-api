@@ -13,7 +13,7 @@ var User = require("../../models/master.js"),
               console.log("crud error create: " + err);
             }
             else {
-              console.log("successfully created: " + results);
+              // console.log("successfully created: " + results);
               cb(results);
             }
           });
@@ -26,7 +26,7 @@ var User = require("../../models/master.js"),
           if (err) {
             console.log("crud error read: " + err);
           }
-          console.log("read " + results);
+          // console.log("read " + results);
           cb(results);
         });
       },
@@ -34,15 +34,32 @@ var User = require("../../models/master.js"),
         // console.log("update user");
         // updates the user by array of objects updates must
         // recieve a method like $set: or $push: followed by the object to change
-
-        User.findOneAndUpdate({ "tokenSub": sub }, updates.update)
+        // needs to take in pushAll or set and upsert or new valules
+        console.log("sub value: " + JSON.stringify(sub, null, 1));
+        console.log("updates: " + JSON.stringify(updates, null, 1));
+        var update;
+        var modifier;
+        if(updates.hasOwnProperty("contacts")){
+          // adjusts update methods for array fields
+          // console.log("is array field");
+          update = {$pushAll: updates};
+          modifier = {upsert: true, new:true};
+        }
+        else{
+          // adjusts updates for none array fields
+          console.log("is not a array field");
+          update = {$set: updates};
+          modifier = {upsert: true, new: true};
+        }
+        // after the modifications are made update the collection
+        User.update({ "tokenSub": sub }, update, modifier)
         .exec((err, results) => {
           if (err) {
             console.log("crud error update: " + err);
 
           }
           else {
-            console.log("successfully updated: " + results);
+            console.log("successfully updated: " + JSON.stringify(results, null, 1));
             cb(results);
           }
         });
