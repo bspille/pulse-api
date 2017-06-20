@@ -43,7 +43,7 @@ var User = require("../../models/master.js"),
         if(updates.hasOwnProperty("contacts")){
           // adjusts update methods for array fields
           // console.log("is array field");
-          update = {$pushAll: updates};
+          update = {$addToSet: updates};
           modifier = {upsert: true, new:true};
         }
         else{
@@ -79,6 +79,21 @@ var User = require("../../models/master.js"),
             console.log("successfully deleted: " + results);
             return (results);
           }
+        });
+      },
+      validate: (field, update) =>{
+
+        user.path(field).validate(function(value) {
+          console.log("validater " + value);
+          console.log("update " + update);
+          console.log("field " + field);
+          // When running in `validate()` or `validateSync()`, the
+          // validator can access the document using `this`.
+          // Does **not** work with update validators.
+          if (this.update.toLowerCase().indexOf(update) !== -1) {
+            return value !== 'red';
+          }
+          return true;
         });
       }
 

@@ -1,6 +1,8 @@
 // TODO: needs field validation to ensure data format is consistant
+// add unique index true to prevent duplicate entries
 // Require mongoose
 var mongoose = require("mongoose"),
+    // Contact = require("./slave.js"),
 
     // Create Schema class
     Schema = mongoose.Schema,
@@ -28,7 +30,7 @@ var mongoose = require("mongoose"),
 
       imageUrl: {
         type: String,
-        required: false,
+        required: false
       },
 
       // users zip code
@@ -69,32 +71,32 @@ var mongoose = require("mongoose"),
 
       // users selected contacts
       contacts: [{
+          // contacts first name
+          givenName:{
+            type: String,
+            required: false
+          },
 
-        // contacts first name
-        givenName:{
-          type: String,
-          required: true
-        },
+          // contacts last name
+          familyName: {
+            type: String,
+            required: false
+          },
 
-        // contacts last name
-        familyName: {
-          type: String,
-          required: true
-        },
+          // contact phone number
+          phoneNumber: {
+            type: String,
+            required: false
+          },
 
-        // contact phone number
-        phoneNumber: {
-          type: String,
-          required: true
-        },
+          // set true for the contact to be pulsed
+          active: {
+            type: Boolean,
+            required: true,
+            default: false
+          }
+      }]
 
-        // set true for the contact to be pulsed
-        active: {
-          type: Boolean,
-          required: true,
-          default: false
-        }
-      }] // end of contact field
 
     }), // end of schema
 
