@@ -60,10 +60,28 @@ function signOut() {
 }
 
 
-$(document).on("click", "#pulse-button", sendPulse);
+$(document).on("click", "#pulse-button", getLocation);
 
-function sendPulse(e) {
-  e.preventDefault();
-    console.log("id_token " + id_token);
-    $.post("/pulse/", {token: id_token});
+function sendPulse(userLat, userLong) {
+    console.log("id_token" + id_token);
+    $.post("/pulse/", {token: id_token, geoLocation: { userLat: userLat, userLong: userLong}});
+    // console.log(userLat);
+    // console.log(userLong);
 };
+
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        console.log("Geolocation is not supported by this browser.");
+    }
+}
+
+function showPosition(position) {
+    // console.log(position.coords.latitude);
+    // console.log(position.coords.longitude);
+    var userLat = position.coords.latitude;
+    var userLong = position.coords.longitude;
+    sendPulse(userLat, userLong);
+}

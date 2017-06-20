@@ -67,6 +67,21 @@ var mongoose = require("mongoose"),
         required: false
       },
 
+      geolocation: [{
+
+        // contacts first name
+        userLat:{
+          type: String,
+          required: false
+        },
+
+        // contacts last name
+        userLong: {
+          type: String,
+          required: false
+        }
+      }],
+
       // users selected contacts
       contacts: [{
 
