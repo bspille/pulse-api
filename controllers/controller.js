@@ -97,16 +97,18 @@ var express = require("express"),
     // route to send out pulse
     // TODO: pulse route recieves duplicate hits from http request
     router.post("/pulse", (req, res) =>{
-      var userLat = req.body.geoLocation.userLat;
-      var userLong = req.body.geoLocation.userLong;
-      console.log("pulseLat " + userLat);
-      console.log("pulseLong " + userLong);
+
+      // made some changes to cleaner naming
+      var latitude = req.body.geoLocation.latitude;
+      var longitude = req.body.geoLocation.longitude;
+      console.log("pulseLat " + latitude);
+      console.log("pulseLong " + longitude);
       var token = req.body.token;
       console.log("pulse route token " + req.body.token);
       google.verifyToken(token, (results) => {
         if (results != null){
           console.log("pulse route verified user" + results.sub);
-          twilio.pulse(results.sub, userLat, userLong);
+          twilio.pulse(results.sub, latitude, longitude);
         }
         else {
           console.log("could not verifiy user pulse failed");

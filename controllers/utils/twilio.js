@@ -2,7 +2,8 @@ var User = require("../../models/master.js")
 var twilio = {
 // TODO: pass in google auth token for referencing user & grabbing contacts
 // TODO: pass in lat and long coords for geolocation
-  pulse: (sub, userLat, userLong) => {
+// changed to cleaner naming here
+  pulse: (sub, latitude, longitude) => {
     console.log("twilio pulse" + sub);
         // find emergency contacts associated with user, will eventually change to google auth token
     User.findOne({ "tokenSub": sub })
@@ -21,8 +22,9 @@ var twilio = {
           var testLat = "40.535434";
           var testLong = "-74.52128700000002";
           // this is a test location, will need to plug in user lat and lng when sent back from the browser
-          var userLocation = "https://www.google.com/maps/place/" + userLat + "," + userLong;
-          for (var i = 0; i < doc.contacts.length; i++) { 
+          // changed to cleaner naming here
+          var userLocation = "https://www.google.com/maps/place/" + latitude + "," + longitude;
+          for (var i = 0; i < doc.contacts.length; i++) {
             // grabs emergency contact phone number
             var pulseRecipientNumber = doc.contacts[i].phoneNumber;
             // grabs emergency contact name

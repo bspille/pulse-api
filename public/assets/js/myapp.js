@@ -64,7 +64,8 @@ $(document).on("click", "#pulse-button", getLocation);
 
 function sendPulse(userLat, userLong) {
     console.log("id_token" + id_token);
-    $.post("/pulse/", {token: id_token, geoLocation: { userLat: userLat, userLong: userLong}});
+    // changed the passed body to be cleaner naming
+    $.post("/pulse/", {token: id_token, geoLocation: { latitude: userLat, longitude: userLong}});
     // console.log(userLat);
     // console.log(userLong);
 };

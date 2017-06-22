@@ -3,7 +3,7 @@ var mongoose = require("mongoose"),
     // Create Schema class
     Schema = mongoose.Schema,
 
-    // Create article schema
+    // Create contact schema
     contactSchema = new Schema({
         // contacts first name
         givenName:{
@@ -30,7 +30,6 @@ var mongoose = require("mongoose"),
           default: false
         }
     }); // end of schema
-    // Create the User model
-    // Contact = mongoose.model("Contact", contactSchema);
 
+// export as sub-document
 module.exports = contactSchema;

@@ -3,9 +3,8 @@
 // Require mongoose
 var mongoose = require("mongoose"),
 
-    Contact = require("./slave.js"),
-    assert = require("assert"),
-    // path = require("path"),
+    Contact = require("./contact.js"),
+    geoLocation = require("./geoLocation.js")
 
     // Create Schema class
     Schema = mongoose.Schema,
@@ -62,31 +61,28 @@ var mongoose = require("mongoose"),
 
       // geo location information for pinning user location
       // must add timestamp and longitude and latitude properties
-      geoLocation: {
-        type: String,
-        required: false
-      },
+      geoLocation: [geoLocation],
 
       // user contact phone number
       phoneNumber: {
         type: String,
         required: false
       },
-
-      geolocation: [{
-
-        // contacts first name
-        userLat:{
-          type: String,
-          required: false
-        },
-
-        // contacts last name
-        userLong: {
-          type: String,
-          required: false
-        }
-      }],
+      // propose delete
+      // geolocation: [{
+      //
+      //   // contacts first name
+      //   userLat:{
+      //     type: String,
+      //     required: false
+      //   },
+      //
+      //   // contacts last name
+      //   userLong: {
+      //     type: String,
+      //     required: false
+      //   }
+      // }],
 
       // users selected contacts
       contacts: [Contact]
