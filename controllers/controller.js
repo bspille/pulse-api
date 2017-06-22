@@ -44,68 +44,46 @@ var express = require("express"),
       // TODO: still needs to prevent duplicate entries
       // assumes the request body is a array of objects with a property of where
       var updates = req.body.updates,
-          token = req.body.token;
-
+          token = req.body.token,
+          user,
+          update;
+          // console.log("updates to add " + JSON.stringify(updates, null, 1));
           // verify the user and return the user object
           google.verifyToken(token, (results) => {
             // console.log("verification results " + JSON.stringify(results, null, 1));
             // check the collection for existing entry
-            var user = results;
-            // console.log("sub " + user.sub);
-            crud.read(user.sub, (results) => {
-              // if a user is found use the results here
-              if (results != null){
+            user = results;
+          }); // added for test close google verify
 
                 // console.log("found entry to update " + JSON.stringify(results, null, 1));
-                if(updates.hasOwnProperty("contacts")){
-                  console.log("contacts to add to " + JSON.stringify(results.contacts, null, 1));
-                  console.log("updates to add " + JSON.stringify(updates, null, 1));
-                  if (results.contacts.length <= 0){
-                    updates.contacts.map((x) => {
-                      var update = {contacts: x}
+          if(updates.hasOwnProperty("contacts")){
 
-                      crud.update(user.sub, update, (results) => {
-                        console.log("updates completed " + JSON.stringify(results, null, 1));
-                      });
-                    })
-                  } // if contact.length <= 0
-                  else{
-                      console.log("test for results " + results.contacts);
-                    updates.contacts.map((x) =>{
-                      var duplicate = false;
-                      for (var i = 0; i < results.contacts.length; i++) {
-                        if (results.contacts[i].phoneNumber == x.phoneNumber){
-                          duplicate = true;
-                        } // if phoneNumber ==
-                      } // for loop
-                      if (!duplicate){
-                        console.log("could not find " + JSON.stringify(x, null, 1));
-                        var update = {contacts: x}
+            // console.log("test for results " + results.contacts);
+            updates.contacts.map((x) =>{
+              update = {contacts: x};
 
-                        crud.update(user.sub, update, (results) => {
-                          console.log("updates completed " + JSON.stringify(results, null, 1));
+              crud.update(user.sub, update, (results) => {
+                console.log("updates completed " + JSON.stringify(results, null, 1));
+              }); // close out crud update
+            }); // close out map contacts
+            // res.redirect("/user");
+          } // if contacts
+          if (updates.hasOwnProperty("geoLocation"))  {
+            update = updates;
+            crud.update(user.sub, update, (results) => {
+              console.log("updates completed " + JSON.stringify(results, null, 1));
+              // res.json(results);
+            }); // close out crud update
+          }// if geoLocation
+          else{
+            update = updates;
+            crud.update(user.sub, update, (results) => {
+              console.log("updates completed " + JSON.stringify(results, null, 1));
+              // res.json(results);
+            }); // close out crud update
+          } // else
 
-                        });
-                      }
-                      else{
-                        console.log("test found contact " + JSON.stringify(x, null, 1));
-                        // reset duplicate
-                        duplicate = false;
-                      }
-                    })
-                    // var update = {contacts: updates.contacts[i]}
-                    //
-                    // crud.update(user.sub, update, (results) => {
-                    //   console.log("updates completed " + JSON.stringify(results, null, 1));
-                  }
-                } // if hasOwnProperty
-              } // if not null
-              else{
-                console.log("error user not found for update");
-              }
-            });
-        });
-    });
+    }); // end update route
 
     // route to delete contacts
     router.delete("/delete", (req, res) =>{
@@ -119,16 +97,18 @@ var express = require("express"),
     // route to send out pulse
     // TODO: pulse route recieves duplicate hits from http request
     router.post("/pulse", (req, res) =>{
-      var userLat = req.body.geoLocation.userLat;
-      var userLong = req.body.geoLocation.userLong;
-      console.log("pulseLat " + userLat);
-      console.log("pulseLong " + userLong);
+
+      // made some changes to cleaner naming
+      var latitude = req.body.geoLocation.latitude;
+      var longitude = req.body.geoLocation.longitude;
+      console.log("pulseLat " + latitude);
+      console.log("pulseLong " + longitude);
       var token = req.body.token;
       console.log("pulse route token " + req.body.token);
       google.verifyToken(token, (results) => {
         if (results != null){
           console.log("pulse route verified user" + results.sub);
-          twilio.pulse(results.sub, userLat, userLong);
+          twilio.pulse(results.sub, latitude, longitude);
         }
         else {
           console.log("could not verifiy user pulse failed");
