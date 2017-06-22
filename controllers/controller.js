@@ -44,68 +44,46 @@ var express = require("express"),
       // TODO: still needs to prevent duplicate entries
       // assumes the request body is a array of objects with a property of where
       var updates = req.body.updates,
-          token = req.body.token;
-
+          token = req.body.token,
+          user,
+          update;
+          // console.log("updates to add " + JSON.stringify(updates, null, 1));
           // verify the user and return the user object
           google.verifyToken(token, (results) => {
             // console.log("verification results " + JSON.stringify(results, null, 1));
             // check the collection for existing entry
-            var user = results;
-            // console.log("sub " + user.sub);
-            crud.read(user.sub, (results) => {
-              // if a user is found use the results here
-              if (results != null){
+            user = results;
+          }); // added for test close google verify
 
                 // console.log("found entry to update " + JSON.stringify(results, null, 1));
                 if(updates.hasOwnProperty("contacts")){
-                  console.log("contacts to add to " + JSON.stringify(results.contacts, null, 1));
-                  console.log("updates to add " + JSON.stringify(updates, null, 1));
-                  if (results.contacts.length <= 0){
-                    updates.contacts.map((x) => {
-                      var update = {contacts: x}
+
+                      // console.log("test for results " + results.contacts);
+                    updates.contacts.map((x) =>{
+                      update = {contacts: x};
 
                       crud.update(user.sub, update, (results) => {
                         console.log("updates completed " + JSON.stringify(results, null, 1));
-                      });
-                    })
-                  } // if contact.length <= 0
-                  else{
-                      console.log("test for results " + results.contacts);
-                    updates.contacts.map((x) =>{
-                      var duplicate = false;
-                      for (var i = 0; i < results.contacts.length; i++) {
-                        if (results.contacts[i].phoneNumber == x.phoneNumber){
-                          duplicate = true;
-                        } // if phoneNumber ==
-                      } // for loop
-                      if (!duplicate){
-                        console.log("could not find " + JSON.stringify(x, null, 1));
-                        var update = {contacts: x}
+                        // res.json("Update Successfull");
+                      }); // close out crud update
+                    });
 
-                        crud.update(user.sub, update, (results) => {
-                          console.log("updates completed " + JSON.stringify(results, null, 1));
-
-                        });
-                      }
-                      else{
-                        console.log("test found contact " + JSON.stringify(x, null, 1));
-                        // reset duplicate
-                        duplicate = false;
-                      }
-                    })
-                    // var update = {contacts: updates.contacts[i]}
-                    //
-                    // crud.update(user.sub, update, (results) => {
-                    //   console.log("updates completed " + JSON.stringify(results, null, 1));
                   }
-                } // if hasOwnProperty
-              } // if not null
-              else{
-                console.log("error user not found for update");
-              }
-            });
-        });
-    });
+            // if (updates.hasOwnProperty("geoLocation"))  {
+            //   update = {geoLocation: updates.geoLocation},
+            //   crud.update(user.sub, update, (results) => {
+            //     console.log("updates completed " + JSON.stringify(results, null, 1));
+            //     // res.json("Update Successfull");
+            //   }); // close out crud update
+            //     // console.log("error user not found for update");
+            // }// if geoLocation
+            // if (!updates.hasOwnProperty("contacts") || !updates.hasOwnProperty("geoLocation")){
+            //   crud.update(user.sub, updates, (results) => {
+            //     console.log("updates completed " + JSON.stringify(results, null, 1));
+            //     // res.json("Update Successfull");
+            //   }); // close crud
+            // } // else
+    }); // end update route
 
     // route to delete contacts
     router.delete("/delete", (req, res) =>{

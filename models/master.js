@@ -2,7 +2,10 @@
 // add unique index true to prevent duplicate entries
 // Require mongoose
 var mongoose = require("mongoose"),
-    // Contact = require("./slave.js"),
+
+    Contact = require("./slave.js"),
+    assert = require("assert"),
+    // path = require("path"),
 
     // Create Schema class
     Schema = mongoose.Schema,
@@ -58,6 +61,7 @@ var mongoose = require("mongoose"),
       },
 
       // geo location information for pinning user location
+      // must add timestamp and longitude and latitude properties
       geoLocation: {
         type: String,
         required: false
@@ -85,38 +89,29 @@ var mongoose = require("mongoose"),
       }],
 
       // users selected contacts
-      contacts: [{
-          // contacts first name
-          givenName:{
-            type: String,
-            required: false
-          },
-
-          // contacts last name
-          familyName: {
-            type: String,
-            required: false
-          },
-
-          // contact phone number
-          phoneNumber: {
-            type: String,
-            required: false
-          },
-
-          // set true for the contact to be pulsed
-          active: {
-            type: Boolean,
-            required: true,
-            default: false
-          }
-      }]
+      contacts: [Contact]
 
 
-    }), // end of schema
+    }); // end of schema
+
+    // update validation needs to be before the model instance
+  //   // TODO: test if the update  validator is appended to the User model
+  //   userSchema.path('contacts').validate(function(value) {
+  //   // When running update validators with the `context` option set to
+  //   // 'query', `this` refers to the query object.
+  //   // map loop trough the array of objects and test for deep inequallity
+  //   // throw error if the update is deep equal when done return true
+  //   console.log("this user schema " + JSON.stringify(this, null, 1));
+  //   this.
+  //     // console.log("value to search for " + value);
+  //     // console.log("check against existing " + );
+  //     assert.notDeepEqual(x, value, "Error: contact " + value + " already in the the sub-document");
+  //
+  //   return true;
+  // });
 
   // Create the User model
-  User = mongoose.model("User", userSchema);
+  var User = mongoose.model("User", userSchema);
 
 // Export the model
 module.exports = User;

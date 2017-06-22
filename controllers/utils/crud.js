@@ -36,34 +36,48 @@ var User = require("../../models/master.js"),
         // updates the user by array of objects updates must
         // recieve a method like $set: or $push: followed by the object to change
         // needs to take in pushAll or set and upsert or new valules
-        console.log("sub value: " + JSON.stringify(sub, null, 1));
-        console.log("updates: " + JSON.stringify(updates, null, 1));
-        var update;
-        var modifier;
+        // console.log("sub value: " + JSON.stringify(sub, null, 1));
+        // console.log("updates: " + JSON.stringify(update, null, 1));
+
+        var opt,
+            update;
         if(updates.hasOwnProperty("contacts")){
           // adjusts update methods for array fields
           // console.log("is array field");
           update = {$addToSet: updates};
-          modifier = {upsert: true, new:true};
-        }
-        else{
-          // adjusts updates for none array fields
-          console.log("is not a array field");
-          update = {$set: updates};
-          modifier = {upsert: true, new: true};
-        }
-        // after the modifications are made update the collection
-        User.update({ "tokenSub": sub }, update, modifier)
-        .exec((err, results) => {
-          if (err) {
-            console.log("crud error update: " + err);
+          // modifier upsert and new will not prevent invalid isertions
+          // and we need the original returned for validation
+          // runValidators runs update validators and context allow for this
+          opt = {new: true};
+          // after the modifications are made find one and update the collection allows for validation against the document
 
-          }
-          else {
-            console.log("successfully updated: " + JSON.stringify(results, null, 1));
-            cb(results);
-          }
-        });
+            console.log("update " + JSON.stringify(update, null, 1));
+            User.update({ "tokenSub": sub, "contacts.phoneNumber": {$ne: updates.contacts.phoneNumber}}, update, opt)
+            .exec((err, results) => {
+                console.log("successfully updated: " + JSON.stringify(results, null, 1));
+                cb(results);
+            });
+        }
+        // else{
+        //   // adjusts updates for none array fields
+        //   console.log("is not a array field");
+        //   update = {$set: update};
+        //   opt = {runValidators: true, upsert: true, context: "query"};
+        // }
+        // // after the modifications are made find one and update the collection allows for validation against the document
+        // try {
+        //   console.log("update " + JSON.stringify(update, null, 1));
+        //   User.update({ "tokenSub": sub }, update, opt)
+        //   .exec((err, results) => {
+        //       console.log("successfully updated: " + JSON.stringify(results, null, 1));
+        //       cb(results);
+        //   });
+        // } catch (err) {
+        //   console.log("ERROR failed to update: " + err);
+        //
+        // } finally {
+        //
+        // }
       },
       delete: (deletes) => {
         // console.log("delete user data");
