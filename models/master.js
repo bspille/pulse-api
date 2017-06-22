@@ -1,10 +1,11 @@
 // TODO: needs field validation to ensure data format is consistant
-// add unique index true to prevent duplicate entries
+// validate validator dosen't run by default need to run validators for updates
 // Require mongoose
 var mongoose = require("mongoose"),
 
     Contact = require("./contact.js"),
-    geoLocation = require("./geoLocation.js")
+    geoLocation = require("./geoLocation.js"),
+    pulseRecord = require("./pulseRecord.js"),
 
     // Create Schema class
     Schema = mongoose.Schema,
@@ -38,12 +39,24 @@ var mongoose = require("mongoose"),
       // users zip code
       zip: {
         type: String,
+        validate: {
+          validator: function(v){
+            return /\d{5}/.test(v);
+          },
+          message: '{VALUE} is not a valide zip code'
+        },
         required: false
       },
 
       // users pin number doubles as a identification question
       pin: {
         type: String,
+        validate: {
+          validator: function(v){
+            return /\d{4}/.test(v);
+          },
+          message: '{VALUE} is not a valide pin'
+        },
         required: false
       },
 
@@ -53,10 +66,13 @@ var mongoose = require("mongoose"),
         required: false
       },
 
-      // time stamp when the geo_location is is submitted
-      timeStamp: {
-        type: Date,
-        required: false
+      pulseRecord: [pulseRecord],
+
+      message: {
+        type: String,
+        default: " needs some assistance, heres where they are: ",
+        required: true
+
       },
 
       // geo location information for pinning user location
@@ -66,6 +82,12 @@ var mongoose = require("mongoose"),
       // user contact phone number
       phoneNumber: {
         type: String,
+        validate: {
+          validator: function(v) {
+            return /\d{3}-\d{3}-\d{4}/.test(v);
+          },
+          message: '{VALUE} is not a valid phone number!'
+        },
         required: false
       },
       // propose delete
