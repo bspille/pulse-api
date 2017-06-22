@@ -17,12 +17,17 @@ var twilio = {
           // Twilio Credentials
           var accountSid = 'AC28a7d147997ae94957f97fde9d4e8697';
           var authToken = '5b6559e6ef0997f8cf151165fc9e4559';
-          var userDisplayName = doc.givenName + " " + doc.familyName
-          var testLat = "40.535434";
-          var testLong = "-74.52128700000002";
-          // this is a test location, will need to plug in user lat and lng when sent back from the browser
+          // test values left in just in case
+          var TESTLat = "40.535434";
+          var TESTLong = "-74.52128700000002";
+          // stringing together the users name
+          var userDisplayName = doc.givenName + " " + doc.familyName;
+          // generating the google map link with a map pin using users geolocation
           var userLocation = "https://www.google.com/maps/place/" + userLat + "," + userLong;
-          for (var i = 0; i < doc.contacts.length; i++) { 
+          // assigning the text body to a variable, laying groundwork for interchangeable messages
+          var assistanceMessage = userDisplayName + " needs some assistance, heres where they are: ";
+          // loop to send a message out to each contact
+          for (var i = 0; i < doc.contacts.length; i++) {
             // grabs emergency contact phone number
             var pulseRecipientNumber = doc.contacts[i].phoneNumber;
             // grabs emergency contact name
@@ -30,14 +35,12 @@ var twilio = {
             //require the Twilio module and create a REST client
             var client = require('twilio')(accountSid, authToken);
             client.messages.create({
-            // TODO: need to change "to" to variable pulseRecipientNumber
                 to: "+1" + pulseRecipientNumber,
                 from: "+18562194209",
-              // TODO: refine pulse message
-                body: "Hey " + pulseRecipientName + ", " + userDisplayName + " needs some assistance, heres where they are: " + userLocation,
+                body: "Hey " + pulseRecipientName + ", " + assistanceMessage + userLocation,
             }, function(err, message) {
                 console.log(message.sid);
-            });// end of client.messages.creat
+            });// end of client.messages.create
           } // end of for loop
         }
       });  // end of .exec
