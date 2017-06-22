@@ -24,29 +24,29 @@ function onSignIn(googleUser) {
 function http(id_token) {
   $.post("/user/", {token: id_token},   (user) => {
     console.log("signin successfull: " + user);
-    $.post("/update/",{token: id_token, updates: {contacts:
-      [
-        {
-        givenName: "ben",
-        familyName: "spille",
-        phoneNumber: "6094681411"
-      },
-      {
-        givenName: "chris",
-        familyName: "callanjr",
-        phoneNumber: "6094406403"
-      },
-      {
-        givenName: "greg",
-        familyName: "barone",
-        phoneNumber: "7327701167"
-      },
-      {
-        givenName: "josh",
-        familyName: "butler",
-        phoneNumber: "9084158831"
-      }
-    ]}}, (user) => {
+    $.post("/update/",{token: id_token, updates: {pin: "1234", phoneNumber: "609-468-1411"
+      // [
+      //   {
+      //   givenName: "ben",
+      //   familyName: "spille",
+      //   phoneNumber: "6094681411"
+      // },
+      // {
+      //   givenName: "chris",
+      //   familyName: "callanjr",
+      //   phoneNumber: "6094406403"
+      // },
+      // {
+      //   givenName: "greg",
+      //   familyName: "barone",
+      //   phoneNumber: "7327701167"
+      // },
+      // {
+      //   givenName: "josh",
+      //   familyName: "butler",
+      //   phoneNumber: "9084158831"
+      // }]
+    }}, (user) => {
         console.log("update successfull: " + user);
     });
   });
