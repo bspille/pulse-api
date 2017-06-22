@@ -1,3 +1,4 @@
+// TODO: find ways to make these more re-usable
 var User = require("../../models/master.js"),
     crud = {
       create: (user, cb) => {
@@ -32,52 +33,42 @@ var User = require("../../models/master.js"),
         });
       },
       update: (sub, updates, cb) => {
-        // console.log("update user");
         // updates the user by array of objects updates must
         // recieve a method like $set: or $push: followed by the object to change
-        // needs to take in pushAll or set and upsert or new valules
         // console.log("sub value: " + JSON.stringify(sub, null, 1));
         // console.log("updates: " + JSON.stringify(update, null, 1));
 
         var opt,
-            update;
-        if(updates.hasOwnProperty("contacts")){
-          // adjusts update methods for array fields
-          // console.log("is array field");
-          update = {$addToSet: updates};
-          // modifier upsert and new will not prevent invalid isertions
-          // and we need the original returned for validation
-          // runValidators runs update validators and context allow for this
-          opt = {new: true};
-          // after the modifications are made find one and update the collection allows for validation against the document
+            update,
+            query;
 
-            console.log("update " + JSON.stringify(update, null, 1));
-            User.update({ "tokenSub": sub, "contacts.phoneNumber": {$ne: updates.contacts.phoneNumber}}, update, opt)
-            .exec((err, results) => {
-                console.log("successfully updated: " + JSON.stringify(results, null, 1));
-                cb(results);
-            });
+        if(updates.hasOwnProperty("contacts")){
+          // adjusts update methods for contacts field contacts
+          update = {$addToSet: updates};
+          opt = {new: true};
+          query = { "tokenSub": sub, "contacts.phoneNumber": {$ne: updates.contacts.phoneNumber}};
+
         }
-        // else{
-        //   // adjusts updates for none array fields
-        //   console.log("is not a array field");
-        //   update = {$set: update};
-        //   opt = {runValidators: true, upsert: true, context: "query"};
-        // }
-        // // after the modifications are made find one and update the collection allows for validation against the document
-        // try {
-        //   console.log("update " + JSON.stringify(update, null, 1));
-        //   User.update({ "tokenSub": sub }, update, opt)
-        //   .exec((err, results) => {
-        //       console.log("successfully updated: " + JSON.stringify(results, null, 1));
-        //       cb(results);
-        //   });
-        // } catch (err) {
-        //   console.log("ERROR failed to update: " + err);
-        //
-        // } finally {
-        //
-        // }
+        if (updates.hasOwnProperty("geoLocation")) {
+          // adjusts update methods for geoLocation
+          update = {$addToSet: updates};
+          opt = {new: true};
+          query = { "tokenSub": sub, "contacts.geoLocation.timeStamp": {$ne: updates.geoLocation.timeStamp}};
+        }
+        else{
+          // adjusts updates for none array fields
+          update = {$set: updates};
+          opt = {new: true};
+          query = {"tokenSub": sub};
+        }
+        console.log("update " + JSON.stringify(update, null, 1));
+        // sets query condition to ne not equal contacts.phoneNumber preventing duplicate entries with the same number
+        User.update(query, update, opt)
+        .exec((err, results) => {
+            console.log("successfully updated: " + JSON.stringify(results, null, 1));
+            cb(results);
+        });
+
       },
       delete: (deletes) => {
         // console.log("delete user data");
@@ -93,21 +84,6 @@ var User = require("../../models/master.js"),
             console.log("successfully deleted: " + results);
             return (results);
           }
-        });
-      },
-      validate: (field, update) =>{
-
-        user.path(field).validate(function(value) {
-          console.log("validater " + value);
-          console.log("update " + update);
-          console.log("field " + field);
-          // When running in `validate()` or `validateSync()`, the
-          // validator can access the document using `this`.
-          // Does **not** work with update validators.
-          if (this.update.toLowerCase().indexOf(update) !== -1) {
-            return value !== 'red';
-          }
-          return true;
         });
       }
 

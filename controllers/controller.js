@@ -56,33 +56,33 @@ var express = require("express"),
           }); // added for test close google verify
 
                 // console.log("found entry to update " + JSON.stringify(results, null, 1));
-                if(updates.hasOwnProperty("contacts")){
+          if(updates.hasOwnProperty("contacts")){
 
-                      // console.log("test for results " + results.contacts);
-                    updates.contacts.map((x) =>{
-                      update = {contacts: x};
+            // console.log("test for results " + results.contacts);
+            updates.contacts.map((x) =>{
+              update = {contacts: x};
 
-                      crud.update(user.sub, update, (results) => {
-                        console.log("updates completed " + JSON.stringify(results, null, 1));
-                        // res.json("Update Successfull");
-                      }); // close out crud update
-                    });
+              crud.update(user.sub, update, (results) => {
+                console.log("updates completed " + JSON.stringify(results, null, 1));
+              }); // close out crud update
+            }); // close out map contacts
+            // res.redirect("/user");
+          } // if contacts
+          if (updates.hasOwnProperty("geoLocation"))  {
+            update = updates;
+            crud.update(user.sub, update, (results) => {
+              console.log("updates completed " + JSON.stringify(results, null, 1));
+              // res.json(results);
+            }); // close out crud update
+          }// if geoLocation
+          else{
+            update = updates;
+            crud.update(user.sub, update, (results) => {
+              console.log("updates completed " + JSON.stringify(results, null, 1));
+              // res.json(results);
+            }); // close out crud update
+          } // else
 
-                  }
-            // if (updates.hasOwnProperty("geoLocation"))  {
-            //   update = {geoLocation: updates.geoLocation},
-            //   crud.update(user.sub, update, (results) => {
-            //     console.log("updates completed " + JSON.stringify(results, null, 1));
-            //     // res.json("Update Successfull");
-            //   }); // close out crud update
-            //     // console.log("error user not found for update");
-            // }// if geoLocation
-            // if (!updates.hasOwnProperty("contacts") || !updates.hasOwnProperty("geoLocation")){
-            //   crud.update(user.sub, updates, (results) => {
-            //     console.log("updates completed " + JSON.stringify(results, null, 1));
-            //     // res.json("Update Successfull");
-            //   }); // close crud
-            // } // else
     }); // end update route
 
     // route to delete contacts
