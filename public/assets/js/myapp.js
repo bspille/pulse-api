@@ -26,7 +26,7 @@ function http(id_token) {
     console.log("signin successfull: " + user);
     // send update in groups contacts, geoLocation, or everything else update tested ok
     // no input validation yet don't mix the groups
-    $.post("/update/",{token: id_token, updates: {pin: "1234", phoneNumber: "ddd-ddd-dddd"
+    $.post("/update/",{token: id_token, updates: {pin: "1234", phoneNumber: "123-123-1234"
       // [
       //   {
       //   givenName: "ben",

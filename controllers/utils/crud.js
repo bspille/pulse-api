@@ -45,36 +45,42 @@ var User = require("../../models/master.js"),
         if(updates.hasOwnProperty("contacts")){
           // adjusts update methods for contacts field contacts
           update = {$addToSet: updates};
-          opt = {new: true};
+          opt = {new: true, runValidators: true};
           query = { "tokenSub": sub, "contacts.phoneNumber": {$ne: updates.contacts.phoneNumber}};
 
         }
         if (updates.hasOwnProperty("geoLocation")) {
           // adjusts update methods for geoLocation
           update = {$addToSet: updates};
-          opt = {new: true};
+          opt = {new: true, runValidators: true};
           query = { "tokenSub": sub, "contacts.geoLocation.timeStamp": {$ne: updates.geoLocation.timeStamp}};
         }
         else{
           // adjusts updates for none array fields
           update = {$set: updates};
-          opt = {new: true};
+          opt = {new: true, runValidators: true};
           query = {"tokenSub": sub};
         }
         console.log("update " + JSON.stringify(update, null, 1));
         // sets query condition to ne not equal contacts.phoneNumber preventing duplicate entries with the same number
         User.update(query, update, opt)
         .exec((err, results) => {
+          if (err) {console.log("update error " + err)}
             console.log("successfully updated: " + JSON.stringify(results, null, 1));
             cb(results);
         });
 
       },
-      delete: (deletes) => {
+      delete: (sub, deletes, cb) => {
         // console.log("delete user data");
         // deletes the user info by array of objects updates must
         // recieve a method like $pop: or $pull: followed by the object to change
-        User.findOneAndUpdate({ "token_sub": deletes.token.sub }, deletes.delete)
+
+        var opt,
+            update,
+            query;
+
+        User.Update(query, update, opt)
         .exec((err, results) => {
           if (err) {
             console.log("crud error delete: " + err);
@@ -82,7 +88,7 @@ var User = require("../../models/master.js"),
           }
           else {
             console.log("successfully deleted: " + results);
-            return (results);
+            cb(results);
           }
         });
       }
