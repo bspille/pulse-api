@@ -10,7 +10,7 @@ body {
 
 /*------------------Mobile Navbar------------------*/
 
-.nav-bar {
+/*.nav-bar {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
@@ -165,7 +165,7 @@ body {
 
 .hamburger .line:last-child {
     margin-bottom: 0;
-}
+}*/
 
 
 /*------------------App Buttons------------------*/
