@@ -22,36 +22,42 @@ function onSignIn(googleUser) {
 };
 // sends the id token to the server
 function http(id_token) {
-  $.post("/user/", {token: id_token},   (user) => {
+  $.post("/user/", {
+    token: id_token
+  }, (user) => {
     console.log("signin successfull: " + user);
-    $.post("/update/",{token: id_token, updates: {contacts:
-      [
-        {
-        givenName: "ben",
-        familyName: "spille",
-        phoneNumber: "6094681411"
-      },
-      {
-        givenName: "chris",
-        familyName: "callanjr",
-        phoneNumber: "6094406403"
-      },
-      {
-        givenName: "greg",
-        familyName: "barone",
-        phoneNumber: "7327701167"
-      },
-      {
-        givenName: "josh",
-        familyName: "butler",
-        phoneNumber: "9084158831"
+    $.post("/update/", {
+      token: id_token,
+      updates: {
+        contacts: [{
+            givenName: "ben",
+            familyName: "spille",
+            phoneNumber: "6094681411"
+          },
+          {
+            givenName: "chris",
+            familyName: "callanjr",
+            phoneNumber: "6094406403"
+          },
+          {
+            givenName: "greg",
+            familyName: "barone",
+            phoneNumber: "7327701167"
+          },
+          {
+            givenName: "josh",
+            familyName: "butler",
+            phoneNumber: "9084158831"
+          }
+        ]
       }
-    ]}}, (user) => {
-        console.log("update successfull: " + user);
+    }, (user) => {
+      console.log("update successfull: " + user);
     });
   });
 
 };
+
 function signOut() {
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
@@ -63,43 +69,31 @@ function signOut() {
 $(document).on("click", "#pulse-button", getLocation);
 
 function sendPulse(userLat, userLong) {
-    console.log("id_token" + id_token);
-    $.post("/pulse/", {token: id_token, geoLocation: { userLat: userLat, userLong: userLong}});
-    // console.log(userLat);
-    // console.log(userLong);
+  console.log("id_token" + id_token);
+  $.post("/pulse/", {
+    token: id_token,
+    geoLocation: {
+      userLat: userLat,
+      userLong: userLong
+    }
+  });
+  // console.log(userLat);
+  // console.log(userLong);
 };
 
 
 function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        console.log("Geolocation is not supported by this browser.");
-    }
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
 }
 
 function showPosition(position) {
-    // console.log(position.coords.latitude);
-    // console.log(position.coords.longitude);
-    var userLat = position.coords.latitude;
-    var userLong = position.coords.longitude;
-    sendPulse(userLat, userLong);
+  // console.log(position.coords.latitude);
+  // console.log(position.coords.longitude);
+  var userLat = position.coords.latitude;
+  var userLong = position.coords.longitude;
+  sendPulse(userLat, userLong);
 }
-
-// Profile Form
-
-$(function () {
-  var showClass = 'show';
-
-  $('input').on('checkval', function () {
-    var label = $(this).prev('label');
-    if(this.value !== '') {
-      label.addClass(showClass);
-    } else {
-      label.removeClass(showClass);
-    }
-  }).on('keyup', function () {
-    $(this).trigger('checkval');
-  });
-});
-

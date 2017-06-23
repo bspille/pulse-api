@@ -7,14 +7,17 @@
 
     <!-- <meta name="google-signin-client_id" content="904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"></meta> -->
     <meta name="google-signin-client_id" content="533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com"></meta>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
     </script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta charset="UTF-8">
     <!--Bringing in foundation, foundation-flex, jquery, and local style files-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" integrity="sha256-itWEYdFWzZPBG78bJOOiQIn06QCgN/F0wMDcC4nOhxY=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" integrity="sha256-itWEYdFWzZPBG78bJOOiQIn06QCgN/F0wMDcC4nOhxY="
+        crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation-flex.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js" integrity="sha256-Nd2xznOkrE9HkrAMi4xWy/hXkQraXioBg9iYsBrcFrs=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js" integrity="sha256-Nd2xznOkrE9HkrAMi4xWy/hXkQraXioBg9iYsBrcFrs="
+        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/plugins/foundation.offcanvas.min.js"></script>
     <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
     <link rel="stylesheet" href="assets/css/menu.css" type="text/css" />
@@ -33,6 +36,7 @@
     <div id="wrapper">
         <div class="multilevel-offcanvas off-canvas position-left" id="offCanvasLeft" data-off-canvas>
             <ul class="vertical menu">
+                <li class="avatar-wrapper"><img class="avatar" src="assets/images/avatar-female.png" alt="avatar" width="148" height="148" /></li>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Profile</a></li>
                 <li><a href="#">About</a></li>
@@ -70,29 +74,24 @@
                 </div>
                 <div class="nav-bar-right">
                     <ul class="menu">
-                        <li class="hide-for-small-only">
-                            <a href="#" class="g-signin2" data-onsuccess="onSignIn"></a>
-                        </li>
                     </ul>
                 </div>
             </div>
-        </div>
-        <div class="body-info">
-            <h4 id="welcome"></h4>
-            <!--Begin new activity-->
-            <a class="button app-button" href="#">Begin New Activity</a>
-            <br>
-            <!--Pule Button-->
-            <button id="pulse-button" class="button button-rounded-hover"><img src="assets/images/radio2.png"></button>
-        </div>
-        <!--Footer-->
-        <div class="columns pulse-footer" data-sticky-container data-stick-to="bottom">
-            <div class="row">
-                <div class="column">
-                    <p>© Pulse / All Rights Reserved.</p>
-                </div>
+            <div class="body-info">
+                <h4 id="welcome"></h4>
+                <!--Begin new activity-->
+                <a class="button app-button" href="#">Begin New Activity</a>
+                <br>
+                <!--Pule Button-->
+                <button id="pulse-button" class="button button-rounded-hover"><img src="assets/images/radio2.png"></button>
             </div>
         </div>
+        <div class="push">
+        </div>
+    </div>
+    <!--Footer-->
+    <div id="pulse-footer">
+        <p>© Pulse / All Rights Reserved.</p>
     </div>
     <script>
         $(document).foundation();
