@@ -3,7 +3,7 @@ var twilio = {
 // TODO: pass in google auth token for referencing user & grabbing contacts
 // TODO: pass in lat and long coords for geolocation
   pulse: (sub, userLat, userLong) => {
-    console.log("twilio pulse" + sub);
+    console.log(`twilio pulse ${sub}`);
         // find emergency contacts associated with user, will eventually change to google auth token
     User.findOne({ "tokenSub": sub })
       .exec(function(error, doc) {
@@ -21,11 +21,11 @@ var twilio = {
           var TESTLat = "40.535434";
           var TESTLong = "-74.52128700000002";
           // stringing together the users name
-          var userDisplayName = doc.givenName + " " + doc.familyName;
+          var userDisplayName = `${doc.givenName} ${doc.familyName}`;
           // generating the google map link with a map pin using users geolocation
           var userLocation = "https://www.google.com/maps/place/" + userLat + "," + userLong;
           // assigning the text body to a variable, laying groundwork for interchangeable messages
-          var assistanceMessage = userDisplayName + " needs some assistance, heres where they are: ";
+          var assistanceMessage = `${userDisplayName} needs some assistance, heres where they are:`;
           // loop to send a message out to each contact
           for (var i = 0; i < doc.contacts.length; i++) {
             // grabs emergency contact phone number
@@ -37,7 +37,7 @@ var twilio = {
             client.messages.create({
                 to: "+1" + pulseRecipientNumber,
                 from: "+18562194209",
-                body: "Hey " + pulseRecipientName + ", " + assistanceMessage + userLocation,
+                body: `Hey ${pulseRecipientName}, ${assistanceMessage} ${userLocation}`,
             }, function(err, message) {
                 console.log(message.sid);
             });// end of client.messages.create
