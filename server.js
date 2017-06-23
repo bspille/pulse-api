@@ -20,9 +20,9 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // Database configuration with mongoose
 // mongoose.Promise = global.Promise;
 Promise.promisifyAll(mongoose);
-// localhost connection
+// localhost connection uncomment for localhost
 mongoose.connect("mongodb://localhost/pulse");
-// heroku mLabs connection
+// heroku mLabs connection uncomment for heroku deployment
 // mongoose.connect("mongodb://heroku_nvjgbw4q:f10viekoqjf0va83nia9bpjq9f@ds131119.mlab.com:31119/heroku_nvjgbw4q")
 var db = mongoose.connection;
 

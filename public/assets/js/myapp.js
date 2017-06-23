@@ -24,29 +24,31 @@ function onSignIn(googleUser) {
 function http(id_token) {
   $.post("/user/", {token: id_token},   (user) => {
     console.log("signin successfull: " + user);
-    $.post("/update/",{token: id_token, updates: {contacts:
-      [
-        {
-        givenName: "ben",
-        familyName: "spille",
-        phoneNumber: "6094681411"
-      },
-      {
-        givenName: "chris",
-        familyName: "callanjr",
-        phoneNumber: "6094406403"
-      },
-      {
-        givenName: "greg",
-        familyName: "barone",
-        phoneNumber: "7327701167"
-      },
-      {
-        givenName: "josh",
-        familyName: "butler",
-        phoneNumber: "9084158831"
-      }
-    ]}}, (user) => {
+    // send update in groups contacts, geoLocation, or everything else update tested ok
+    // no input validation yet don't mix the groups
+    $.post("/update/",{token: id_token, updates: {pin: "1234", phoneNumber: "123-123-1234"
+      // [
+      //   {
+      //   givenName: "ben",
+      //   familyName: "spille",
+      //   phoneNumber: "6094681411"
+      // },
+      // {
+      //   givenName: "chris",
+      //   familyName: "callanjr",
+      //   phoneNumber: "6094406403"
+      // },
+      // {
+      //   givenName: "greg",
+      //   familyName: "barone",
+      //   phoneNumber: "7327701167"
+      // },
+      // {
+      //   givenName: "josh",
+      //   familyName: "butler",
+      //   phoneNumber: "9084158831"
+      // }]
+    }}, (user) => {
         console.log("update successfull: " + user);
     });
   });
@@ -60,10 +62,29 @@ function signOut() {
 }
 
 
-$(document).on("click", "#pulse-button", sendPulse);
+$(document).on("click", "#pulse-button", getLocation);
 
-function sendPulse(e) {
-  e.preventDefault();
-    console.log("id_token " + id_token);
-    $.post("/pulse/", {token: id_token});
+function sendPulse(userLat, userLong) {
+    console.log("id_token" + id_token);
+    // changed the passed body to be cleaner naming
+    $.post("/pulse/", {token: id_token, geoLocation: { latitude: userLat, longitude: userLong}});
+    // console.log(userLat);
+    // console.log(userLong);
 };
+
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        console.log("Geolocation is not supported by this browser.");
+    }
+}
+
+function showPosition(position) {
+    // console.log(position.coords.latitude);
+    // console.log(position.coords.longitude);
+    var userLat = position.coords.latitude;
+    var userLong = position.coords.longitude;
+    sendPulse(userLat, userLong);
+}

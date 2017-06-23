@@ -24,7 +24,7 @@ var express = require("express"),
               crud.read(user.sub, (results) => {
                 // if there is a entry send it back as json
                 if (results != null){
-                  console.log("found entry " + JSON.stringify(results, null, 1));
+                  console.log("found entry for user " + JSON.stringify(results, null, 1));
                   res.json(results)
                 }
                 // if there is no entry create one
@@ -44,29 +44,46 @@ var express = require("express"),
       // TODO: still needs to prevent duplicate entries
       // assumes the request body is a array of objects with a property of where
       var updates = req.body.updates,
-          token = req.body.token;
+          token = req.body.token,
+          user,
+          update;
+          // console.log("updates to add " + JSON.stringify(updates, null, 1));
           // verify the user and return the user object
           google.verifyToken(token, (results) => {
             // console.log("verification results " + JSON.stringify(results, null, 1));
             // check the collection for existing entry
-            var user = results;
-            // console.log("sub " + user.sub);
-            crud.read(user.sub, (results) => {
-              // if there is a entry send it back as json
-              if (results != null){
-                // console.log("found entry " + JSON.stringify(results, null, 1));
-                crud.update(user.sub, updates, (results) => {
-                  console.log("updates completed " + JSON.stringify(results, null, 1));
-                  res.json(results);
-                });
-              }
-              // if there is no entry create one
-              else{
-                console.log("error user not found for update");
-              }
-            });
-        });
-    });
+            user = results;
+          }); // added for test close google verify
+
+                // console.log("found entry to update " + JSON.stringify(results, null, 1));
+          if(updates.hasOwnProperty("contacts")){
+
+            // console.log("test for results " + results.contacts);
+            updates.contacts.map((x) =>{
+              update = {contacts: x};
+
+              crud.update(user.sub, update, (results) => {
+                console.log("updates completed " + JSON.stringify(results, null, 1));
+              }); // close out crud update
+            }); // close out map contacts
+            // res.redirect("/user");
+          } // if contacts
+          if (updates.hasOwnProperty("geoLocation"))  {
+            update = updates;
+            crud.update(user.sub, update, (results) => {
+              console.log("updates completed " + JSON.stringify(results, null, 1));
+              // res.json(results);
+            }); // close out crud update
+          }// if geoLocation
+          else{
+            update = updates;
+            crud.update(user.sub, update, (results) => {
+              console.log("updates completed " + JSON.stringify(results, null, 1));
+              // res.json(results);
+            }); // close out crud update
+          } // else
+
+    }); // end update route
 
     // route to delete contacts
     router.delete("/delete", (req, res) =>{
@@ -81,12 +98,17 @@ var express = require("express"),
     // TODO: pulse route recieves duplicate hits from http request
     router.post("/pulse", (req, res) =>{
 
+      // made some changes to cleaner naming
+      var latitude = req.body.geoLocation.latitude;
+      var longitude = req.body.geoLocation.longitude;
+      console.log("pulseLat " + latitude);
+      console.log("pulseLong " + longitude);
       var token = req.body.token;
       console.log("pulse route token " + req.body.token);
       google.verifyToken(token, (results) => {
         if (results != null){
           console.log("pulse route verified user" + results.sub);
-          twilio.pulse(results.sub);
+          twilio.pulse(results.sub, latitude, longitude);
         }
         else {
           console.log("could not verifiy user pulse failed");

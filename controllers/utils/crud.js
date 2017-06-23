@@ -1,3 +1,4 @@
+// TODO: find ways to make these more re-usable
 var User = require("../../models/master.js"),
     crud = {
       create: (user, cb) => {
@@ -32,44 +33,54 @@ var User = require("../../models/master.js"),
         });
       },
       update: (sub, updates, cb) => {
-        // console.log("update user");
         // updates the user by array of objects updates must
         // recieve a method like $set: or $push: followed by the object to change
-        // needs to take in pushAll or set and upsert or new valules
-        console.log("sub value: " + JSON.stringify(sub, null, 1));
-        console.log("updates: " + JSON.stringify(updates, null, 1));
-        var update;
-        var modifier;
+        // console.log("sub value: " + JSON.stringify(sub, null, 1));
+        // console.log("updates: " + JSON.stringify(update, null, 1));
+
+        var opt,
+            update,
+            query;
+
         if(updates.hasOwnProperty("contacts")){
-          // adjusts update methods for array fields
-          // console.log("is array field");
-          update = {$pushAll: updates};
-          modifier = {upsert: true, new:true};
+          // adjusts update methods for contacts field contacts
+          update = {$addToSet: updates};
+          opt = {new: true, runValidators: true};
+          query = { "tokenSub": sub, "contacts.phoneNumber": {$ne: updates.contacts.phoneNumber}};
+
+        }
+        if (updates.hasOwnProperty("geoLocation")) {
+          // adjusts update methods for geoLocation
+          update = {$addToSet: updates};
+          opt = {new: true, runValidators: true};
+          query = { "tokenSub": sub, "contacts.geoLocation.timeStamp": {$ne: updates.geoLocation.timeStamp}};
         }
         else{
           // adjusts updates for none array fields
-          console.log("is not a array field");
           update = {$set: updates};
-          modifier = {upsert: true, new: true};
+          opt = {new: true, runValidators: true};
+          query = {"tokenSub": sub};
         }
-        // after the modifications are made update the collection
-        User.update({ "tokenSub": sub }, update, modifier)
+        console.log("update " + JSON.stringify(update, null, 1));
+        // sets query condition to ne not equal contacts.phoneNumber preventing duplicate entries with the same number
+        User.update(query, update, opt)
         .exec((err, results) => {
-          if (err) {
-            console.log("crud error update: " + err);
-
-          }
-          else {
+          if (err) {console.log("update error " + err)}
             console.log("successfully updated: " + JSON.stringify(results, null, 1));
             cb(results);
-          }
         });
+
       },
-      delete: (deletes) => {
+      delete: (sub, deletes, cb) => {
         // console.log("delete user data");
         // deletes the user info by array of objects updates must
         // recieve a method like $pop: or $pull: followed by the object to change
-        User.findOneAndUpdate({ "token_sub": deletes.token.sub }, deletes.delete)
+
+        var opt,
+            update,
+            query;
+
+        User.Update(query, update, opt)
         .exec((err, results) => {
           if (err) {
             console.log("crud error delete: " + err);
@@ -77,7 +88,7 @@ var User = require("../../models/master.js"),
           }
           else {
             console.log("successfully deleted: " + results);
-            return (results);
+            cb(results);
           }
         });
       }
