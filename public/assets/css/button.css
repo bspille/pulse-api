@@ -1,0 +1,84 @@
+/*------------------App Buttons------------------*/
+
+.app-button {
+    background-color: #939393;
+    border: 2px solid #464646;
+    border-radius: 5px;
+    opacity: .9;
+}
+
+.app-button:hover {
+    background-color: #656565;
+}
+
+.shadow {
+    -moz-box-shadow: 0 0 30px 2px #7d7d7d;
+    -webkit-box-shadow: 0 0 30px 2px #7d7d7d;
+}
+
+
+/*------------------Pulse Button------------------*/
+
+.button-rounded-hover {
+    min-height: 20rem;
+    min-width: 20rem;
+    border: 0;
+    border-radius: 5000px;
+    padding: 1rem 2rem;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    /*opacity: .9;*/
+    font-size: 0rem;
+    /*font-weight: bold;*/
+    letter-spacing: 2px;
+    transition: all 0.35s ease;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    outline: none;
+}
+
+.button-rounded-hover:before {
+    opacity: 0;
+    content: "";
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border-radius: inherit;
+    background-color: #fefefe;
+    transition: all 0.3s;
+    -webkit-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+
+.button-rounded-hover:after {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    /*border: 5px solid #115b8d;*/
+    border: 5px solid #464646;
+    content: '';
+    border-radius: inherit;
+}
+
+.button-rounded-hover:hover,
+.button-rounded-hover:focus {
+    /*background-color: #115b8d;*/
+    background-color: #ff0000;
+    -moz-box-shadow: 0 0 30px 2px #7d7d7d;
+    -webkit-box-shadow: 0 0 30px 2px #7d7d7d;
+    /*background-color: #115b8d;*/
+}
+
+.button-rounded-hover:hover:before,
+.button-rounded-hover:focus:before {
+    -webkit-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    transform: translateX(0%);
+    opacity: 0.25;
+}

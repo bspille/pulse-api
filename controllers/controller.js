@@ -1,4 +1,3 @@
-
 // TODO: token from google fetches all the info for the user profile
 var express = require("express"),
     router = express.Router(),
