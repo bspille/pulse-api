@@ -3,7 +3,7 @@ var mongoose = require("mongoose"),
     // Create Schema class
     Schema = mongoose.Schema,
 
-    // Create article schema
+    // Create contact schema
     contactSchema = new Schema({
         // contacts first name
         givenName:{
@@ -20,7 +20,13 @@ var mongoose = require("mongoose"),
         // contact phone number
         phoneNumber: {
           type: String,
-          required: false,
+          validate: {
+            validator: function(v) {
+              return /\d{3}-\d{3}-\d{4}/.test(v);
+            },
+            message: '{VALUE} is not a valid phone number!'
+          },
+          required: false
         },
 
         // set true for the contact to be pulsed
@@ -30,7 +36,6 @@ var mongoose = require("mongoose"),
           default: false
         }
     }); // end of schema
-    // Create the User model
-    // Contact = mongoose.model("Contact", contactSchema);
 
+// export as sub-document
 module.exports = contactSchema;

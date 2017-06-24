@@ -4,6 +4,7 @@ var twilio = {
 // TODO: pass in lat and long coords for geolocation
   pulse: (sub, userLat, userLong) => {
     console.log(`twilio pulse ${sub}`);
+
         // find emergency contacts associated with user, will eventually change to google auth token
     User.findOne({ "tokenSub": sub })
       .exec(function(error, doc) {
@@ -17,6 +18,7 @@ var twilio = {
           // Twilio Credentials
           var accountSid = 'AC28a7d147997ae94957f97fde9d4e8697';
           var authToken = '5b6559e6ef0997f8cf151165fc9e4559';
+
           // test values left in just in case
           var TESTLat = "40.535434";
           var TESTLong = "-74.52128700000002";
@@ -27,6 +29,7 @@ var twilio = {
           // assigning the text body to a variable, laying groundwork for interchangeable messages
           var assistanceMessage = `${userDisplayName} needs some assistance, heres where they are:`;
           // loop to send a message out to each contact
+
           for (var i = 0; i < doc.contacts.length; i++) {
             // grabs emergency contact phone number
             var pulseRecipientNumber = doc.contacts[i].phoneNumber;
