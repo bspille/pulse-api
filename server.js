@@ -24,7 +24,7 @@ Promise.promisifyAll(mongoose);
 // localhost connection uncomment for localhost
 mongoose.connect("mongodb://localhost/pulse");
 // heroku mLabs connection uncomment for heroku deployment
-// mongoose.connect("mongodb://heroku_nvjgbw4q:f10viekoqjf0va83nia9bpjq9f@ds131119.mlab.com:31119/heroku_nvjgbw4q")
+// mongoose.connect("mongodb://heroku_fhfqpr6g:8l7nvjiqnbrb24geffb3ddn04q@ds137882.mlab.com:37882/heroku_fhfqpr6g")
 var db = mongoose.connection;
 
 // Show any mongoose errors
