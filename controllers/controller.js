@@ -128,10 +128,10 @@ var express = require("express"),
 
     });
 
-    // // route to render the welcome page
-    // router.get("/", (req, res) => {
-    //   res.render("index");
-    // });
+    // route to render the welcome page
+    router.get("/", (req, res) => {
+      res.render("index");
+    });
 
 // export router here
 module.exports = router;

@@ -19,10 +19,10 @@ var User = require("../../models/master.js"),
             }
           });
       },
-      read: (sub, cb) => {
+      read: (query, cb) => {
         // console.log("find user");
         // takes in the token sub (sub) and searches for entries that match
-        User.findOne({tokenSub: sub}).exec((err, results) => {
+        User.findOne(query).exec((err, results) => {
           // log error if there is a read error
           if (err) {
             console.log("crud error read: " + err);
@@ -32,7 +32,7 @@ var User = require("../../models/master.js"),
           cb(results);
         });
       },
-      update: (sub, updates, cb) => {
+      update: (query, updates, cb) => {
         // updates the user by array of objects updates must
         // recieve a method like $set: or $push: followed by the object to change
         // console.log("sub value: " + JSON.stringify(sub, null, 1));
@@ -46,20 +46,16 @@ var User = require("../../models/master.js"),
           // adjusts update methods for contacts field contacts
           update = {$addToSet: updates};
           opt = {new: true, runValidators: true};
-          query = { "tokenSub": sub, "contacts.phoneNumber": {$ne: updates.contacts.phoneNumber}};
-
         }
         if (updates.hasOwnProperty("geoLocation")) {
           // adjusts update methods for geoLocation
           update = {$addToSet: updates};
           opt = {new: true, runValidators: true};
-          query = { "tokenSub": sub, "contacts.geoLocation.timeStamp": {$ne: updates.geoLocation.timeStamp}};
         }
         else{
           // adjusts updates for none array fields
           update = {$set: updates};
           opt = {new: true, runValidators: true};
-          query = {"tokenSub": sub};
         }
         console.log("update " + JSON.stringify(update, null, 1));
         // sets query condition to ne not equal contacts.phoneNumber preventing duplicate entries with the same number
@@ -71,16 +67,15 @@ var User = require("../../models/master.js"),
         });
 
       },
-      delete: (sub, deletes, cb) => {
+      delete: (query, deletes, cb) => {
         // console.log("delete user data");
         // deletes the user info by array of objects updates must
         // recieve a method like $pop: or $pull: followed by the object to change
 
         var opt,
-            update,
-            query;
+            update;
 
-        User.Update(query, update, opt)
+        User.Update(query, deletes, opt)
         .exec((err, results) => {
           if (err) {
             console.log("crud error delete: " + err);
