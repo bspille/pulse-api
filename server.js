@@ -37,7 +37,7 @@ db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
 
-// cors config
+// cors config cors is a browser issue and may not be a problem later
 var whitelist = ['https://remote-pulse.herokuapp.com'];
 var corsOptions = {
   origin: function (origin, callback) {

@@ -1,27 +1,31 @@
 
-// TODO: token from google fetches all the info for the user profile
+// TODO: set up timer to hit pulse route on past due
 var express = require("express"),
     router = express.Router();
     twilio = require("./utils/twilio.js"),
     crud = require("./utils/crud.js"),
     token = require("./utils/google.js"),
     path = require("path"),
-    google = require("./utils/google.js")
+    google = require("./utils/google.js"),
+    timer = require("/utils/timer.js"),
     // front end application client id
     CLIENT_ID = '533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com';
-    
+
 
     // route to add new user
     router.post("/user", (req, res) =>{
         // console.log("http Hit" + JSON.stringify(req.body));
-        var token = req.body.token;
+        var token = req.body.token,
+            query;
             // verify the user and return the user object
             google.verifyToken(token, (results) => {
               // console.log("verification results " + JSON.stringify(results, null, 1));
               // check the collection for existing entry
               var user = results;
+              query = {tokenSub: user.sub};
+
               // console.log("sub " + user.sub);
-              crud.read(user.sub, (results) => {
+              crud.read(query, (results) => {
                 // if there is a entry send it back as json
                 if (results != null){
                   console.log("found entry for user " + JSON.stringify(results, null, 1));
@@ -46,7 +50,9 @@ var express = require("express"),
       var updates = req.body.updates,
           token = req.body.token,
           user,
-          update;
+          update,
+          query;
+
           // console.log("updates to add " + JSON.stringify(updates, null, 1));
           // verify the user and return the user object
           google.verifyToken(token, (results) => {
@@ -61,8 +67,8 @@ var express = require("express"),
             // console.log("test for results " + results.contacts);
             updates.contacts.map((x) =>{
               update = {contacts: x};
-
-              crud.update(user.sub, update, (results) => {
+              query = { tokenSub: user.sub, "contacts.phoneNumber": {$ne: update.contacts.phoneNumber}};
+              crud.update(query, update, (results) => {
                 console.log("updates completed " + JSON.stringify(results, null, 1));
               }); // close out crud update
             }); // close out map contacts
@@ -70,14 +76,16 @@ var express = require("express"),
           } // if contacts
           if (updates.hasOwnProperty("geoLocation"))  {
             update = updates;
-            crud.update(user.sub, update, (results) => {
+            query = { tokenSub: user.sub, "contacts.geoLocation.timeStamp": {$ne: update.geoLocation.timeStamp}};
+            crud.update(query, update, (results) => {
               console.log("updates completed " + JSON.stringify(results, null, 1));
               // res.json(results);
             }); // close out crud update
           }// if geoLocation
           else{
             update = updates;
-            crud.update(user.sub, update, (results) => {
+            query = {tokenSub: user.sub};
+            crud.update(query, update, (results) => {
               console.log("updates completed " + JSON.stringify(results, null, 1));
               // res.json(results);
             }); // close out crud update
