@@ -2,9 +2,9 @@
 var crud = require("./crud.js"),
     timer = {
       // run this.query every 5 minutes
-      run(){setInterval(this.query, 300000)}
+      run(){setInterval(this.query, 300000)},
 
-      query(){
+      query (){
         var date = Date.now(),
         query = {timeSet: date};
         crud.read(query, (result) =>{

@@ -22,7 +22,7 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // mongoose.Promise = global.Promise;
 Promise.promisifyAll(mongoose);
 // localhost connection uncomment for localhost
-mongoose.connect("mongodb://localhost/pulse");
+// mongoose.connect("mongodb://localhost/pulse");
 // heroku mLabs connection uncomment for heroku deployment
 // mongoose.connect("mongodb://heroku_fhfqpr6g:8l7nvjiqnbrb24geffb3ddn04q@ds137882.mlab.com:37882/heroku_fhfqpr6g")
 var db = mongoose.connection;
@@ -38,7 +38,7 @@ db.once("open", function() {
 });
 
 // cors config cors is a browser issue and may not be a problem later
-var whitelist = ['https://remote-pulse.herokuapp.com'];
+var whitelist = ['https://pulse-alert.herokuapp.com', 'https://pulse-alert-api.herokuapp.com'];
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {

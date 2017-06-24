@@ -7,7 +7,7 @@ var express = require("express"),
     token = require("./utils/google.js"),
     path = require("path"),
     google = require("./utils/google.js"),
-    timer = require("/utils/timer.js"),
+    timer = require("./utils/timer.js"),
     // front end application client id
     CLIENT_ID = '533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com';
 
@@ -130,7 +130,7 @@ var express = require("express"),
 
     // route to render the welcome page
     router.get("/", (req, res) => {
-      res.render("index");
+      res.sendFile("../pulblic/index.html");
     });
 
 // export router here
