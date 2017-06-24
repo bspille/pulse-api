@@ -2,7 +2,6 @@
 var express = require("express"),
     bodyParser = require("body-parser"),
     cors = require("cors"),
-    exphbs = require("express-handlebars"),
     mongoose = require("mongoose"),
     Promise = require("bluebird"),
     // Sets up the Express App
@@ -24,7 +23,7 @@ Promise.promisifyAll(mongoose);
 // localhost connection uncomment for localhost
 // mongoose.connect("mongodb://localhost/pulse");
 // heroku mLabs connection uncomment for heroku deployment
-// mongoose.connect("mongodb://heroku_fhfqpr6g:8l7nvjiqnbrb24geffb3ddn04q@ds137882.mlab.com:37882/heroku_fhfqpr6g")
+mongoose.connect("mongodb://heroku_fhfqpr6g:8l7nvjiqnbrb24geffb3ddn04q@ds137882.mlab.com:37882/heroku_fhfqpr6g")
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -38,7 +37,7 @@ db.once("open", function() {
 });
 
 // cors config cors is a browser issue and may not be a problem later
-var whitelist = ['https://pulse-alert.herokuapp.com', 'https://pulse-alert-api.herokuapp.com'];
+var whitelist = ['https://pulse-alert.herokuapp.com', 'http://pulse-alert-api.herokuapp.com'];
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -54,9 +53,7 @@ app.use(cors(corsOptions));
 var routes  = require("./controllers/controller");
 app.use('/', routes);
 
-// set up handlebars engine
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+
 // starting express app
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
