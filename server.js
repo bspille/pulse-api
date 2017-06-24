@@ -37,18 +37,18 @@ db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
 
-// // cors config
-// var whitelist = ['http://lvh.me'];
-// var corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true)
-//     } else {
-//       callback(new Error("Not allowed by CORS " + origin))
-//     }
-//   }
-// };
-app.use(cors());
+// cors config
+var whitelist = ['https://pulse-alert.herokuapp.com'];
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error("Not allowed by CORS " + origin))
+    }
+  }
+};
+app.use(cors(corsOptions));
 
 // router
 var routes  = require("./controllers/controller");
