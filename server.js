@@ -38,7 +38,7 @@ db.once("open", function() {
 });
 
 // cors config
-var whitelist = ['https://pulse-alert.herokuapp.com'];
+var whitelist = ['https://remote-pulse.herokuapp.com'];
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
