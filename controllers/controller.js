@@ -130,7 +130,7 @@ var express = require("express"),
 
     // route to render the welcome page
     router.get("/", (req, res) => {
-      res.sendFile("./index.html");
+      res.send("welcome to the pulse api");
     });
 
 // export router here
