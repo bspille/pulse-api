@@ -1,12 +1,13 @@
 // Dependencies
 var express = require("express"),
     bodyParser = require("body-parser"),
+    cors = require("cors"),
     exphbs = require("express-handlebars"),
     mongoose = require("mongoose"),
     Promise = require("bluebird"),
     // Sets up the Express App
     app = express(),
-    PORT = process.env.PORT || 3000;
+    PORT = process.env.PORT || 8080;
 
 // serve public files as static
 app.use(express.static("public"));
@@ -21,9 +22,9 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // mongoose.Promise = global.Promise;
 Promise.promisifyAll(mongoose);
 // localhost connection uncomment for localhost
-mongoose.connect("mongodb://localhost/pulse");
+// mongoose.connect("mongodb://localhost/pulse");
 // heroku mLabs connection uncomment for heroku deployment
-// mongoose.connect("mongodb://heroku_nvjgbw4q:f10viekoqjf0va83nia9bpjq9f@ds131119.mlab.com:31119/heroku_nvjgbw4q")
+mongoose.connect("mongodb://heroku_nvjgbw4q:f10viekoqjf0va83nia9bpjq9f@ds131119.mlab.com:31119/heroku_nvjgbw4q")
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -35,6 +36,19 @@ db.on("error", function(error) {
 db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
+
+// // cors config
+// var whitelist = ['http://lvh.me'];
+// var corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error("Not allowed by CORS " + origin))
+//     }
+//   }
+// };
+app.use(cors());
 
 // router
 var routes  = require("./controllers/controller");

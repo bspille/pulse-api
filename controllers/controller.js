@@ -1,7 +1,7 @@
 
 // TODO: token from google fetches all the info for the user profile
 var express = require("express"),
-    router = express.Router(),
+    router = express.Router();
     twilio = require("./utils/twilio.js"),
     crud = require("./utils/crud.js"),
     token = require("./utils/google.js"),
@@ -9,7 +9,7 @@ var express = require("express"),
     google = require("./utils/google.js")
     // front end application client id
     CLIENT_ID = '533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com';
-
+    
 
     // route to add new user
     router.post("/user", (req, res) =>{
@@ -120,10 +120,10 @@ var express = require("express"),
 
     });
 
-    // route to render the welcome page
-    router.get("/", (req, res) => {
-      res.render("index");
-    });
+    // // route to render the welcome page
+    // router.get("/", (req, res) => {
+    //   res.render("index");
+    // });
 
 // export router here
 module.exports = router;
