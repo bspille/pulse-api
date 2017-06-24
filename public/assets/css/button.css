@@ -17,6 +17,64 @@
 }
 
 
+/*------------------Begin Activity Button------------------*/
+
+.button-hover-default {
+  border: 2px solid #464646;
+  background: transparent;
+  color: #464646;
+  text-transform: uppercase;
+  overflow: hidden;
+  letter-spacing: 0.07rem;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+.button-hover-default span {
+  transition: all 0.2s ease-in-out;
+}
+
+.button-hover-default .fa {
+  position: absolute;
+  font-size: 1.2rem;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  color: black;
+  right: -20px;
+  transition: 0.4s right cubic-bezier(0.38, 0.6, 0.48, 1);
+}
+
+.button-hover-default .fa-user-plus, .button-hover-default .fa-user-times {
+  position: absolute;
+  font-size: 1.2rem;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  color: black;
+  right: -23px;
+  transition: 0.4s right cubic-bezier(0.38, 0.6, 0.48, 1);
+}
+
+.button-hover-default:hover {
+  border-color: black;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.button-hover-default:hover span {
+  margin-right: 20px;
+  color: black;
+}
+
+.button-hover-default:hover .fa {
+  right: 10px;
+}
+
+
+
 /*------------------Pulse Button------------------*/
 
 .button-rounded-hover {
@@ -84,10 +142,6 @@
 }
 
 /*------------------Add Contact Button------------------*/
-
-#add-contact-button {
-
-}
 
 /*.plus-minus-input {
   -webkit-align-items: center;

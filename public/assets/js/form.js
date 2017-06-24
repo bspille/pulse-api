@@ -25,10 +25,13 @@ $(document).ready(function () {
           <input type="text" id="full-name" name="full name input" placeholder="Full name"></div>\
           <div class="floated-label-wrapper"><label for="tel">Phone #</label>\
           <input type="tel" id="tel" name="tel input" placeholder="Phone number">\
-          <a href="#" class="button round remove_field"><i class="fa fa-user-times fa-lg remove-button" aria-hidden="true"></i> Remove</a></div></div>');
+          <button class="button-hover-default button remove_field"><span>Remove contact</span><i class="fa fa-user-times"></i></button</div></div>');
   });
   $(contacts).on("click", ".remove_field", function (e) { //removes additional contact field
     e.preventDefault();
     $(this).closest('.additional-contact').remove();
   });
 });
+
+
+/*<a href="#" class="button app-button remove_field"><i class="fa fa-user-times fa-lg" aria-hidden="true"></i> Remove</a>\*/

@@ -39,21 +39,3 @@
     margin-right: 5%;
     margin-bottom: 5%;
 }
-
-.contact-form {
-
-}
-
-.remove_field {
-    
-}
-
-.remove_field:hover {
-    background-color: red;
-    transition: all 0.15s ease 0s;
-
-}
-
-.remove-button {
-    
-}
