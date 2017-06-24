@@ -130,7 +130,7 @@ var express = require("express"),
 
     // route to render the welcome page
     router.get("/", (req, res) => {
-      res.sendFile("../pulblic/index.html");
+      res.sendFile("./index.html");
     });
 
 // export router here
