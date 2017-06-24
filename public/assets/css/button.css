@@ -141,6 +141,16 @@
     opacity: 0.25;
 }
 
+#pulse-button {
+    margin-bottom: 50px;
+}
+
+/*------------------Save Profile Button------------------*/
+
+#save-profile-button {
+    text-transform: uppercase;
+}
+
 /*------------------Add Contact Button------------------*/
 
 /*.plus-minus-input {

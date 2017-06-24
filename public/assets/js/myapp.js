@@ -97,3 +97,12 @@ function showPosition(position) {
   var userLong = position.coords.longitude;
   sendPulse(userLat, userLong);
 }
+
+// Toggle pulse button
+$('#largeSwitch').click(function () {
+  if ($('#pulse-button').attr("disabled")) {
+    $('#pulse-button').removeAttr("disabled");
+  } else {
+    $('#pulse-button').attr("disabled", '');
+  }
+});

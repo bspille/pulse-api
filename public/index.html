@@ -26,7 +26,7 @@
     <!--Bringing in fontawesome in order to use their icons-->
     <script src="https://use.fontawesome.com/97f0d0a6dd.js"></script>
 
-    <script type="text/javascript" src="assets/js/myapp.js"></script>
+    <script type="text/javascript" src="assets/js/myapp.js" async defer></script>
 </head>
 
 <body>
@@ -84,7 +84,13 @@
                 <button class="button-hover-default button"><span>Begin new activity</span><i class="fa fa-hourglass-start"></i></button>
                 <br>
                 <!--Pule Button-->
-                <button id="pulse-button" class="button button-rounded-hover"><img src="assets/images/radio2.png"></button>
+                <button id="pulse-button" class="button button-rounded-hover" disabled><img src="assets/images/radio2.png"></button>
+                <div id="pulse-toggle-button" class="switch large">
+                    <input class="switch-input" id="largeSwitch" type="checkbox" name="exampleSwitch">
+                    <label class="switch-paddle" for="largeSwitch">
+                    <span class="show-for-sr">I like things</span>
+                    </label>
+                </div>
             </div>
         </div>
         <div class="push">
