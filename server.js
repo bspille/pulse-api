@@ -7,7 +7,7 @@ var express = require("express"),
     exphbs = require("express-handlebars"),
     // Sets up the Express App
     app = express(),
-    PORT = process.env.PORT || 4200;
+    PORT = process.env.PORT || 3000;
 
 // serve public files as static
 app.use(express.static("public"));
@@ -22,9 +22,9 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // mongoose.Promise = global.Promise;
 Promise.promisifyAll(mongoose);
 // localhost connection uncomment for localhost
-// mongoose.connect("mongodb://localhost/pulse");
+mongoose.connect("mongodb://localhost/pulse");
 // heroku mLabs connection uncomment for heroku deployment
-mongoose.connect("mongodb://heroku_fhfqpr6g:8l7nvjiqnbrb24geffb3ddn04q@ds137882.mlab.com:37882/heroku_fhfqpr6g")
+// mongoose.connect("mongodb://heroku_fhfqpr6g:8l7nvjiqnbrb24geffb3ddn04q@ds137882.mlab.com:37882/heroku_fhfqpr6g")
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -37,18 +37,18 @@ db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
 
-// cors config cors is a browser issue and may not be a problem later
-var whitelist = ['https://pulse-alert.herokuapp.com', 'http://pulse-alert-api.herokuapp.com'];
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error("Not allowed by CORS " + origin))
-    }
-  }
-};
-app.use(cors());
+// // cors config cors is a browser issue and may not be a problem later
+// var whitelist = ['https://pulse-alert.herokuapp.com', 'http://pulse-alert-api.herokuapp.com'];
+// var corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error("Not allowed by CORS " + origin))
+//     }
+//   }
+// };
+// app.use(cors());
 
 // router
 var routes  = require("./controllers/controller");
