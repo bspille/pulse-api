@@ -4,9 +4,10 @@ var express = require("express"),
     cors = require("cors"),
     mongoose = require("mongoose"),
     Promise = require("bluebird"),
+    exphbs = require("express-handlebars"),
     // Sets up the Express App
     app = express(),
-    PORT = process.env.PORT || 8080;
+    PORT = process.env.PORT || 4200;
 
 // serve public files as static
 app.use(express.static("public"));
@@ -53,6 +54,9 @@ app.use(cors());
 var routes  = require("./controllers/controller");
 app.use('/', routes);
 
+// set up handlebars engine
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 // starting express app
   app.listen(PORT, function() {

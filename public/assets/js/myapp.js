@@ -22,11 +22,11 @@ function onSignIn(googleUser) {
 };
 // sends the id token to the server
 function http(id_token) {
-  $.post("https://pulse-alert.herokuapp.com/user/", {token: id_token},   (user) => {
+  $.post("/user/", {token: id_token},   (user) => {
     console.log("signin successfull: " + user);
     // send update in groups contacts, geoLocation, or everything else update tested ok
     // no input validation yet don't mix the groups
-    $.post("https://pulse-alert.herokuapp.com/update/",{token: id_token, updates:
+    $.post("/update/",{token: id_token, updates:
       [{
         givenName: "ben",
         familyName: "spille",
@@ -66,7 +66,7 @@ $(document).on("click", "#pulse-button", getLocation);
 function sendPulse(userLat, userLong) {
     console.log("id_token" + id_token);
     // changed the passed body to be cleaner naming
-    $.post("https://pulse-alert.herokuapp.com/pulse/", {token: id_token, geoLocation: { latitude: userLat, longitude: userLong}});
+    $.post("/pulse/", {token: id_token, geoLocation: { latitude: userLat, longitude: userLong}});
     // console.log(userLat);
     // console.log(userLong);
 };

@@ -1,0 +1,64 @@
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    /*background-image: url("https://www.toptal.com/designers/subtlepatterns/topography/");*/
+    /*background-image: url("../images/topography.png");*/
+    /*background-image: url("../images/cream_pixels.png");*/
+    background-image: url("../images/greyzz.png");
+    /*background-image: url("../images/pw_pattern.png");*/
+    /*background-image: url("../images/swirl.png");*/
+}
+
+#wrapper {
+    min-height: 100%;
+    position: relative;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -60px;
+}
+
+/*------------------Footer------------------*/
+
+#pulse-footer {
+    height: 60px;
+    width: 100%;
+    background: #222b31;
+    color: rgba(254, 254, 254, 0.6);
+    text-align: center;
+    padding: 1rem 0 0;
+    position: absolute;
+    left: 0px;
+}
+
+.push {
+    height: 60px;
+}
+
+/*------------------Avatar------------------*/
+
+.avatar-wrapper {
+    padding-left: 16px;
+}
+
+.avatar {
+    float: left;
+    margin-top: 1em;
+    margin-right: 1em;
+    margin-bottom: 1em;
+    position: relative;
+
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+
+    -webkit-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+    box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+}
