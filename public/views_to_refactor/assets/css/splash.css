@@ -1,23 +1,57 @@
 /*Pulse logo*/
 
-#pulse-logo-big {
+#title-container {
     display: flex;
+    z-index: 50;
     position: relative;
-    top: 50%;
-    align-content: center;
-    /*justify-content: center;
-    vertical-align: middle;*/
-    margin: auto;
-}
-
-.title-container {
-    z-index: 1000;
-    position: absolute;
-    top: 30%;
+    top: 25%;
     width: 100%;
+    justify-content: center;
     text-align: center;
     color: #fff;
+    margin-bottom: 10px;
 }
+
+
+/*#splash-logo {
+    position: relative;
+    z-index: 1000;
+    top: 50%;
+    align-content: center;
+    justify-content: center;
+    vertical-align: middle;
+    margin: auto;
+}*/
+
+#pulse-logo-waves {
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    max-width: 75%;
+}
+
+#pulse-logo-big {
+    justify-content: center;
+    position: absolute;
+    max-width: 75%;
+}
+
+.pulse {
+    -webkit-animation-duration: 1.5s;
+    -webkit-animation-iteration-count: infinite;
+}
+
+
+/*Sign in button*/
+
+#signin-button-container {
+    display: flex;
+    z-index: 50;
+    position: relative;
+    top: 65%;
+    margin-top: 10px
+}
+
 
 /*video*/
 
@@ -54,7 +88,7 @@
 }
 
 .video-container .filter {
-    z-index: 100;
+    z-index: 0;
     position: absolute;
     background: rgba(0, 0, 0, 0.4);
     width: 100%;
