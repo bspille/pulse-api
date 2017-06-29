@@ -69,11 +69,12 @@
     justify-content: center;
     width: 20rem;
     height: 60px;
-    /*vertical-align: middle;*/
+    vertical-align: middle;
     opacity: .7;
     margin-top: 10px;
     margin: auto;
     overflow: hidden;
+    flex-wrap: wrap;
 }
 
 #sign-in-button span {
