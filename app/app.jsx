@@ -1,6 +1,9 @@
-var React = require("react"),
+// require npm packages here
+const React = require("react"),
     reactDOM = require("react-dom");
-    // Main = require("./components/main");
+// import components here
+import  {Main} from"./components/main.jsx";
 
-reactDOM.render(<h2>hello world</h2>,
+reactDOM.render(<Main/>
+,
   document.getElementById('root'));
