@@ -7,17 +7,14 @@
 
     <!-- <meta name="google-signin-client_id" content="904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"></meta> -->
     <meta name="google-signin-client_id" content="533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com"></meta>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
     </script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta charset="UTF-8">
     <!--Bringing in foundation, foundation-flex, jquery, and local style files-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" integrity="sha256-itWEYdFWzZPBG78bJOOiQIn06QCgN/F0wMDcC4nOhxY="
-        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" integrity="sha256-itWEYdFWzZPBG78bJOOiQIn06QCgN/F0wMDcC4nOhxY=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation-flex.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js" integrity="sha256-Nd2xznOkrE9HkrAMi4xWy/hXkQraXioBg9iYsBrcFrs="
-        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js" integrity="sha256-Nd2xznOkrE9HkrAMi4xWy/hXkQraXioBg9iYsBrcFrs=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/plugins/foundation.offcanvas.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
@@ -36,22 +33,20 @@
     <div class="homepage-hero-module">
         <div class="video-container">
             <div class="filter"></div>
-            <div id="title-container" class="row">
-                <div id="title-container" class="small-12 columns splash-logo">
-                    <img id="pulse-logo-waves" class="animated pulse" src="assets/images/pulse-waves.png" alt="">
-                    <img id="pulse-logo-big" class="" src="assets/images/pulse-logo-nowaves.png" alt="">
-                </div>
-            </div>
-            <!-- Sign in Button-->
-            <div id="signin-button-container" class="row">
-                <div class="small-12 columns">
-                    <a href="#" id="sign-in-button" class="welcome button-hover-addcart button" data-onsuccess="onSignIn"><span>Sign In</span><i class="fa fa-google" aria-hidden="true"></i></a>
-                </div>
-            </div>
             <video autoplay loop class="fillWidth">
                 <source src="assets/videos/circles_and_people/circles_and_people.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
                 <source src="assets/videos/circles_and_people/circles_and_people.webm" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
             </video>
+            <div id="title-container" class="row align-middle splash-logo">
+                <img id="pulse-logo-waves" class="column animated pulse" src="assets/images/pulse-waves.png" alt="PULSE">
+                <img id="pulse-logo-big" class="column" src="assets/images/pulse-logo-nowaves.png" alt="">
+            </div>
+            <!-- Sign in Button-->
+            <div id="signin-button-container" class="row align-bottom">
+                <div class="column">
+                    <a href="#" id="sign-in-button" class="welcome button-hover-addcart button" data-onsuccess="onSignIn"><span>Sign In</span><i class="fa fa-google" aria-hidden="true"></i></a>
+                </div>
+            </div>
             <!--<div class="poster hidden">
                 <img src="assets/videos/circles_and_people/circles_and_people.jpg" alt="">
             </div>-->
