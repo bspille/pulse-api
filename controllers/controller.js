@@ -131,7 +131,7 @@ var express = require("express"),
     // route to render the welcome page
     router.get("/", (req, res) => {
       // sends static html file in the public dir
-      res.sendFile("test.html", {root: __dirname + '/../public/'});
+      res.sendFile("splash.html", {root: __dirname + '/../public/'});
       // res.render("index");
     });
 

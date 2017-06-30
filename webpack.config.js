@@ -6,9 +6,12 @@ module.exports = {
 
   // The plain compiled JavaScript will be output into this file
   output: {
-    filename: "public/bundle.js"
+    filename: "public/bundle.js",
+    library: 'ReactRouterDOM'
   },
-
+resolve: {
+  modules: ['node_modules']
+},
   // This section desribes the transformations we will perform
   module: {
     loaders: [
@@ -25,6 +28,13 @@ module.exports = {
         }
       }
     ]
+  },
+  externals: {
+    fs: '{}',
+    tls: '{}',
+    net: '{}',
+    console: '{}',
+    child_process: '{}'
   },
   // This lets us debug our react code in chrome dev tools. Errors will have lines and file names
   // Without this the console says all errors are coming from just coming from bundle.js

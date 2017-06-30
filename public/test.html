@@ -1,19 +1,108 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-     <meta name="google-signin-scope" content="profile email">
-    <!-- uncomment for heroku deployment -->
-    <meta name="google-signin-client_id" content="904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"></meta>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <title>pulse api</title>
-  </head>
-  <body>
-    <div id="root">
-      
-    </div>
-    <script src="bundle.js">
-      
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Pulse</title>
+    <meta name="google-signin-scope" content="profile email">
+
+     <meta name="google-signin-client_id" content="904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"></meta> 
+    <!--<meta name="google-signin-client_id" content="533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com"></meta>-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
     </script>
-  </body>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta charset="UTF-8">
+    <!--Bringing in foundation, foundation-flex, jquery, and local style files-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" integrity="sha256-itWEYdFWzZPBG78bJOOiQIn06QCgN/F0wMDcC4nOhxY="
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation-flex.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js" integrity="sha256-Nd2xznOkrE9HkrAMi4xWy/hXkQraXioBg9iYsBrcFrs="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/plugins/foundation.offcanvas.min.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/menu.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/form.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/button.css" type="text/css" />
+    <!--Bringing in fontawesome in order to use their icons-->
+    <script src="https://use.fontawesome.com/97f0d0a6dd.js"></script>
+
+    <script type="text/javascript" src="assets/js/myapp.js" async defer></script>
+</head>
+
+<body>
+    <!--Navbar-->
+
+    <!-- Set up Off-canvas -->
+    <div id="wrapper">
+        <div class="multilevel-offcanvas off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+            <ul class="vertical menu">
+                <li class="avatar-wrapper"><img class="avatar" src="assets/images/avatar-female.png" alt="avatar" width="148" height="148" /></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+            <ul class="vertical menu">
+                <li><a href="#" data-close="offCanvasLeft" onclick="signOut();">Sign Out</a></li>
+            </ul>
+            <ul class="menu simple social-links">
+                <li><a href="#" target="_blank"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+                <li><a href="#" target="_blank"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+                <li><a href="https://github.com/bspille/pulse" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i></a></li>
+                <li><a href="#" target="_blank"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
+            </ul>
+        </div>
+        <div class="off-canvas-content" data-off-canvas-content>
+            <div class="nav-bar shadow">
+                <div class="nav-bar-left">
+                    <ul class="menu">
+                        <li>
+                            <button class="offcanvas-trigger" type="button" data-open="offCanvasLeft">
+                                <span class="offcanvas-trigger-text hide-for-small-only">Menu</span>
+                                <div class="hamburger">
+                                    <span class="line"></span>
+                                    <span class="line"></span>
+                                    <span class="line"></span>
+                                </div>
+                            </button>
+                        </li>
+                        <li>
+                            <a class="nav-bar-logo"><img class="logo" src="assets/images/pulse-logo.png"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav-bar-right">
+                    <ul class="menu">
+                    </ul>
+                </div>
+            </div>
+            <div class="body-info">
+                <h4 id="welcome"></h4>
+                <!--Begin new activity-->
+                <!--<a class="button app-button" href="#">Begin New Activity</a>-->
+                <button class="button-hover-default button"><span>Begin new activity</span><i class="fa fa-hourglass-start"></i></button>
+                <br>
+                <!--Pule Button-->
+                <button id="pulse-button" class="button button-rounded-hover" disabled><img src="assets/images/radio2.png"></button>
+                <div id="pulse-toggle-button" class="switch large">
+                    <input class="switch-input" id="largeSwitch" type="checkbox" name="exampleSwitch">
+                    <label class="switch-paddle" for="largeSwitch">
+                    <span class="show-for-sr">I like things</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="push">
+        </div>
+    </div>
+    <!--Footer-->
+    <div id="pulse-footer">
+        <p>© Pulse / All Rights Reserved.</p>
+    </div>
+    <script>
+        $(document).foundation();
+    </script>
+</body>
+
 </html>
