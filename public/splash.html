@@ -8,7 +8,6 @@
     <!--<meta name="google-signin-client_id" content="533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com"></meta>-->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous">
-
     </script>
     <!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->
     <meta charset="UTF-8">
@@ -31,7 +30,7 @@
 </head>
 
 <body>
-    <div class="homepage-hero-module" style="z-index: 2; position: absolute;">
+    <div class="homepage-hero-module" style="position: relative; z-index: 2;">
         <div class="video-container">
             <div class="filter"></div>
             <video autoplay loop class="fillWidth">
@@ -54,7 +53,7 @@
         </div>
     </div>
     <!--react node root-->
-    <div id="root" style="z-index: 1; position: absolute;"></div>
+    <div id="root" style="z-index: 1; position: relative;"></div>
     <script>
         $(document).foundation();
 
@@ -75,7 +74,7 @@ function onSuccess(googleUser) {
         id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
         // hides the splash page on successfull signin
-        $('.homepage-hero-module').css({"z-index": -1});
+        $('.homepage-hero-module').css({"z-index": -1000});
     }
 
 
