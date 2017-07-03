@@ -27,5 +27,4 @@ var GoogleAuth = require('google-auth-library'),
           });
         }
       }
-
-      module.exports = google;
+module.exports = google;

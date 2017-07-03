@@ -1,10 +1,10 @@
 // Dependencies
-var express = require("express"),
-    bodyParser = require("body-parser"),
-    cors = require("cors"),
-    mongoose = require("mongoose"),
-    Promise = require("bluebird"),
-    exphbs = require("express-handlebars"),
+const Router = require("./controllers/controller")
+const express = require("express")
+const bodyParser = require("body-parser")
+const cors = require("cors")
+const mongoose = require("mongoose")
+const Promise = require("bluebird")
     // Sets up the Express App
     app = express(),
     PORT = process.env.PORT || 3000;
@@ -51,12 +51,8 @@ db.once("open", function() {
 // app.use(cors());
 
 // router
-var routes  = require("./controllers/controller");
-app.use('/', routes);
+app.use('/', Router);
 
-// set up handlebars engine
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
 
 // starting express app
   app.listen(PORT, function() {

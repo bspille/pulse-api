@@ -1,5 +1,5 @@
-var User = require("../../models/master.js")
-var twilio = {
+const User = require("./../../models/master.js")
+const twilio = {
 // TODO: pass in google auth token for referencing user & grabbing contacts
 // TODO: pass in lat and long coords for geolocation
   pulse: (sub, userLat, userLong) => {
@@ -121,4 +121,3 @@ var twilio = {
 }; // end of module.exports
 
 module.exports = twilio;
-// test

@@ -1,112 +1,142 @@
 
-// TODO: set up timer to hit pulse route on past due
-var express = require("express"),
-    router = express.Router();
-    twilio = require("./utils/twilio.js"),
-    crud = require("./utils/crud.js"),
-    token = require("./utils/google.js"),
-    path = require("path"),
-    google = require("./utils/google.js"),
-    timer = require("./utils/timer.js"),
-    // front end application client id
-    CLIENT_ID = '533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com';
+const twilio = require("./utils/twilio.js")
+const crud  = require("./utils/crud.js")
+const google = require("./utils/google.js")
+const timer = require("./utils/timer.js")
+const express = require("express")
+const Router = express.Router()  
+const CLIENT_ID = '533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com';
+const token = (token) => {return token}
+const query = (query) => {return query}
+const updates = (updates) => {return updates}
+const update = (update) => {return update}
+const user = (user) => {
+  cosole.log("user verified: ", JSON.stringify(user, null, 1));
 
+  return user
+}
+const ERROR = (error) => {
+  if (error == "complete"){
+    return null
+  }
+  return ERROR.concat([error])
+}
+const results = (results) => {
+  return Object.assign({}, results)
+}
+const response = (results, ERROR) =>{
+  return null
+}
+let activeTimer = false;
+ // route to add new user
+Router.post("/user", (req, res) =>{
+  token(req.body.token);
 
-    // route to add new user
-    router.post("/user", (req, res) =>{
-        // console.log("http Hit" + JSON.stringify(req.body));
-        var token = req.body.token,
-            query;
-            // verify the user and return the user object
-            google.verifyToken(token, (results) => {
-              // console.log("verification results " + JSON.stringify(results, null, 1));
-              // check the collection for existing entry
-              var user = results;
-              query = {tokenSub: user.sub};
+  // verify the user and return the user object
+  google.verifyToken(token, (results) => {
+    user(results);
+  }); // end of verify user
 
-              // console.log("sub " + user.sub);
-              crud.read(query, (results) => {
-                // if there is a entry send it back as json
-                if (results != null){
-                  console.log("found entry for user " + JSON.stringify(results, null, 1));
-                  res.json(results)
-                }
-                // if there is no entry create one
-                else{
-                  console.log("has no read results");
-                  crud.create(user, (results) => {
-                    console.log("created new user " + JSON.stringify(results, null, 1));
-                    res.json(results);
-                  });
-                }
-              });
-            });
-    }); // end of post user
+  query({tokenSub: user.sub});
+
+  // add condition for unverified user here
+  try {
+    crud.read(query, (res) => {
+      // if there is a entry send it back as json
+      if (res){
+        console.log("found entry for user " + JSON.stringify(res, null, 1));
+        results(res)
+      }
+      // if there is no entry create one
+      else{
+        crud.create(user, (res) => {
+          console.log("created new user " + JSON.stringify(res, null, 1));
+          results(res);
+        });
+      }
+    });
+  } 
+  catch (error) {
+    ERROR(error);
+    console.log(error);
+  }
+  finally {
+    res.json(`finished login/create user ${results}`);
+    ERROR("complete");
+  }
+}); // end of post user
 
     // route to update user
-    router.post("/update", (req, res) =>{
-      // TODO: still needs to prevent duplicate entries
-      // assumes the request body is a array of objects with a property of where
-      var updates = req.body.updates,
-          token = req.body.token,
-          user,
-          update,
-          query;
+Router.post("/update", (req, res) =>{
+  updates(req.body.updates);
+  token(req.body.token);
 
-          // console.log("updates to add " + JSON.stringify(updates, null, 1));
-          // verify the user and return the user object
-          google.verifyToken(token, (results) => {
-            // console.log("verification results " + JSON.stringify(results, null, 1));
-            // check the collection for existing entry
-            user = results;
-          }); // added for test close google verify
+  // verify the user and return the user object
+  google.verifyToken(token, (results) => {
+    // check the collection for existing entry
+    user(results);
+  }); //close google verify
 
-                // console.log("found entry to update " + JSON.stringify(results, null, 1));
-          if(updates.hasOwnProperty("contacts")){
+  // starts the timer and sets the active timer to true
+  // needs a way to determine when to call stop and set active timeer to false
+  if (updates.hasOwnPropery("timeSet") && !activeTimer && user){
+    timer.start()
+    activeTimer = true;
+  }
 
-            // console.log("test for results " + results.contacts);
-            updates.contacts.map((x) =>{
-              update = {contacts: x};
-              query = { tokenSub: user.sub, "contacts.phoneNumber": {$ne: update.contacts.phoneNumber}};
-              crud.update(query, update, (results) => {
-                console.log("updates completed " + JSON.stringify(results, null, 1));
-              }); // close out crud update
-            }); // close out map contacts
-            // res.redirect("/user");
-          } // if contacts
-          if (updates.hasOwnProperty("geoLocation"))  {
-            update = updates;
-            query = { tokenSub: user.sub, "contacts.geoLocation.timeStamp": {$ne: update.geoLocation.timeStamp}};
-            crud.update(query, update, (results) => {
-              console.log("updates completed " + JSON.stringify(results, null, 1));
-              // res.json(results);
-            }); // close out crud update
-          }// if geoLocation
-          else{
-            update = updates;
-            query = {tokenSub: user.sub};
-            crud.update(query, update, (results) => {
-              console.log("updates completed " + JSON.stringify(results, null, 1));
-              // res.json(results);
-            }); // close out crud update
-          } // else
+  // if the updates contain contacts run this route
+  try {
+    if(updates.hasOwnProperty("contacts")){
+      updates.contacts.map((x) =>{
+        update({contacts: x});
+        query({ tokenSub: user.sub, "contacts.phoneNumber": {$ne: update.contacts.phoneNumber}});
+        try {
+          crud.update(query, update, (res) => {
+            results(res)
+          }); // close out crud update
+        } 
+        catch (error) {
+          // throw the error up to the parent to catch and continue
+          if (error) throw error;
+        }
+      }); // close out map contacts
+    } // if contacts
 
-    }); // end update route
+    // if the updates contain geoLocation run this route
+    if (updates.hasOwnProperty("geoLocation"))  {
+      update(updates);
+      query({ tokenSub: user.sub, "contacts.geoLocation.timeStamp": {$ne: update.geoLocation.timeStamp}});
+      crud.update(query, update, (res) => {
+        results(res)
+      }); // close out crud update
+    }// close if geoLocation
+            
+    else{
+      update(updates);
+      query({tokenSub: user.sub});
+      crud.update(query, update, (res) => {
+        results(res)
+      }); // close out crud update
+    } // else
+  }
+  catch(error){
+    ERROR(error);
+  }
+  finally{
+    res.json(`update completed ${results}`);
+    ERROR("complete");
+  }
+}); // end update route
 
-    // route to delete contacts
-    router.delete("/delete", (req, res) =>{
-      // assumes request body will be a array of objects with a propery of where
-      var fields = req.body;
-          user = crud.delete(deletes).then(() => {
-            res.json(user);
-          });
-    });
+// route to delete contacts
+// need to work this in 
+Router.delete("/delete", (req, res) =>{
 
-    // route to send out pulse
-    // TODO: pulse route recieves duplicate hits from http request
-    router.post("/pulse", (req, res) =>{
+});
 
-      // made some changes to cleaner naming
+// route to send out pulse
+Router.post("/pulse", (req, res) =>{
+  // made some changes to cleaner naming
       var latitude = req.body.geoLocation.latitude;
       var longitude = req.body.geoLocation.longitude;
       console.log("pulseLat " + latitude);
@@ -128,12 +158,12 @@ var express = require("express"),
 
     });
 
-    // route to render the welcome page
-    router.get("/", (req, res) => {
-      // sends static html file in the public dir
-      res.sendFile("splash.html", {root: __dirname + '/../public/'});
-      // res.render("index");
-    });
+// route to render the welcome page
+Router.get("/", (req, res) => {
+  // sends static html file in the public dir
+  res.sendFile("splash.html", {root: __dirname + '/../public/'});
+  // res.render("index");
+});
 
 // export router here
-module.exports = router;
+module.exports = Router;

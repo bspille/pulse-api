@@ -5,14 +5,8 @@ var mongoose = require("mongoose"),
 
     // Create contact schema
     contactSchema = new Schema({
-        // contacts first name
-        givenName:{
-          type: String,
-          required: false
-        },
-
-        // contacts last name
-        familyName: {
+        // contacts name
+        name:{
           type: String,
           required: false
         },
