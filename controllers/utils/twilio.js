@@ -29,7 +29,6 @@ var twilio = {
           // assigning the text body to a variable, laying groundwork for interchangeable messages
           var assistanceMessage = `${userDisplayName} needs some assistance, heres where they are:`;
           // loop to send a message out to each contact
-
           for (var i = 0; i < doc.contacts.length; i++) {
             // grabs emergency contact phone number
             var pulseRecipientNumber = doc.contacts[i].phoneNumber;

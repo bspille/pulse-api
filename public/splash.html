@@ -1,13 +1,12 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <title>Pulse</title>
     <!--<meta name="google-signin-scope" content="profile email">-->
-
-    <!-- <meta name="google-signin-client_id" content="904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"></meta> -->
-    <meta name="google-signin-client_id" content="533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com"></meta>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+     <meta name="google-signin-client_id" content="904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"></meta> 
+    <!--<meta name="google-signin-client_id" content="533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com"></meta>-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
     </script>
     <!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->
     <meta charset="UTF-8">
@@ -24,11 +23,9 @@
     <link rel="stylesheet" href="assets/css/splash.css" type="text/css" />
     <!--Bringing in fontawesome in order to use their icons-->
     <script src="https://use.fontawesome.com/97f0d0a6dd.js"></script>
-
     <script type="text/javascript" src="assets/js/myapp.js" async defer></script>
     <script type="text/javascript" src="assets/js/splash.js"></script>
 </head>
-
 <body>
     <div class="homepage-hero-module" style="position: relative; z-index: 2;">
         <div class="video-container">
@@ -42,9 +39,9 @@
                 <img id="pulse-logo-big" class="column" src="assets/images/pulse-logo-nowaves.png" alt="">
             </div>
             <!-- Sign in Button-->
-            <div id="signin-button-container" class="row align-bottom">
-                <div class="column">
-                    <a href="#" id="sign-in-button" class="welcome button-hover-addcart button" data-onsuccess="onSignIn"><span>Sign In</span><i class="fa fa-google" aria-hidden="true"></i></a>
+            <div id="signin-button-container" class="row">
+                <div class="small-12 columns">
+                    <div id="my-signin2"></div>
                 </div>
             </div>
             <!--<div class="poster hidden">
@@ -56,7 +53,6 @@
     <div id="root" style="z-index: 1; position: relative;"></div>
     <script>
         $(document).foundation();
-
 // successfull signin here
 function onSuccess(googleUser) {
       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
@@ -69,20 +65,16 @@ function onSuccess(googleUser) {
         console.log('Family Name: ' + profile.getFamilyName());
         console.log("Image URL: " + profile.getImageUrl());
         console.log("Email: " + profile.getEmail());
-
         // The ID token you need to pass to your backend:
         id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
         // hides the splash page on successfull signin
         $('.homepage-hero-module').css({"z-index": -1000});
     }
-
-
 // failed to signin condition here
 function onFailure(error) {
       console.log(error);
     }
-
     // customize the signin button here
         function renderButton() {
             gapi.signin2.render('my-signin2', {
@@ -95,10 +87,8 @@ function onFailure(error) {
                 'onfailure': onFailure
             });
         }
-
     </script>
     <script src="bundle.js"></script>
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 </body>
-
 </html>

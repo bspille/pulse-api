@@ -1,0 +1,243 @@
+/*------------------App Buttons------------------*/
+
+.app-button {
+    background-color: #939393;
+    border: 2px solid #464646;
+    border-radius: 5px;
+    opacity: .9;
+}
+
+.app-button:hover {
+    background-color: #656565;
+}
+
+.shadow {
+    -moz-box-shadow: 0 0 30px 2px #7d7d7d;
+    -webkit-box-shadow: 0 0 30px 2px #7d7d7d;
+}
+
+
+/*-------------------Sign In Button----------------------*/
+
+.button-hover-addcart {
+    border: 2px solid #767676;
+    border-radius: 8px;
+    background: white;
+    color: #767676;
+    text-transform: uppercase;
+    overflow: hidden;
+    letter-spacing: 0.07rem;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+}
+
+.button-hover-addcart span {
+    transition: all 0.2s ease-in-out;
+}
+
+.button-hover-addcart .fa {
+    position: absolute;
+    font-size: 1.2rem;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    color: #5d5d5d;
+    right: -20px;
+    transition: 0.4s right cubic-bezier(0.38, 0.6, 0.48, 1);
+}
+
+.button-hover-addcart:hover {
+    border-color: #5d5d5d;
+    background: white;
+    transition: border-color 0.2s;
+}
+
+.button-hover-addcart:hover span {
+    margin-right: 20px;
+    color: #5d5d5d;
+}
+
+.button-hover-addcart:hover .fa {
+    right: 12px;
+}
+
+#sign-in-button {
+    display: flex;
+    position: relative;
+    align-content: center;
+    justify-content: center;
+    width: 20rem;
+    height: 60px;
+    vertical-align: middle;
+    opacity: .7;
+    margin: auto;
+}
+
+#sign-in-button span {
+    margin: auto;
+}
+
+#sign-in-button:hover {
+    opacity: 1;
+    background-color: white;
+}
+
+
+/*------------------Begin Activity Button------------------*/
+
+.button-hover-default {
+    border: 2px solid #464646;
+    background: transparent;
+    color: #464646;
+    text-transform: uppercase;
+    overflow: hidden;
+    letter-spacing: 0.07rem;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+}
+
+.button-hover-default span {
+    transition: all 0.2s ease-in-out;
+}
+
+.button-hover-default .fa {
+    position: absolute;
+    font-size: 1.2rem;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    color: black;
+    right: -20px;
+    transition: 0.4s right cubic-bezier(0.38, 0.6, 0.48, 1);
+}
+
+.button-hover-default .fa-user-plus,
+.button-hover-default .fa-user-times {
+    position: absolute;
+    font-size: 1.2rem;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    color: black;
+    right: -23px;
+    transition: 0.4s right cubic-bezier(0.38, 0.6, 0.48, 1);
+}
+
+.button-hover-default:hover {
+    border-color: black;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+.button-hover-default:hover span {
+    margin-right: 20px;
+    color: black;
+}
+
+.button-hover-default:hover .fa {
+    right: 10px;
+}
+
+
+/*------------------Pulse Button------------------*/
+
+.button-rounded-hover {
+    min-height: 20rem;
+    min-width: 20rem;
+    border: 0;
+    border-radius: 5000px;
+    padding: 1rem 2rem;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    /*opacity: .9;*/
+    font-size: 0rem;
+    /*font-weight: bold;*/
+    letter-spacing: 2px;
+    transition: all 0.35s ease;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    outline: none;
+}
+
+.button-rounded-hover:before {
+    opacity: 0;
+    content: "";
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border-radius: inherit;
+    background-color: #fefefe;
+    transition: all 0.3s;
+    -webkit-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+
+.button-rounded-hover:after {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    /*border: 5px solid #115b8d;*/
+    border: 5px solid #464646;
+    content: '';
+    border-radius: inherit;
+}
+
+.button-rounded-hover:hover,
+.button-rounded-hover:focus {
+    /*background-color: #115b8d;*/
+    background-color: #ff0000;
+    -moz-box-shadow: 0 0 30px 2px #7d7d7d;
+    -webkit-box-shadow: 0 0 30px 2px #7d7d7d;
+    /*background-color: #115b8d;*/
+}
+
+.button-rounded-hover:hover:before,
+.button-rounded-hover:focus:before {
+    -webkit-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    transform: translateX(0%);
+    opacity: 0.25;
+}
+
+#pulse-button {
+    margin-bottom: 50px;
+}
+
+
+/*------------------Save Profile Button------------------*/
+
+#save-profile-button {
+    text-transform: uppercase;
+}
+
+
+/*------------------Add Contact Button------------------*/
+
+
+/*.plus-minus-input {
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.plus-minus-input .input-group-field {
+  text-align: center;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 1rem;
+}
+
+.plus-minus-input .input-group-field::-webkit-inner-spin-button,
+.plus-minus-input .input-group-field ::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+          appearance: none;
+}*/
