@@ -1,3 +1,6 @@
+// TODO: add ERROR to the response object and send it as json before setting to null
+// refactor pulse route
+// figure out delete route
 
 const twilio = require("./utils/twilio.js")
 const crud  = require("./utils/crud.js")
@@ -97,7 +100,7 @@ Router.post("/update", (req, res) =>{
         } 
         catch (error) {
           // throw the error up to the parent to catch and continue
-          if (error) throw error;
+          throw error;
         }
       }); // close out map contacts
     } // if contacts

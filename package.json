@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/bspille/pulse#readme",
   "dependencies": {
+    "@types/react": "*",
     "axios": "^0.16.2",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
@@ -32,10 +33,14 @@
     "html5-geolocation": "^1.0.1",
     "mongoose": "^4.11.0",
     "path": "^0.12.7",
+    "prop-types": "^15.5.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-google-login": "^2.9.2",
+    "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
+    "redux": "^3.7.1",
+    "redux-promise": "^0.5.3",
     "twilio": "^3.4.0"
   },
   "devDependencies": {

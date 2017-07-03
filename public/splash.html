@@ -4,7 +4,7 @@
 <head>
     <title>Pulse</title>
     <!--<meta name="google-signin-scope" content="profile email">-->
-     <meta name="google-signin-client_id" content="904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"></meta> 
+     <!--<meta name="google-signin-client_id" content="904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"></meta> -->
     <!--<meta name="google-signin-client_id" content="533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com"></meta>-->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous">
@@ -30,7 +30,7 @@
 </head>
 
 <body>
-    <div class="homepage-hero-module" style="position: relative; z-index: 2;">
+    <div id="sp" class="homepage-hero-module" style="position: relative; z-index: 2;">
         <div class="video-container">
             <div class="filter"></div>
             <video autoplay loop class="fillWidth">
@@ -44,7 +44,7 @@
             <!-- Sign in Button-->
             <div id="signin-button-container" class="row">
                 <div class="small-12 columns">
-                    <div id="my-signin2"></div>
+                    <div id="googleButton"></div>
                 </div>
             </div>
             <!--<div class="poster hidden">
@@ -57,48 +57,54 @@
     <script>
         $(document).foundation();
 
-// successfull signin here
-function onSuccess(googleUser) {
-      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-    //   console.log(JSON.stringify(googleUser, null, 1));
-       // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        console.log('Full Name: ' + profile.getName());
-        console.log('Given Name: ' + profile.getGivenName());
-        console.log('Family Name: ' + profile.getFamilyName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail());
+//         let accessToken;
 
-        // The ID token you need to pass to your backend:
-        id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-        // hides the splash page on successfull signin
-        $('.homepage-hero-module').css({"z-index": -1000});
-    }
+// // successfull signin here
+// function onSuccess(googleUser) {
+//       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+//     //   console.log(JSON.stringify(googleUser, null, 1));
+//        // Useful data for your client-side scripts:
+//         // var profile = googleUser.getBasicProfile();
+//         // console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+//         // console.log('Full Name: ' + profile.getName());
+
+//         // set the name 
+//         // setName(profile.getGivenName());
+//         // console.log('Family Name: ' + profile.getFamilyName());
+
+//         // set image url
+//         // setImageUrl(profile.getImageUrl());
+//         // console.log("Email: " + profile.getEmail());
+
+//         // set ID token you need to pass to your backend:
+//         accessToken = googleUser.getAuthResponse().id_token;
+//         // hides the splash page on successfull signin
+        
+//         $('.homepage-hero-module').css({"z-index": -1000});
+//     }
 
 
-// failed to signin condition here
-function onFailure(error) {
-      console.log(error);
-    }
+// // failed to signin condition here
+// function onFailure(error) {
+//       console.log(error);
+//     }
 
-    // customize the signin button here
-        function renderButton() {
-            gapi.signin2.render('my-signin2', {
-                'scope': 'profile email',
-                'width': 240,
-                'height': 50,
-                'longtitle': true,
-                'theme': 'dark',
-                'onsuccess': onSuccess,
-                'onfailure': onFailure
-            });
-        }
+//     // customize the signin button here
+//         function renderButton() {
+//             gapi.signin2.render('my-signin2', {
+//                 'scope': 'profile email',
+//                 'width': 240,
+//                 'height': 50,
+//                 'longtitle': true,
+//                 'theme': 'dark',
+//                 'onsuccess': onSuccess,
+//                 'onfailure': onFailure
+//             });
+//         }
 
     </script>
     <script src="bundle.js"></script>
-    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <!--<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>-->
 </body>
 
 </html>
