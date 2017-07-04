@@ -1,11 +1,11 @@
-import { SET_ID_TOKEN } from './../actions/index.js';
+import { SET_IS_SIGNED_IN } from './../actions/index.js';
 
-export default function(state = null, action) {
+export default function(state = false, action) {
     // console.log(JSON.stringify(action, null, 1));
     switch(action.type){
-    
+        
         // if the action type is set id token return the payload from the action to state
-        case SET_ID_TOKEN:
+        case SET_IS_SIGNED_IN:
         console.log(`this is set to state ${action.payload}`)
         return action.payload
 

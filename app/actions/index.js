@@ -12,6 +12,7 @@ export const SET_ZIP_CODE = 'SET_ZIP_CODE';
 export const SET_CONTACTS = 'SET_CONTACTS';
 export const ADD_CONTACT = 'ADD_CONTACT';
 export const TOGGLE_CONTACT = 'TOGGLE_CONTACT';
+export const SET_IS_SIGNED_IN = 'SET_IS_SIGNED_IN';
 
 // used to get the access token from google signin
 export const setAccessToken = (idToken) =>{
@@ -32,6 +33,13 @@ export const setImageUrl = (imageUrl) => {
     return {
         type: SET_IMAGE_URL,
         payload: imageUrl
+    }
+}
+
+export const setIsSignedIn = (isSignedIn) => {
+    return {
+        type: SET_IS_SIGNED_IN,
+        payload: isSignedIn
     }
 }
 

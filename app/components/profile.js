@@ -9,7 +9,7 @@ import React from 'react'
 import UserInfo from "../containers/profile-user-info"
 import ContactInfo from "../containers/profile-contact-info";
 
-export const Profile = () => {
+export default () => {
 
     <profile>
         <UserInfo/>
