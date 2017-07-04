@@ -3,35 +3,36 @@
 // select and unselect toggle is active contact
 // contacts will need a key value to reference them
 
-export const SET_ID_TOKEN = 'SET_ID_TOKEN'
-export const SET_NAME = 'SET_NAME'
-export const SET_IMAGE_URL = 'SET_IMAGE_URL'
-export const SET_PIN = 'SET_PIN'
-export const SET_PHONE_NUMBER = 'SET_PHONE_NUMBER'
-export const SET_ZIP_CODE = 'SET_ZIP_CODE'
-export const SET_CONTACTS = 'SET_CONTACTS'
-export const ADD_CONTACT = 'ADD_CONTACT'
-export const TOGGLE_CONTACT = 'TOGGLE_CONTACT'
+export const SET_ID_TOKEN = 'SET_ID_TOKEN';
+export const SET_NAME = 'SET_NAME';
+export const SET_IMAGE_URL = 'SET_IMAGE_URL';
+export const SET_PIN = 'SET_PIN';
+export const SET_PHONE_NUMBER = 'SET_PHONE_NUMBER';
+export const SET_ZIP_CODE = 'SET_ZIP_CODE';
+export const SET_CONTACTS = 'SET_CONTACTS';
+export const ADD_CONTACT = 'ADD_CONTACT';
+export const TOGGLE_CONTACT = 'TOGGLE_CONTACT';
 
 // used to get the access token from google signin
 export const setAccessToken = (idToken) =>{
-    console.log(`this is the access token ${idToken}`)
-    // return {
-    //     type: SET_ID_TOKEN,
-    //     idToken
-    // }
+    return {
+        type: SET_ID_TOKEN,
+        payload: idToken
+    }
 }
 
 export const setName = (name) => {
-    console.log(`this is the setName ${naem}`)
+    return {
+        type: SET_NAME,
+        payload: name
+    }
 }
 // used to get the image url form google signin
 export const setImageUrl = (imageUrl) => {
-    console.log(`this is the image url ${imageUrl}`)
-    // return {
-    //     type: SET_IMAGE_URL,
-    //     imageUrl
-    // }
+    return {
+        type: SET_IMAGE_URL,
+        payload: imageUrl
+    }
 }
 
 // used to fetch the pin from the user object
@@ -39,7 +40,7 @@ export const setPin = (pin) => {
     // axios post here
     return {
         type: SET_PIN,
-        payload = res
+        payload: res
     }
 }
 
@@ -82,7 +83,3 @@ export const toogleContact = (contact) => {
         contact
     }
 }
-
-
-// node exports
-module.exports = {setAccessToken, setName, setImageUrl};

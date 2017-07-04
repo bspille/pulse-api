@@ -1,6 +1,6 @@
 import React, { Component} from "react";
 
-class Main extends Component {
+export class ContactInfo extends Component {
     render() {
         return (
             <div>

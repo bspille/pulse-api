@@ -6,36 +6,20 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxPromise from 'redux-promise';
 
-import App from './components/app';
-// import reducers from './reducers';
+import App from './containers/app';
+import reducers from './reducers/index';
+import { setAccessToken, setImageUrl, setName } from './actions/index';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
-
-// reactDOM.render(
-//     <Provider store={createStoreWithMiddleware(reducers)}>
-//         <App/>
-//     </Provider>,
-//     document.getElementById('root')
-// );
-
-let isLoggedIn = false;
-
-if (isLoggedIn){
-    ()=>{
-        console.log("is logged in");
-    }
-}
+const store = createStoreWithMiddleware(reducers);
 
 const responseGoogle = (response) => {
     console.log(response);
-    isLoggedIn = response.isSignedIn();
     document.getElementById('root').style.zIndex= "100";
-
-
-//   setName(profile.getGivenName());
-//   setImageUrl(profile.getImageUrl());
-//   setAccessToken(googleUser.getAuthResponse().id_token);
-
+    let profile = response.getBasicProfile();
+    store.dispatch(setAccessToken(response.getAuthResponse().id_token));
+    store.dispatch(setImageUrl(profile.getImageUrl()));
+    store.dispatch(setName(profile.getGivenName()));
 }
  
 reactDOM.render(
@@ -47,3 +31,13 @@ reactDOM.render(
   />,
   document.getElementById('googleButton')
 );
+
+reactDOM.render(
+    <Provider store={store}>
+        <App/>
+    </Provider>,
+    document.getElementById('root')
+);
+
+
+

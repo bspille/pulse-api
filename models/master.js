@@ -30,10 +30,11 @@ const userSchema = new Schema({
     required: true
   },
 
-  imageUrl: {
-    type: String,
-    required: false
-  },
+  // redundant consider deleteing
+  // imageUrl: {
+  //   type: String,
+  //   required: false
+  // },
 
   // users zip code
   zip: {

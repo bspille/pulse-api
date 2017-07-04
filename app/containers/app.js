@@ -2,34 +2,23 @@
 // 
 // imports and requires here
 import React, { Component} from "react"
-import Nav from "./nav"
-import Header from "./header"
-import Footer from "./footer"
-import Profile from "./profile"
-import PulseButton from "./pulse-button"
+import Nav from "../components/nav"
+import Header from "../components/header"
+import Footer from "../components/footer"
+import Profile from "../components/profile"
+import PulseButton from "../components/pulse-button"
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 // exported to the index.js
-export class App extends Component {
+class App extends Component {
 
   constructor(props){
-    super(props);
-
-    // initalize state here
-    this.state = {
-      idToken: 'adf',
-      name: 'hello',
-      imageUrl: 'ldfjad',
-      pin: '0000',
-      phoneNumber: '000-000-0000',
-      zip: '00000',
-      constacts: []
-    }
-
+    super(props)
+    
   }
-  pulseComponent(){
-    return <PulseButton name={this.state.name}/>
-  }
+
+
 
   render(){
     return (
@@ -39,7 +28,7 @@ export class App extends Component {
             <Nav/>
             <Header/>
             <div className="container">
-              <Route exact={true} path="/" component={pulseComponent}/>
+              <Route exact={true} path="/" render={() => (<PulseButton idToken = {this.props.idToken} />)}/>
               <Route path="/profile" component={Profile}/>
             </div>
           </div>
@@ -50,4 +39,8 @@ export class App extends Component {
   }
 }
 
+function mapStateToProps(state){
+  return state
+}
+export default connect(mapStateToProps)(App)
 
