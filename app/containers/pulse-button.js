@@ -68,9 +68,9 @@ class PulseButton extends Component {
                     <button className="button-hover-default button"><span>Begin new activity</span><i className="fa fa-hourglass-start"></i></button>
                     <br></br>
                     {/*Pulse Button*/}
-                    // <button id="pulse-button" className="button button-rounded-hover"  disabled><img src="assets/images/radio2.png" alt="go" /></button>
+                    <button id="pulse-button" className="button button-rounded-hover" onClick={this.getLocation} disabled><img src="../../public/assets/images/radio2.png" alt="go" /></button>
                     <div id="pulse-toggle-button" className="switch large">
-                        <input className="switch-input" id="largeSwitch" type="checkbox" name="exampleSwitch"  />
+                        <input className="switch-input" id="largeSwitch" type="checkbox" name="exampleSwitch" onClick={this.togglePulseButton} />
                         <label className="switch-paddle" htmlFor="largeSwitch">
                             <span className="show-for-sr">I like things</span>
                         </label>
