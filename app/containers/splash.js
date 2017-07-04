@@ -3,24 +3,24 @@ import { Component } from 'react'
 import reactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { setAccessToken, setImageUrl, setName, setIsSignedIn } from '../actions/index';
+import * as actionCreators from '../actions/index';
 import GoogleLogin from '../components/google'
+import {store} from '../index'
 
-class Splash extends Component {
+class splash extends Component {
     constructor(props){
         super(props)
-        this.respnseGoogle = this.responseGoogle.bind(this);
+        this.responseGoogle = this.responseGoogle.bind(this);
         
-
     }
+
     responseGoogle(response){
         console.log(response);
-        
-        // let profile = response.getBasicProfile();
-        // this.props.setIsSignedIn(response.isSignedIn.get());
-        setAccessToken(response.getAuthResponse().id_token);
-        // this.props.setImageUrl(profile.getImageUrl());
-        // this.props.setName(profile.getGivenName());
+        let profile = response.getBasicProfile();
+        this.props.setIsSignedIn(response.isSignedIn());
+        this.props.setAccessToken(response.getAuthResponse().id_token);
+        this.props.setImageUrl(profile.getImageUrl());
+        this.props.setName(profile.getGivenName());
     }
  
     componentDidMount(){
@@ -62,10 +62,8 @@ class Splash extends Component {
 }
 
 
-const mapDispatchToProps = (dispatch) => {
-    console.log(bindActionCreators({ setAccessToken }, dispatch));
-    return bindActionCreators({ setAccessToken }, dispatch)
-    }
+function mapDispatchToProps(dispatch){
+    return bindActionCreators(actionCreators, dispatch)
+}
 
-
-export default connect(null, mapDispatchToProps)(Splash);
+export default connect(null, mapDispatchToProps)(splash)

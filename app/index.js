@@ -11,10 +11,10 @@ import reducers from './reducers/index';
 
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
-
+export const store = createStoreWithMiddleware(reducers)
 
 reactDOM.render(
-    <Provider store={createStoreWithMiddleware(reducers)}>
+    <Provider store={store}>
         <App/>
     </Provider>,
     document.getElementById('root')

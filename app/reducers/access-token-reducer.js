@@ -6,7 +6,7 @@ export default function(state = null, action) {
     
         // if the action type is set id token return the payload from the action to state
         case SET_ID_TOKEN:
-        console.log(`this is set to state ${action.payload}`)
+        console.log(`this idToken set to state ${action.payload}`)
         return action.payload
 
         // return the default state if type is not found
