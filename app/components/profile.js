@@ -11,10 +11,9 @@ import ContactInfo from "../containers/profile-contact-info";
 
 export default () => {
 
-    <profile>
-        <UserInfo/>
-        <ContactInfo/>                       
-    </profile>
+    return (
+        <h2>this is the profile</h2>
+    )
        
 }
 

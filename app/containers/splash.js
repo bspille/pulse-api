@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 import * as actionCreators from '../actions/index';
 import GoogleLogin from '../components/google'
 import {store} from '../index'
+import { Link } from 'react-router-dom';
 
 class splash extends Component {
     constructor(props){
@@ -51,7 +52,7 @@ class splash extends Component {
                     
                     <div id="signin-button-container" className="row">
                         <div className="small-12 columns">
-                            <div id="googleButton"></div>
+                            <Link to="/signedIn"> <div id="googleButton"></div></Link>
                         </div>
                     </div>
                 </div>

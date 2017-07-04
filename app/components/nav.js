@@ -14,7 +14,7 @@ const Nav = () => (
                 <li><a href="#">Help</a></li>
             </ul>
             <ul className="vertical menu">
-                <li><a href="#" data-close="offCanvasLeft" onClick="signOut();">Sign Out</a></li>
+                <li><a href="#" data-close="offCanvasLeft">Sign Out</a></li>
             </ul>
             <ul className="menu simple social-links">
                 <li><a href="#" target="_blank"><i className="fa fa-twitter-square" aria-hidden="true"></i></a></li>
