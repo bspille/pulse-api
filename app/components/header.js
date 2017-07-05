@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
+import Profile from "../components/profile.js"
 
 export default (props) => (
     <header>
@@ -15,6 +16,7 @@ export default (props) => (
                     </li>
                 </ul>
             </nav>
+            
         </div>
     </header>
 );

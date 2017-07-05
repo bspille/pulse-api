@@ -3,7 +3,7 @@
 // imports and requires here
 import React, { Component } from "react"
 import { connect } from 'react-redux'
-import * as actionCreators from '../actions/index';
+import * as actionCreators from '../actions/index'
 import { bindActionCreators } from 'redux'
 import Nav from "../components/nav"
 import Header from "../components/header"
@@ -11,8 +11,8 @@ import Footer from "../components/footer"
 import Splash from './splash'
 // import Profile from "../components/profile"
 import PulseButton from "./pulse-button"
-import { BrowserRouter as Route } from 'react-router-dom'
-
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Profile from "../components/profile.js";
 
 
 // exported to the index.js
@@ -34,6 +34,10 @@ import { BrowserRouter as Route } from 'react-router-dom'
           
           </div>
           <Footer/>
+          <Router>
+            {/*<Route path="/" component={About}/>*/}
+            <Route path="/profile" component={Profile}/>
+          </Router>
         </div>
       );
     }

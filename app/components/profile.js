@@ -5,15 +5,15 @@
 // TODO: I think this should become a functional conponent
 // TODO: 0the forms are going to need to be class components because of the need to have controlled inputs
 
-// import React from 'react'
-// import UserInfo from "../containers/profile-user-info"
-// import ContactInfo from "../containers/profile-contact-info";
+import React from 'react'
+import UserInfo from "../containers/profile-user-info"
+import ContactInfo from "../containers/profile-contact-info";
 
-// export default () => {
+export default () => {
 
-//     return (
-//         <h2>this is the profile</h2>
-//     )
+    return (
+        <h2>this is the profile</h2>
+    )
        
-// }
+}
 

@@ -20,6 +20,11 @@ class PulseButton extends Component {
        console.log(this)
     }
 
+    componentDidMount(){
+        let pulseButton = document.getElementById('pulse-button');
+        pulseButton.setAttribute("disabled", "");
+    }
+
     sendPulse() {
         console.log(`id_token ${this.props.idToken}`);
         console.log(`latitude ${this.state.latitude}`);
@@ -53,11 +58,13 @@ class PulseButton extends Component {
 
     togglePulseButton(){
         let pulseButton = document.getElementById('pulse-button');
-        let status = pulseButton.hasAttribute(disabled);
+        let disabled = pulseButton.hasAttribute('disabled');
         if (disabled){
-            pulseButton.removeAttribute(disabled);
+            console.log('disabled')
+            pulseButton.removeAttribute("disabled");
         }
         else{
+            console.log("enabled")
             pulseButton.setAttribute("disabled", "");
         }
     }
