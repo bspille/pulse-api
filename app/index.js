@@ -19,8 +19,8 @@ reactDOM.render(
   <Provider store= {store}>
     <Router>
         <Switch>
-            <Route exact={true} path='/' component={App} />
-            <Route path='user' component={App} />
+            <Route exact={true} path='/' component={Splash} />
+            <Route path='/user/' component={App} />
         </Switch>
     </Router>
   </Provider>,

@@ -9,12 +9,12 @@ const timer = require("./utils/timer.js")
 const express = require("express")
 const Router = express.Router()  
 const CLIENT_ID = '533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com';
-const token = (token) => {return token}
+let token;
 const query = (query) => {return query}
 const updates = (updates) => {return updates}
 const update = (update) => {return update}
 const user = (user) => {
-  cosole.log("user verified: ", JSON.stringify(user, null, 1));
+  console.log("user verified: ", JSON.stringify(user, null, 1));
 
   return user
 }
@@ -31,10 +31,14 @@ const response = (results, ERROR) =>{
   return null
 }
 let activeTimer = false;
- // route to add new user
-Router.post("/user", (req, res) =>{
-  token(req.body.token);
 
+ // route to add new user
+Router.post("/user/", (req, res) =>{
+
+  token = req.body.idToken;
+  console.log("####################")
+ console.log(token)
+ console.log("#################")
   // verify the user and return the user object
   google.verifyToken(token, (results) => {
     user(results);

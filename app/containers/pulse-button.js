@@ -16,7 +16,8 @@ class PulseButton extends Component {
        this.getLocation = this.getLocation.bind(this);
        this.showPosition = this.showPosition.bind(this);
        this.sendPulse = this.sendPulse.bind(this);
-       console.log(`this is the pulse button props ${this.props}`)
+       
+       console.log(this)
     }
 
     sendPulse() {
@@ -71,7 +72,7 @@ class PulseButton extends Component {
                     <button className="button-hover-default button"><span>Begin new activity</span><i className="fa fa-hourglass-start"></i></button>
                     <br></br>
                     {/*Pulse Button*/}
-                    <button id="pulse-button" className="button button-rounded-hover" onClick={this.getLocation} disabled><img src="../../public/assets/images/radio2.png" alt="go" /></button>
+                    <button id="pulse-button" className="button button-rounded-hover" onClick={this.getLocation} disabled><img src="assets/images/radio2.png" alt="go" /></button>
                     <div id="pulse-toggle-button" className="switch large">
                         <input className="switch-input" id="largeSwitch" type="checkbox" name="exampleSwitch" onClick={this.togglePulseButton} />
                         <label className="switch-paddle" htmlFor="largeSwitch">
@@ -86,7 +87,7 @@ class PulseButton extends Component {
 
 // map the redux state to the props object
 function mapStateToProps(state){
-  return {state}
+    return Object.assign({},state)
 }
 
 // connect the new props to the container

@@ -3,6 +3,8 @@
 // imports and requires here
 import React, { Component } from "react"
 import { connect } from 'react-redux'
+import * as actionCreators from '../actions/index';
+import { bindActionCreators } from 'redux'
 import Nav from "../components/nav"
 import Header from "../components/header"
 import Footer from "../components/footer"
@@ -11,11 +13,16 @@ import PulseButton from "./pulse-button"
 import { BrowserRouter as Route } from 'react-router-dom'
 
 
+
 // exported to the index.js
- export default class App extends Component {
+ class App extends Component {
   constructor(props){
     super(props)
-    console.log(`this it the app props ${this.props}`)
+   
+    console.log(this)
+  }
+  componentWillMount(){
+    this.props.getUerData("hello")
   }
   render(){
     return (
@@ -33,9 +40,11 @@ import { BrowserRouter as Route } from 'react-router-dom'
 }
 
 // map the redux state to the props object
-// function mapStateToProps(state){
-//   return state
-// }
-
+function mapStateToProps(state){
+  return Object.assign({},state)
+}
+function mapDispatchToProps(dispatch){
+    return bindActionCreators(actionCreators, dispatch)
+}
 // connect the new props to the container
-//  export default connect({ mapStateToProps })(App);
+ export default connect(mapStateToProps, mapDispatchToProps)(App);

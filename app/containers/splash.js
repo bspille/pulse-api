@@ -5,13 +5,13 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actionCreators from '../actions/index';
 import GoogleLogin from '../components/google'
-import {store} from '../index'
 import { Link } from 'react-router-dom';
 
 class splash extends Component {
     constructor(props){
         super(props)
         this.responseGoogle = this.responseGoogle.bind(this);
+        console.log(this)
         
     }
 
@@ -22,6 +22,8 @@ class splash extends Component {
         this.props.setAccessToken(response.getAuthResponse().id_token);
         this.props.setImageUrl(profile.getImageUrl());
         this.props.setName(profile.getGivenName());
+        this.props.getUserData(this.props.idToken);
+        // need redirect to happen here for enter app
     }
  
     componentDidMount(){
@@ -36,6 +38,9 @@ class splash extends Component {
         )
     }
 
+     
+
+  
     render(){
         return(
             <div className="homepage-hero-module">
@@ -52,7 +57,9 @@ class splash extends Component {
                     
                     <div id="signin-button-container" className="row">
                         <div className="small-12 columns">
-                            <div id="googleButton"></div>
+                            <Link to='/user/'>
+                                <div id="googleButton"></div>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -62,9 +69,12 @@ class splash extends Component {
 
 }
 
+function mapStateToProps(state){
+  return Object.assign({},state)
+}
 
 function mapDispatchToProps(dispatch){
     return bindActionCreators(actionCreators, dispatch)
 }
 // replace mapdixpatch to props with {actionCreators}
-export default connect(null, mapDispatchToProps)(splash)
+export default connect(mapStateToProps, mapDispatchToProps)(splash)
