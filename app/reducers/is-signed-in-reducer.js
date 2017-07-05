@@ -8,9 +8,9 @@ export default function(state = false, action) {
         case SET_IS_SIGNED_IN:
         console.log(`isSignedIn set to state ${action.payload}`)
         return action.payload
-
+        
         // return the default state if type is not found
         default:
-        return false
+        return state
     }
 }

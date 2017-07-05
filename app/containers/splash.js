@@ -11,10 +11,16 @@ class splash extends Component {
     constructor(props){
         super(props)
         this.responseGoogle = this.responseGoogle.bind(this);
-        console.log(this)
         
-    }
 
+        console.log(this)
+
+        if (this.props.isSignedIn){
+            console.log(this)
+        }
+    
+    }
+ 
     responseGoogle(response){
         console.log(response);
         let profile = response.getBasicProfile();
@@ -23,6 +29,7 @@ class splash extends Component {
         this.props.setImageUrl(profile.getImageUrl());
         this.props.setName(profile.getGivenName());
         this.props.getUserData(this.props.idToken);
+        console.log(this)
         // need redirect to happen here for enter app
     }
  

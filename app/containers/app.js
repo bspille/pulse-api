@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux'
 import Nav from "../components/nav"
 import Header from "../components/header"
 import Footer from "../components/footer"
+import Splash from './splash'
 // import Profile from "../components/profile"
 import PulseButton from "./pulse-button"
 import { BrowserRouter as Route } from 'react-router-dom'
@@ -21,21 +22,24 @@ import { BrowserRouter as Route } from 'react-router-dom'
    
     console.log(this)
   }
-  componentWillMount(){
-    this.props.getUerData("hello")
-  }
+ 
   render(){
-    return (
-      <div>
-        <Nav/>
-        <Header/>
-        <div className="container">
-        <PulseButton/>
-        
+    if(this.props.isSignedIn){
+      return (
+        <div>
+          <Nav/>
+          <Header/>
+          <div className="container">
+          <PulseButton/>
+          
+          </div>
+          <Footer/>
         </div>
-        <Footer/>
-      </div>
-    );
+      );
+    }
+    else{
+    return <Splash/>
+    }
   }
 }
 

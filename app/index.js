@@ -19,8 +19,7 @@ reactDOM.render(
   <Provider store= {store}>
     <Router>
         <Switch>
-            <Route exact={true} path='/' component={Splash} />
-            <Route path='/user/' component={App} />
+            <Route path="/" component={App} />
         </Switch>
     </Router>
   </Provider>,
