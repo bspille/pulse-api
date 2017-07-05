@@ -1,4 +1,6 @@
 // TODO: this container needs refactoring to es6 see object destructuring
+// TODO: this component need to be tested
+
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux'
@@ -14,6 +16,7 @@ class PulseButton extends Component {
        this.getLocation = this.getLocation.bind(this);
        this.showPosition = this.showPosition.bind(this);
        this.sendPulse = this.sendPulse.bind(this);
+       console.log(`this is the pulse button props ${this.props}`)
     }
 
     sendPulse() {
@@ -83,7 +86,7 @@ class PulseButton extends Component {
 
 // map the redux state to the props object
 function mapStateToProps(state){
-  return state
+  return {state}
 }
 
 // connect the new props to the container

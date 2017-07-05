@@ -3,39 +3,39 @@
 // imports and requires here
 import React, { Component } from "react"
 import { connect } from 'react-redux'
-import Loader from './loader'
-import Splash from './splash'
+import Nav from "../components/nav"
+import Header from "../components/header"
+import Footer from "../components/footer"
+// import Profile from "../components/profile"
+import PulseButton from "./pulse-button"
+import { BrowserRouter as Route } from 'react-router-dom'
 
-import  {BrowserRouter  as Router, Route} from 'react-router-dom'
 
 // exported to the index.js
- class App extends Component {
+ export default class App extends Component {
   constructor(props){
     super(props)
+    console.log(`this it the app props ${this.props}`)
   }
   render(){
     return (
-      <Router>
-        <div>
-          <Route exact={true} path="/" render={()=>{
-            if (this.props.isSignedIn){
-              return <Loader/>
-            }
-            else{
-              return <Splash/>
-            }
-          }}/>
-          <Route path="/signedIn" component= {Loader}/>
+      <div>
+        <Nav/>
+        <Header/>
+        <div className="container">
+        <PulseButton/>
+        
         </div>
-      </Router>
-    )
+        <Footer/>
+      </div>
+    );
   }
 }
 
 // map the redux state to the props object
-function mapStateToProps({ isSignedIn }){
-  return {isSignedIn}
-}
+// function mapStateToProps(state){
+//   return state
+// }
 
 // connect the new props to the container
-export default connect(mapStateToProps)(App)
+//  export default connect({ mapStateToProps })(App);

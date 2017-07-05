@@ -52,7 +52,7 @@ class splash extends Component {
                     
                     <div id="signin-button-container" className="row">
                         <div className="small-12 columns">
-                            <Link to="/signedIn"> <div id="googleButton"></div></Link>
+                            <div id="googleButton"></div>
                         </div>
                     </div>
                 </div>
@@ -66,5 +66,5 @@ class splash extends Component {
 function mapDispatchToProps(dispatch){
     return bindActionCreators(actionCreators, dispatch)
 }
-
+// replace mapdixpatch to props with {actionCreators}
 export default connect(null, mapDispatchToProps)(splash)
