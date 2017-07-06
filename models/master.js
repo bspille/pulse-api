@@ -21,20 +21,15 @@ const userSchema = new Schema({
   // users first name
   givenName: {
     type: String,
-    required: true
+    required: false
   },
 
   // users last name
   familyName: {
     type: String,
-    required: true
+    required: false
   },
 
-  // redundant consider deleteing
-  // imageUrl: {
-  //   type: String,
-  //   required: false
-  // },
 
   // users zip code
   zip: {

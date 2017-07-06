@@ -51,9 +51,9 @@ export const setIsSignedIn = (isSignedIn) => {
     }
 }
 
-export const getUserData = (idToken) => {
-    
-    let request = axios.post("/user/",{idToken});
+export const getUserData = (token) => {
+   
+    let request = axios.post("/user/",{token});
     return {
         type: GET_USER_DATA,
         payload: request

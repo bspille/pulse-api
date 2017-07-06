@@ -3,20 +3,12 @@ const User = require("../../models/master.js")
 
 const crud = {
   create: (user, cb) => {
-    // console.log("create new user");
-    let entry = new User({
-      tokenSub: user.sub,
-      givenName: user.given_name,
-      familyName: user.family_name,
-      imageUrl: user.picture
-    });
-
-    entry.save((err, results) => {
-      if (err){
-        
+    User.create(user, function (err, results) {
+      if (err) {
+        console.log(err)
       }
-      cb(results);
-    });
+      cb(results)
+    })
   },
 
   read: (query, cb) => {
@@ -24,7 +16,7 @@ const crud = {
     User.findOne(query).exec((err, results) => {
           // log error if there is a read error
       if (err) {
-        
+        console.log(err)
       }
       cb(results);
     });

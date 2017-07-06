@@ -13,54 +13,59 @@ let token;
 let query;
 let updates;
 let update;
-const user = (user) => {
-  console.log("user verified: ", JSON.stringify(user, null, 1));
-
-  return user
-}
+let user;
+let userData;
+// const userData = (res)=> {
+//   console.log(`this is the response object ${res}`)
+//   return res
+// }
 const ERROR = (error) => {
   if (error == "complete"){
     return null
   }
   return ERROR.concat([error])
 }
-const results = (results) => {
-  return Object.assign({}, results)
-}
-const response = (results, ERROR) =>{
-  return null
-}
+
 let activeTimer = false;
 
  // route to add new user
 Router.post("/user/", (req, res) =>{
 
-  token = req.body.idToken;
+  token = req.body.token;
  
   // verify the user and return the user object
   google.verifyToken(token, (results) => {
-    // user(results);
+    
     console.log(JSON.stringify(results, null, 1))
+     if(results.aud == "904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"){
+      user = {
+      tokenSub: results.sub,
+      givenName: results.given_name,
+      familyName: results.family_name
+    }
+  }
 
     query = {tokenSub: results.sub};
 
     // add condition for unverified user here
     try {
-      console.log("#######################")
-  console.log(query)
-  console.log("#########################")
+ 
       crud.read(query, (res) => {
         // if there is a entry send it back as json
         if (res){
           console.log("found entry for user " + JSON.stringify(res, null, 1));
-          results(res)
+          userData = res
         }
         // if there is no entry create one
-        else{
+        if(!res && user){
+          console.log("hit the create route")
           crud.create(user, (res) => {
             console.log("created new user " + JSON.stringify(res, null, 1));
-            results(res);
+            userData = res
           });
+        }
+        else{
+          console.log("error cant create or find user")
         }
       });
     } 
@@ -69,10 +74,13 @@ Router.post("/user/", (req, res) =>{
       console.log(error);
     }
     finally {
-      res.json(`finished login/create user ${results}`);
+      // add condition for errors
+      if (userData != undefined){
+        res.json(userData)
+      }
       ERROR("complete");
     }
-  }); // end of verify user
+  });
 }); // end of post user
 
     // route to update user
@@ -132,7 +140,8 @@ Router.post("/update", (req, res) =>{
     ERROR(error);
   }
   finally{
-    res.json(`update completed ${results}`);
+    // add condition for errors here
+    res.json(`update completed ${userData}`);
     ERROR("complete");
   }
   }); // end of verify user
