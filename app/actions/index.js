@@ -16,6 +16,9 @@ export const GET_USER_DATA ='GET_USER_DATA';
 // add routes here
 export const ROOT = "/"
 export const PROFILE = "/profile"
+export const ABOUT = "/about"
+export const FAQ = "/faq"
+export const HELP = "/help"
 
 
 

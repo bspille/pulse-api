@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from './profile'
 import PulseButton from '../containers/pulse-button'
-import { ROOT, PROFILE } from '../actions/index'
+import { ROOT, PROFILE, FAQ, ABOUT, HELP } from '../actions/index'
 // add new cases for aditional routes
 export default (props) => {
 switch(props.route){
@@ -14,6 +14,6 @@ switch(props.route){
         <Profile/>
     )
     default:
-    return <h2>Loading...</h2>
+    return <h2>"Please wait a monent while I load Master" Loading...</h2>
 }
 }

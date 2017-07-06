@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ROOT, PROFILE } from '../actions/index'
+import { ROOT, PROFILE, FAQ, HELP, ABOUT } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actionCreators from '../actions/index';
@@ -21,10 +21,10 @@ class Nav extends Component {
                     <ul className="vertical menu">
                         <li className="avatar-wrapper"><img className="avatar" src="assets/images/avatar-female.png" alt="avatar" width="148" height="148" /></li>
                         <li><a href="#" onClick={() => this.props.setRoute(ROOT)}>Home</a></li>
-                        <li><a href="#" onClick={() => this.props.setRoute(PROFILE)}>Profile</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Help</a></li>
+                        <li><a href="#" onClick={() => this.props.setRoute(PROFILE)} >Profile</a></li>
+                        <li><a href="#" onClick={() => this.props.setRoute(ABOUT)} >About</a></li>
+                        <li><a href="#" onClick={() => this.props.setRoute(FAQ)} >FAQ</a></li>
+                        <li><a href="#" onClick={() => this.props.setRoute(HELP)} >Help</a></li>
                     </ul>
                     <ul className="vertical menu">
                         <li><a href="#" data-close="offCanvasLeft">Sign Out</a></li>
