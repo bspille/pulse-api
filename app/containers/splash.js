@@ -11,25 +11,18 @@ class splash extends Component {
     constructor(props){
         super(props)
         this.responseGoogle = this.responseGoogle.bind(this);
-        
-
-        console.log(this)
-
-        if (this.props.isSignedIn){
-            console.log(this)
-        }
-    
+        console.log(this)    
     }
  
     responseGoogle(response){
         console.log(response);
         let profile = response.getBasicProfile();
-        this.props.setIsSignedIn(response.isSignedIn());
+        
         this.props.setAccessToken(response.getAuthResponse().id_token);
         this.props.setImageUrl(profile.getImageUrl());
         this.props.setName(profile.getGivenName());
         this.props.getUserData(this.props.idToken);
-        console.log(this)
+        this.props.setIsSignedIn(response.isSignedIn());
         // need redirect to happen here for enter app
     }
  

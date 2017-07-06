@@ -9,9 +9,9 @@ import Nav from "../components/nav"
 import Header from "../components/header"
 import Footer from "../components/footer"
 import Splash from './splash'
-// import Profile from "../components/profile"
+import Profile from "../components/profile"
 import PulseButton from "./pulse-button"
-import { BrowserRouter as Route } from 'react-router-dom'
+import {  Route, Switch } from 'react-router-dom'
 
 
 
@@ -26,15 +26,19 @@ import { BrowserRouter as Route } from 'react-router-dom'
   render(){
     if(this.props.isSignedIn){
       return (
-        <div>
-          <Nav/>
-          <Header/>
-          <div className="container">
-          <PulseButton/>
-          
+        
+          <div>
+            <Nav/>
+            <Header/>
+            <div className="container">
+              <Switch>
+                <Route exact={true} path='/' component={PulseButton} />
+                <Route path='/profile' component={Profile} />
+              </Switch>
+            </div>
+            <Footer/>
           </div>
-          <Footer/>
-        </div>
+       
       );
     }
     else{

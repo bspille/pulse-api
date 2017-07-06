@@ -10,9 +10,9 @@ const express = require("express")
 const Router = express.Router()  
 const CLIENT_ID = '533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com';
 let token;
-const query = (query) => {return query}
-const updates = (updates) => {return updates}
-const update = (update) => {return update}
+let query;
+let updates;
+let update;
 const user = (user) => {
   console.log("user verified: ", JSON.stringify(user, null, 1));
 
@@ -36,53 +36,55 @@ let activeTimer = false;
 Router.post("/user/", (req, res) =>{
 
   token = req.body.idToken;
-  console.log("####################")
- console.log(token)
- console.log("#################")
+ 
   // verify the user and return the user object
   google.verifyToken(token, (results) => {
-    user(results);
+    // user(results);
+    console.log(JSON.stringify(results, null, 1))
+
+    query = {tokenSub: results.sub};
+
+    // add condition for unverified user here
+    try {
+      console.log("#######################")
+  console.log(query)
+  console.log("#########################")
+      crud.read(query, (res) => {
+        // if there is a entry send it back as json
+        if (res){
+          console.log("found entry for user " + JSON.stringify(res, null, 1));
+          results(res)
+        }
+        // if there is no entry create one
+        else{
+          crud.create(user, (res) => {
+            console.log("created new user " + JSON.stringify(res, null, 1));
+            results(res);
+          });
+        }
+      });
+    } 
+    catch (error) {
+      ERROR(error);
+      console.log(error);
+    }
+    finally {
+      res.json(`finished login/create user ${results}`);
+      ERROR("complete");
+    }
   }); // end of verify user
-
-  query({tokenSub: user.sub});
-
-  // add condition for unverified user here
-  try {
-    crud.read(query, (res) => {
-      // if there is a entry send it back as json
-      if (res){
-        console.log("found entry for user " + JSON.stringify(res, null, 1));
-        results(res)
-      }
-      // if there is no entry create one
-      else{
-        crud.create(user, (res) => {
-          console.log("created new user " + JSON.stringify(res, null, 1));
-          results(res);
-        });
-      }
-    });
-  } 
-  catch (error) {
-    ERROR(error);
-    console.log(error);
-  }
-  finally {
-    res.json(`finished login/create user ${results}`);
-    ERROR("complete");
-  }
 }); // end of post user
 
     // route to update user
 Router.post("/update", (req, res) =>{
-  updates(req.body.updates);
-  token(req.body.token);
+  updates = req.body.updates;
+  token = req.body.token;
 
   // verify the user and return the user object
   google.verifyToken(token, (results) => {
     // check the collection for existing entry
     user(results);
-  }); //close google verify
+ 
 
   // starts the timer and sets the active timer to true
   // needs a way to determine when to call stop and set active timeer to false
@@ -95,8 +97,8 @@ Router.post("/update", (req, res) =>{
   try {
     if(updates.hasOwnProperty("contacts")){
       updates.contacts.map((x) =>{
-        update({contacts: x});
-        query({ tokenSub: user.sub, "contacts.phoneNumber": {$ne: update.contacts.phoneNumber}});
+        update = {contacts: x};
+        query = { tokenSub: user.sub, "contacts.phoneNumber": {$ne: update.contacts.phoneNumber}};
         try {
           crud.update(query, update, (res) => {
             results(res)
@@ -111,16 +113,16 @@ Router.post("/update", (req, res) =>{
 
     // if the updates contain geoLocation run this route
     if (updates.hasOwnProperty("geoLocation"))  {
-      update(updates);
-      query({ tokenSub: user.sub, "contacts.geoLocation.timeStamp": {$ne: update.geoLocation.timeStamp}});
+      update = updates;
+      query = { tokenSub: user.sub, "contacts.geoLocation.timeStamp": {$ne: update.geoLocation.timeStamp}};
       crud.update(query, update, (res) => {
         results(res)
       }); // close out crud update
     }// close if geoLocation
             
     else{
-      update(updates);
-      query({tokenSub: user.sub});
+      update = updates;
+      query = {tokenSub: user.sub};
       crud.update(query, update, (res) => {
         results(res)
       }); // close out crud update
@@ -133,6 +135,7 @@ Router.post("/update", (req, res) =>{
     res.json(`update completed ${results}`);
     ERROR("complete");
   }
+  }); // end of verify user
 }); // end update route
 
 // route to delete contacts

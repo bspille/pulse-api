@@ -33,8 +33,13 @@ class PulseButton extends Component {
             }
         });
     }
+    componentDidMount(){
+        let pulseButton = document.getElementById('pulse-button');
+        pulseButton.setAttribute("disabled", "");
+    }
 
     getLocation() {
+        console.log('getting geolocation')
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(this.showPosition);
         } 
@@ -44,6 +49,7 @@ class PulseButton extends Component {
     }
 
     showPosition(position) {
+        console.log(position)
         this.setState({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
@@ -53,9 +59,9 @@ class PulseButton extends Component {
 
     togglePulseButton(){
         let pulseButton = document.getElementById('pulse-button');
-        let status = pulseButton.hasAttribute(disabled);
+        let disabled = pulseButton.hasAttribute('disabled');
         if (disabled){
-            pulseButton.removeAttribute(disabled);
+            pulseButton.removeAttribute("disabled");
         }
         else{
             pulseButton.setAttribute("disabled", "");
@@ -72,7 +78,7 @@ class PulseButton extends Component {
                     <button className="button-hover-default button"><span>Begin new activity</span><i className="fa fa-hourglass-start"></i></button>
                     <br></br>
                     {/*Pulse Button*/}
-                    <button id="pulse-button" className="button button-rounded-hover" onClick={this.getLocation} disabled><img src="assets/images/radio2.png" alt="go" /></button>
+                    <button id="pulse-button" className="button button-rounded-hover" onClick={this.getLocation} ><img src="assets/images/radio2.png" alt="go" /></button>
                     <div id="pulse-toggle-button" className="switch large">
                         <input className="switch-input" id="largeSwitch" type="checkbox" name="exampleSwitch" onClick={this.togglePulseButton} />
                         <label className="switch-paddle" htmlFor="largeSwitch">

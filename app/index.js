@@ -2,8 +2,8 @@ import React from 'react';
 import reactDOM from 'react-dom'
 // import GoogleLogin from './components/google';
 // import { Router, browserHistory } from 'react-router'
-import {BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import {BrowserHistory} from 'react-router'
+import {BrowserRouter as Router, Route, Switch, BrowserHistory } from 'react-router-dom'
+// import {BrowserHistory} from 'react-router'
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxPromise from 'redux-promise';
@@ -17,10 +17,8 @@ export const store = createStoreWithMiddleware(reducers)
 
 reactDOM.render(
   <Provider store= {store}>
-    <Router>
-        <Switch>
-            <Route path="/" component={App} />
-        </Switch>
+    <Router >
+      <App/>
     </Router>
   </Provider>,
     document.getElementById('root')
