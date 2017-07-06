@@ -3,7 +3,8 @@
 
 import React, { Component } from 'react';
 import axios from 'axios';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import * as actionCreators from '../actions/index';
 
 class PulseButton extends Component {
     constructor(props){
@@ -36,6 +37,7 @@ class PulseButton extends Component {
     componentDidMount(){
         let pulseButton = document.getElementById('pulse-button');
         pulseButton.setAttribute("disabled", "");
+        console.log(getUserData);
     }
 
     getLocation() {
@@ -72,7 +74,7 @@ class PulseButton extends Component {
         return (
             <section>
                 <div className="body-info">
-                    <h4 id="welcome"></h4>
+                    <h4 id="welcome">Welcome, </h4>
                     {/*Begin new activity*/}
                     {/*<a className="button app-button" href="#">Begin New Activity</a>*/}
                     <button className="button-hover-default button"><span>Begin new activity</span><i className="fa fa-hourglass-start"></i></button>
