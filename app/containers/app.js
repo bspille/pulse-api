@@ -5,14 +5,14 @@ import React, { Component } from "react"
 import { connect } from 'react-redux'
 import * as actionCreators from '../actions/index';
 import { bindActionCreators } from 'redux'
-import Nav from "../components/nav"
+import Nav from "./nav"
 import Header from "../components/header"
 import Footer from "../components/footer"
 import Splash from './splash'
 import Profile from "../components/profile"
 import PulseButton from "./pulse-button"
-import {  Route, Switch } from 'react-router-dom'
-
+import Loader from '../components/loader'
+import { ROOT, PROFILE } from '../actions/index'
 
 
 // exported to the index.js
@@ -30,11 +30,16 @@ import {  Route, Switch } from 'react-router-dom'
           <div>
             <Nav/>
             <Header/>
+              <ul className="vertical menu">
+                        <li className="avatar-wrapper"><img className="avatar" src="assets/images/avatar-female.png" alt="avatar" width="148" height="148" /></li>
+                        <li><a href="#" onClick={() => this.props.setRoute(ROOT)}>Home</a></li>
+                        <li><a href="#" onClick={() => this.props.setRoute(PROFILE)}>Profile</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Help</a></li>
+                    </ul>
             <div className="container">
-              <Switch>
-                <Route exact={true} path='/' component={PulseButton} />
-                <Route path='/profile' component={Profile} />
-              </Switch>
+            <Loader route= {this.props.route} />
             </div>
             <Footer/>
           </div>

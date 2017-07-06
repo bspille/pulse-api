@@ -109,7 +109,7 @@ Router.post("/update", (req, res) =>{
         query = { tokenSub: user.sub, "contacts.phoneNumber": {$ne: update.contacts.phoneNumber}};
         try {
           crud.update(query, update, (res) => {
-            results(res)
+            console.log(`########## this is the update returned ${res}`)
           }); // close out crud update
         } 
         catch (error) {
@@ -124,7 +124,7 @@ Router.post("/update", (req, res) =>{
       update = updates;
       query = { tokenSub: user.sub, "contacts.geoLocation.timeStamp": {$ne: update.geoLocation.timeStamp}};
       crud.update(query, update, (res) => {
-        results(res)
+        console.log(`this is the update return ${res}`)
       }); // close out crud update
     }// close if geoLocation
             
@@ -132,7 +132,7 @@ Router.post("/update", (req, res) =>{
       update = updates;
       query = {tokenSub: user.sub};
       crud.update(query, update, (res) => {
-        results(res)
+        console.log(`this is the update return ${res}`)
       }); // close out crud update
     } // else
   }
@@ -141,7 +141,9 @@ Router.post("/update", (req, res) =>{
   }
   finally{
     // add condition for errors here
-    res.json(`update completed ${userData}`);
+    if (userData != undefined){
+
+    }
     ERROR("complete");
   }
   }); // end of verify user
@@ -155,6 +157,7 @@ Router.delete("/delete", (req, res) =>{
 
 // route to send out pulse
 Router.post("/pulse", (req, res) =>{
+  console.log(JSON.stringify(req.body,null,1))
   // made some changes to cleaner naming
       var latitude = req.body.geoLocation.latitude;
       var longitude = req.body.geoLocation.longitude;

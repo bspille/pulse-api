@@ -17,9 +17,9 @@ export const store = createStoreWithMiddleware(reducers)
 
 reactDOM.render(
   <Provider store= {store}>
-    <Router >
+   
       <App/>
-    </Router>
+    
   </Provider>,
     document.getElementById('root')
 );
