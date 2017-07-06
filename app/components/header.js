@@ -3,7 +3,7 @@ import React from 'react';
 import Profile from './profile'
 export default (props) => (
     <header>
-        <div className="container">
+        {/*<div className="container">
             <nav className="collapse navbar-collapse">
                 <ul className="nav navbar-nav">
                     <li>
@@ -15,7 +15,7 @@ export default (props) => (
                     </li>
                 </ul>
             </nav>
-        </div>
+        </div>*/}
     </header>
 );
 

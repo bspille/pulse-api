@@ -17,16 +17,16 @@ class Nav extends Component {
         return (
             <nav>
                 <div id="wrapper">
-                <div className="multilevel-offcanvas off-canvas position-left" id="offCanvasLeft" data-off-canvas>
-                    <ul className="vertical menu">
-                        <li className="avatar-wrapper"><img className="avatar" src="assets/images/avatar-female.png" alt="avatar" width="148" height="148" /></li>
-                        <li><a href="#" onClick={() => this.props.setRoute(ROOT)}>Home</a></li>
-                        <li><a href="#" onClick={() => this.props.setRoute(PROFILE)} >Profile</a></li>
-                        <li><a href="#" onClick={() => this.props.setRoute(ABOUT)} >About</a></li>
-                        <li><a href="#" onClick={() => this.props.setRoute(FAQ)} >FAQ</a></li>
-                        <li><a href="#" onClick={() => this.props.setRoute(HELP)} >Help</a></li>
-                    </ul>
-                    <ul className="vertical menu">
+                    <div className="multilevel-offcanvas off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+                        <ul className="vertical menu">
+                            <li className="avatar-wrapper"><img className="avatar" src="assets/images/avatar-female.png" alt="avatar" width="148" height="148" /></li>
+                            <li><a href="#" onClick={() => this.props.setRoute(ROOT)}>Home</a></li>
+                            <li><a href="#" onClick={() => this.props.setRoute(PROFILE)} >Profile</a></li>
+                            <li><a href="#" onClick={() => this.props.setRoute(ABOUT)} >About</a></li>
+                            <li><a href="#" onClick={() => this.props.setRoute(FAQ)} >FAQ</a></li>
+                            <li><a href="#" onClick={() => this.props.setRoute(HELP)} >Help</a></li>
+                        </ul>
+                        <ul className="vertical menu">
                         <li><a href="#" data-close="offCanvasLeft">Sign Out</a></li>
                     </ul>
                     <ul className="menu simple social-links">
@@ -61,7 +61,7 @@ class Nav extends Component {
                         </div>
                     </div>
                     </div>
-                    </div>
+                </div>
             </nav>
         );
     }

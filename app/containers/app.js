@@ -27,23 +27,23 @@ import { ROOT, PROFILE, FAQ, HELP, ABOUT } from '../actions/index'
     if(this.props.isSignedIn){
       return (
         
-          <div>
+          <div className="main-container">
             <Nav/>
             <Header/>
-              <ul className="vertical menu">
+              {/*<ul className="vertical menu">
                         <li className="avatar-wrapper"><img className="avatar" src="assets/images/avatar-female.png" alt="avatar" width="148" height="148" /></li>
                         <li><a href="#" onClick={() => this.props.setRoute(ROOT)} >Home</a></li>
                         <li><a href="#" onClick={() => this.props.setRoute(PROFILE)} >Profile</a></li>
                         <li><a href="#" onClick={() => this.props.setRoute(ABOUT)} >About</a></li>
                         <li><a href="#" onClick={() => this.props.setRoute(FAQ)} >FAQ</a></li>
                         <li><a href="#" onClick={() => this.props.setRoute(HELP)} >Help</a></li>
-                    </ul>
+                    </ul>*/}
             <div className="container">
             <Loader route= {this.props.route} />
             </div>
             <Footer/>
           </div>
-       
+      
       );
     }
     else{

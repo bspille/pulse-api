@@ -1,11 +1,9 @@
 html {
-    height: 100%;
     margin: 0;
     padding: 0;
 }
 
 body {
-    height: 100%;
     margin: 0;
     padding: 0;
     /*background-image: url("https://www.toptal.com/designers/subtlepatterns/topography/");*/
@@ -17,16 +15,25 @@ body {
 }
 
 #wrapper {
-    min-height: 100%;
     position: relative;
     height: auto !important;
-    height: 100%;
     margin: 0 auto -60px;
+}
+
+.main-container {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
 }
 
 /*------------------Footer------------------*/
 
-#pulse-footer {
+
+/*#pulse-footer {
     height: 60px;
     width: 100%;
     background: #222b31;
@@ -39,7 +46,60 @@ body {
 
 .push {
     height: 60px;
+}*/
+
+.mobile-bottom-bar {
+    width: 100%;
+    height: 3.778rem;
+    background: #2c3840;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    vertical-align: bottom;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
+
+.mobile-bottom-bar .footer-link {
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    text-align: center;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 0.8125rem;
+    font-weight: bold;
+    padding: 0.907rem 1rem;
+}
+
+.mobile-bottom-bar .footer-link i.fa {
+    opacity: 0.8;
+    margin-right: 0.625rem;
+    font-size: 1.5rem;
+    vertical-align: middle;
+}
+
+.mobile-bottom-bar .footer-link:focus,
+.mobile-bottom-bar .footer-link:active {
+    color: #a8b8c3;
+}
+
+.mobile-bottom-bar .footer-text {
+    position: relative;
+    top: 2px;
+    font-weight: bold;
+    font-size: 0.875rem;
+    color: #ffffff;
+}
+
+.mobile-bottom-bar .footer-text:hover {
+    color: #a8b8c3;
+}
+
 
 /*------------------Avatar------------------*/
 
@@ -53,12 +113,10 @@ body {
     margin-right: 1em;
     margin-bottom: 1em;
     position: relative;
-
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
-
-    -webkit-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
-    box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+    -webkit-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0, 0, 0, .2);
+    box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0, 0, 0, .2);
 }
