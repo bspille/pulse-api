@@ -84,7 +84,10 @@ Router.post("/user/", (req, res) =>{
 }); // end of post user
 
     // route to update user
-Router.post("/update", (req, res) =>{
+Router.post("/update/", (req, res) =>{
+  console.log("#########################")
+  console.log(JSON.stringify(req.body,null,1))
+  console.log("#########################")
   updates = req.body.updates;
   token = req.body.token;
 
@@ -103,13 +106,14 @@ Router.post("/update", (req, res) =>{
 
   // if the updates contain contacts run this route
   try {
-    if(updates.hasOwnProperty("contacts")){
+    if(updates.hasOwnProperty("addContact")){
       updates.contacts.map((x) =>{
         update = {contacts: x};
         query = { tokenSub: user.sub, "contacts.phoneNumber": {$ne: update.contacts.phoneNumber}};
         try {
           crud.update(query, update, (res) => {
             console.log(`########## this is the update returned ${res}`)
+            userData = res;
           }); // close out crud update
         } 
         catch (error) {
@@ -142,7 +146,7 @@ Router.post("/update", (req, res) =>{
   finally{
     // add condition for errors here
     if (userData != undefined){
-
+      res.json(userData)
     }
     ERROR("complete");
   }
