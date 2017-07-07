@@ -6,24 +6,49 @@ import { connect } from 'react-redux'
 class NewContact extends Component {
     constructor(props){
         super(props)
-        console.log(this)
+        console.log(this.props.token)
         
     }
+    componentDidMount(){
+        let userToken = document.getElementById('idToken');
+        userToken.setAttribute("value", this.props.token);
+    }
     render() {
+        const { fields: {contactName, phoneNumber, token}, handleSubmit, pristine, reset, submitting } = this.props
         return (
             <div>
+                
                 <form onSubmit={ handleSubmit(this.props.addContact)} >
-                    <input type="hidden" value={this.props.idToken}/>
+                    <Field
+                        name="token"
+                        component="input"
+                        type="text"
+                        id="idToken"
+                        value={this.props.token}
+                        
+                    />
                     <h2>Contacts</h2>
                     <div id="contacts">
                         <div className="contact-form">
+                            <label>Contact Name</label>
                             <div className="floated-label-wrapper">
-                                <label htmlFor="full-name-0">Name</label>
-                                <input type="text" id="full-name-0" name="full name input" placeholder="Full name" {...contactName} />
+                                <Field
+                                    name="contactName"
+                                    component="input"
+                                    type="text"
+                                    placeholder="Contact Name"
+                                    
+                                />
                             </div>
+                            <label>Contact Phone Number</label>
                             <div className="floated-label-wrapper">
-                                <label htmlFor="tel-0">Phone #</label>
-                                <input type="tel" id="tel-0" name="tel input" placeholder="Phone number" {...phoneNumber}/>
+                                <Field
+                                    name="phoneNumber"
+                                    component="input"
+                                    type="text"
+                                    placeholder="Phone Number"
+                                    
+                                />
                             </div>
                         </div>
                     </div>
@@ -48,6 +73,9 @@ function mapDispatchToProps(dispatch){
    
     return bindActionCreators(actionCreators, dispatch)
 }
-
+NewContact = reduxForm({
+    form: 'addNewContact',
+    fields: ["contactName", "phoneNumber", "token"]
+},)(NewContact)
 NewContact = connect(mapStateToProps, mapDispatchToProps)(NewContact)
 export default NewContact
