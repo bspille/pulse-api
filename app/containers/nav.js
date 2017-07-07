@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { HOME, CONTACTS, FAQ, HELP, ABOUT } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actionCreators from '../actions/index';
