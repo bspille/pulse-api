@@ -13,17 +13,17 @@ class NewContact extends Component {
         this.props.change("token", this.props.idToken)
     }
     render() {
-        const { fields: {name, phoneNumber, token}, handleSubmit } = this.props
+        const { fields: {contactName, phoneNumber, token}, handleSubmit } = this.props
         return (
             <div>
                 <form onSubmit={ handleSubmit(this.props.addContact)} >
-                    <input type="hidden" value={this.props.idToken} {...token}/>
+                    <input type="hidden" value="token" {...token}/>
                     <h2>Contacts</h2>
                     <div id="contacts">
                         <div className="contact-form">
                             <div className="floated-label-wrapper">
                                 <label htmlFor="full-name-0">Name</label>
-                                <input type="text" id="full-name-0" name="full name input" placeholder="Full name" {...name} />
+                                <input type="text" id="full-name-0" name="full name input" placeholder="Full name" {...contactName} />
                             </div>
                             <div className="floated-label-wrapper">
                                 <label htmlFor="tel-0">Phone #</label>
@@ -44,7 +44,6 @@ class NewContact extends Component {
         )
     }
 } 
-
 function mapStateToProps(state){
   return Object.assign({},state)
 }
@@ -55,7 +54,7 @@ function mapDispatchToProps(dispatch){
 NewContact = connect(mapStateToProps, mapDispatchToProps)(NewContact)
 NewContact = reduxForm({
     form: 'addNewContact',
-    fields: ["name", "phoneNumber", "token"]
+    fields: ["contactName", "phoneNumber", "token"]
 },)(NewContact)
 
 export default NewContact
