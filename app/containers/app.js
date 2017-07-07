@@ -30,8 +30,11 @@ import { Route, Switch, Redirect } from 'react-router-dom'
             <Route component={Header}/>
             <div className="container">
               <Switch>
-                <Route component={PulseButton}/>
+                <Route exact={true} path="/user" component={PulseButton}/>
                 <Route path="/user/profile" component={Profile}/>
+                <Route path="/user/about" render={() => <h2>"Please wait a monent while I load Master" Loading...</h2>}/>
+                <Route path="/user/faq" render={() => <h2>"Please wait a monent while I load Master" Loading...</h2>}/>
+                <Route path="/user/help" render={() => <h2>"Please wait a monent while I load Master" Loading...</h2>}/>
               </Switch>
             </div>
             <Route component={Footer}/>
