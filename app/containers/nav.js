@@ -36,7 +36,7 @@ class Nav extends Component {
                                 <li><Link to="/user/profile" >Profile</Link></li>
                                 <li><Link to="/user/about">About</Link></li>
                                 <li><Link to="/user/faq" >FAQ</Link></li>
-                                <li><Link to="/user/help" >Help</Link></li>
+                                {/*<li><Link to="/user/help" >Help</Link></li>*/}
                             </ul>
                         </div>
                     </div>
