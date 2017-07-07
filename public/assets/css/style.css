@@ -15,6 +15,10 @@ body {
     /*background-image: url("../images/pw_pattern.png");*/
     /*background-image: url("../images/swirl.png");*/
 }
+#welcome{
+    text-transform: uppercase;
+    font-weight: 700;
+}
 .main-container {
     display: flex;
     min-height: 100vh;
@@ -22,6 +26,9 @@ body {
 }
 
 .container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     flex: 1;
 }
 
