@@ -46,7 +46,7 @@ const crud = {
     // sets query condition to ne not equal contacts.phoneNumber preventing duplicate entries with the same number
     User.update(query, update, opt).exec((err, results) => {  
       if (err) {
-  
+        console.log(`this is a update error ${err}`)
       }
       cb(results);
     });

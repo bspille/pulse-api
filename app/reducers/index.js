@@ -5,7 +5,6 @@ import nameReducer from './name-reducer'
 import isSignedInReducer from './is-signed-in-reducer'
 import { reducer as formReducer } from 'redux-form';
 import userReducer from './user-reducer'
-import routeReducer from './route-reducer'
 import contactsReducer from './contacts-reducer'
 
 const rootReducer = combineReducers({
@@ -16,7 +15,6 @@ const rootReducer = combineReducers({
     form: formReducer,
     user: userReducer,
     contacts: contactsReducer,
-    route: routeReducer,
 
 });
 export default rootReducer;

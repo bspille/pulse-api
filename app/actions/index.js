@@ -61,7 +61,7 @@ export const setRoute = (route) => {
 
 export const addContact = (props) => {
     console.log(`this is what is being passed the newContact ${JSON.stringify(props, null,1)}`)
-    let request = axios.post('/update/', {newContact: props})
+    let request = axios.post('/update/', {token: props.token, updates:{newContact:{contactName: props.contactName, phoneNumber: props.phoneNumber}}})
     console.log(request)
     return{
         type: UPDATE_USER,
