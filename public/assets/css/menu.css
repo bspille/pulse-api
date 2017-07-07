@@ -221,3 +221,16 @@
 .hamburger .line:last-child {
     margin-bottom: 0;
 }
+
+/*Menu Links*/
+
+#menu-links {
+    display: flex;
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 39.9375em) {
+        #menu-links {
+            margin-right: auto;
+    }
+}

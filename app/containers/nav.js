@@ -17,12 +17,10 @@ class Nav extends Component {
         return (
             <nav>
                 <div id="wrapper">
-        
                 <div className="off-canvas-content" data-off-canvas-content>
                     <div className="nav-bar shadow">
                         <div className="nav-bar-left">
-                            <ul className="menu">
-                           
+                            <ul className="menu"> 
                                 <li>
                                     <Link to="/user" >
                                         <span className="nav-bar-logo hide-for-small-only">
@@ -32,8 +30,8 @@ class Nav extends Component {
                                 </li>
                             </ul>
                         </div>
-                        <div className="nav-bar-right">
-                            <ul className="menu menu-hover-lines">
+                        <div id="menu-links" className="row">
+                            <ul className="menu menu-hover-lines small-12 columns">
                                 <li><Link to="/user" >Home</Link></li>
                                 <li><Link to="/user/profile" >Profile</Link></li>
                                 <li><Link to="/user/about">About</Link></li>
@@ -43,7 +41,7 @@ class Nav extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
             </nav>
         );
     }
