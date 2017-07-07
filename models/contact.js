@@ -8,7 +8,7 @@ var mongoose = require("mongoose"),
         // contacts name
         contactName:{
           type: String,
-          required: false
+          required: true
         },
 
         // contact phone number
@@ -20,7 +20,8 @@ var mongoose = require("mongoose"),
             },
             message: '{VALUE} is not a valid phone number!'
           },
-          required: false
+          required: true
+          
         },
 
         // set true for the contact to be pulsed
