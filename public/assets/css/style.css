@@ -14,6 +14,7 @@ body {
     background-image: url("../images/greyzz.png");
     /*background-image: url("../images/pw_pattern.png");*/
     /*background-image: url("../images/swirl.png");*/
+    font-family: 'Montserrat', sans-serif;
 }
 
 #welcome{

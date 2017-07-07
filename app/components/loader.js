@@ -1,8 +1,8 @@
 import React from 'react';
-import Profile from './profile'
+import Contacts from './contacts'
 import PulseButton from '../containers/pulse-button'
 
-import { ROOT, HOME, PROFILE, FAQ, ABOUT, HELP } from '../actions/index'
+import { ROOT, HOME, CONTACTS, FAQ, ABOUT, HELP } from '../actions/index'
 
 // add new cases for aditional routes
 export default (props) => {
@@ -11,7 +11,7 @@ switch(props.route){
     return (
         <PulseButton/>
     )
-    case PROFILE:
+    case CONTACTS:
     return (
         <NewContact/>
     )

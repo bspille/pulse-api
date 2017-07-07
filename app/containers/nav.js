@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HOME, PROFILE, FAQ, HELP, ABOUT } from '../actions/index'
+import { HOME, CONTACTS, FAQ, HELP, ABOUT } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actionCreators from '../actions/index';
@@ -33,9 +33,9 @@ class Nav extends Component {
                         <div id="menu-links" className="row">
                             <ul className="menu menu-hover-lines small-12 columns">
                                 <li><Link to="/user" >Home</Link></li>
-                                <li><Link to="/user/profile" >Profile</Link></li>
+                                <li><Link to="/user/contacts" >Contacts</Link></li>
                                 <li><Link to="/user/about">About</Link></li>
-                                <li><Link to="/user/faq" >FAQ</Link></li>
+                                {/*<li><Link to="/user/faq" >FAQ</Link></li>*/}
                                 {/*<li><Link to="/user/help" >Help</Link></li>*/}
                             </ul>
                         </div>

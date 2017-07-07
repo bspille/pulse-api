@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Profile from './profile'
+import Contacts from './contacts'
 export default (props) => (
     <header>
         <div className="container">
