@@ -52,12 +52,6 @@ export const getUserData = (token) => {
     }
 }
 
-export const setRoute = (route) => {
-    return {
-        type: SET_ROUTE,
-        payload: route
-    }
-}
 
 export const addContact = (props) => {
     console.log(`this is what is being passed the newContact ${JSON.stringify(props, null,1)}`)

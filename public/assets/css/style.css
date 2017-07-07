@@ -14,12 +14,23 @@ body {
     background-image: url("../images/greyzz.png");
     /*background-image: url("../images/pw_pattern.png");*/
     /*background-image: url("../images/swirl.png");*/
+    font-family: 'Montserrat', sans-serif;
 }
 
-#welcome{
+#welcome {
     /*text-transform: uppercase;*/
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
+}
+
+#about-header {
+    /*text-transform: uppercase;*/
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.app-font {
+    font-family: 'Montserrat', sans-serif;
 }
 
 .main-container {
@@ -106,3 +117,26 @@ body {
 .mobile-bottom-bar .footer-icon:hover {
     color: #a8b8c3;
 }
+
+/*------------------About Page---------------------*/
+
+
+.four-up-feature {
+  text-align: center;
+}
+
+.four-up-feature .four-up-feature-header {
+  margin-bottom: 3rem;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.four-up-feature .four-up-feature-image {
+  margin-bottom: 2rem;
+}
+
+.four-up-feature .four-up-feature-text {
+  margin-bottom: 2rem;
+}
+

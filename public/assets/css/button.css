@@ -177,9 +177,9 @@
     border-radius: inherit;
     background-color: #fefefe;
     transition: all 0.3s;
-    -webkit-transform: translateX(-100%);
-    -ms-transform: translateX(-100%);
-    transform: translateX(-100%);
+    -webkit-transform: scale(-100%);
+    -ms-transform: scale(-100%);
+    transform: scale(-100%);
 }
 
 .button-rounded-hover:after {
@@ -205,10 +205,18 @@
 
 .button-rounded-hover:hover:before,
 .button-rounded-hover:focus:before {
-    -webkit-transform: translateX(0%);
+    /*-webkit-transform: translateX(0%);
     -ms-transform: translateX(0%);
-    transform: translateX(0%);
+    transform: translateX(0%);*/
+    -webkit-transform: scale(100%);
+    -ms-transform: scale(100%);
+    transform: scale(100%);
     opacity: 0.25;
+}
+
+#pulse-button-container {
+    display: flex;
+    justify-content: center;
 }
 
 #pulse-button {
