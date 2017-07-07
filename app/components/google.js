@@ -118,7 +118,7 @@ class GoogleLogin extends Component {
       border: '1px solid transparent',
       fontSize: 20,
       fontWeight: 'bold',
-
+      outline: 'none',
     };
     const styleProp = (() => {
       if (style) {

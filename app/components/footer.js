@@ -8,7 +8,7 @@ export default (props) => {
         return (
         <div className="mobile-bottom-bar">
         <a href="#" className="footer-link">
-        <a href="#" onClick={() => props.setRoute(ROOT)}><i className="fa fa-sign-out"></i><span className='footer-text'>Log out</span></a>
+        <a href="#" onClick={() => props.setRoute(ROOT)}><i className="fa fa-sign-out footer-icon"></i><span className='footer-text'>Log out</span></a>
         </a>
         </div>
 )}    

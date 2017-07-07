@@ -15,10 +15,13 @@ body {
     /*background-image: url("../images/pw_pattern.png");*/
     /*background-image: url("../images/swirl.png");*/
 }
+
 #welcome{
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
 }
+
 .main-container {
     display: flex;
     min-height: 100vh;
@@ -96,9 +99,10 @@ body {
     color: #a8b8c3;
 }
 
+.mobile-bottom-bar .footer-icon {
+    color: #ffffff;
+}
 
-
-
-
-
-
+.mobile-bottom-bar .footer-icon:hover {
+    color: #a8b8c3;
+}
