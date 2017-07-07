@@ -12,7 +12,7 @@ import NewContact from "../containers/add-contact-form";
 export default () => {
 
     return (
-        <h2>this is the profile</h2>
+        <NewContact/>
     )
        
 }

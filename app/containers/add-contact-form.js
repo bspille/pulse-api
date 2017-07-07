@@ -9,6 +9,9 @@ class NewContact extends Component {
         console.log(this)
         
     }
+    componentDidMount(){
+        this.props.change("token", this.props.idToken)
+    }
     render() {
         const { fields: {name, phoneNumber, token}, handleSubmit } = this.props
         return (
@@ -49,9 +52,10 @@ function mapDispatchToProps(dispatch){
    
     return bindActionCreators(actionCreators, dispatch)
 }
+NewContact = connect(mapStateToProps, mapDispatchToProps)(NewContact)
 NewContact = reduxForm({
     form: 'addNewContact',
     fields: ["name", "phoneNumber", "token"]
 },)(NewContact)
-NewContact = connect(mapStateToProps, mapDispatchToProps)(NewContact)
+
 export default NewContact
