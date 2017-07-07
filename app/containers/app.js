@@ -12,7 +12,7 @@ import Splash from './splash'
 import Profile from "../components/profile"
 import PulseButton from "./pulse-button"
 import Loader from '../components/loader'
-import { ROOT, PROFILE, FAQ, HELP, ABOUT } from '../actions/index'
+import { ROOT, HOME, PROFILE, FAQ, HELP, ABOUT } from '../actions/index'
 
 
 // exported to the index.js
@@ -24,30 +24,24 @@ import { ROOT, PROFILE, FAQ, HELP, ABOUT } from '../actions/index'
   }
  
   render(){
-    if(this.props.isSignedIn){
+    switch(this.props.route){
+    case HOME || PROFILE || ABOUT || FAQ || HELP: 
       return (
         
-          <div>
+          <div className="main-container">
             <Nav/>
             <Header/>
-              <ul className="vertical menu">
-                        <li className="avatar-wrapper"><img className="avatar" src="assets/images/avatar-female.png" alt="avatar" width="148" height="148" /></li>
-                        <li><a href="#" onClick={() => this.props.setRoute(ROOT)} >Home</a></li>
-                        <li><a href="#" onClick={() => this.props.setRoute(PROFILE)} >Profile</a></li>
-                        <li><a href="#" onClick={() => this.props.setRoute(ABOUT)} >About</a></li>
-                        <li><a href="#" onClick={() => this.props.setRoute(FAQ)} >FAQ</a></li>
-                        <li><a href="#" onClick={() => this.props.setRoute(HELP)} >Help</a></li>
-                    </ul>
             <div className="container">
             <Loader route= {this.props.route} />
             </div>
-            <Footer/>
+            <Footer setRoute={this.props.setRoute} />
           </div>
        
-      );
-    }
-    else{
-    return <Splash/>
+      )
+      case ROOT:
+        return <h1>Page Loading...</h1>
+        default:
+        return <Splash/>
     }
   }
 }

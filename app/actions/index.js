@@ -15,11 +15,12 @@ export const GET_USER_DATA ='GET_USER_DATA';
 export const UPDATE_USER = 'UPDATE_USER'
 
 // add routes here
-export const ROOT = "/"
+export const HOME = "/home"
 export const PROFILE = "/profile"
 export const ABOUT = "/about"
 export const FAQ = "/faq"
 export const HELP = "/help"
+export const ROOT = "/"
 
 
 

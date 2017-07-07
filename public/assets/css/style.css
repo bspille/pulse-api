@@ -15,6 +15,22 @@ body {
     /*background-image: url("../images/pw_pattern.png");*/
     /*background-image: url("../images/swirl.png");*/
 }
+#welcome{
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.main-container {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1;
+}
 
 #wrapper {
     min-height: 100%;
@@ -24,41 +40,65 @@ body {
     margin: 0 auto -60px;
 }
 
+
+
 /*------------------Footer------------------*/
 
-#pulse-footer {
-    height: 60px;
+.mobile-bottom-bar {
     width: 100%;
-    background: #222b31;
-    color: rgba(254, 254, 254, 0.6);
+    height: 3.778rem;
+    background: #2c3840;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    vertical-align: bottom;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.mobile-bottom-bar .footer-link {
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
     text-align: center;
-    padding: 1rem 0 0;
-    position: absolute;
-    left: 0px;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 0.8125rem;
+    font-weight: bold;
+    padding: 0.907rem 1rem;
 }
 
-.push {
-    height: 60px;
+.mobile-bottom-bar .footer-link i.fa {
+    opacity: 0.8;
+    margin-right: 0.625rem;
+    font-size: 1.5rem;
+    vertical-align: middle;
 }
 
-/*------------------Avatar------------------*/
-
-.avatar-wrapper {
-    padding-left: 16px;
+.mobile-bottom-bar .footer-link:focus,
+.mobile-bottom-bar .footer-link:active {
+    color: #a8b8c3;
 }
 
-.avatar {
-    float: left;
-    margin-top: 1em;
-    margin-right: 1em;
-    margin-bottom: 1em;
+.mobile-bottom-bar .footer-text {
     position: relative;
-
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-
-    -webkit-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
-    box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+    top: 2px;
+    font-weight: bold;
+    font-size: 0.875rem;
+    color: #ffffff;
 }
+
+.mobile-bottom-bar .footer-text:hover {
+    color: #a8b8c3;
+}
+
+
+
+
+
+
+

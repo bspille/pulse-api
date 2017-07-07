@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actionCreators from '../actions/index';
 import GoogleLogin from '../components/google'
+import { HOME } from '../actions/index'
 
 
 class splash extends Component {
@@ -23,6 +24,9 @@ class splash extends Component {
         this.props.setName(profile.getGivenName());
         this.props.getUserData(this.props.idToken);
         this.props.setIsSignedIn(response.isSignedIn());
+        if(this.props.isSignedIn){
+            this.props.setRoute(HOME)
+        }
         // need redirect to happen here for enter app
     }
  
@@ -30,7 +34,7 @@ class splash extends Component {
         reactDOM.render(
             <GoogleLogin
                 clientId="904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"
-                buttonText="Login"
+                buttonText="Sign in"
                 onSuccess={this.responseGoogle}
                 onFailure={this.responseGoogle}
             />,

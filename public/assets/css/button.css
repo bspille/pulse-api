@@ -213,7 +213,9 @@
 
 #pulse-button {
     margin-bottom: 50px;
+    margin-top: 50px;
 }
+
 
 
 /*------------------Save Profile Button------------------*/
@@ -222,25 +224,7 @@
     text-transform: uppercase;
 }
 
-
-/*------------------Add Contact Button------------------*/
-
-
-/*.plus-minus-input {
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+#googleButton {
+    display: flex;
+    justify-content: center;
 }
-
-.plus-minus-input .input-group-field {
-  text-align: center;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  padding: 1rem;
-}
-
-.plus-minus-input .input-group-field::-webkit-inner-spin-button,
-.plus-minus-input .input-group-field ::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-          appearance: none;
-}*/

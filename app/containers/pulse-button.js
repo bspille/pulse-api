@@ -72,11 +72,11 @@ class PulseButton extends Component {
         return (
             <section>
                 <div className="body-info">
-                    <h4 id="welcome"></h4>
+                    <h2 id="welcome">Welcome, {this.props.name}</h2>
                     {/*Begin new activity*/}
                     {/*<a className="button app-button" href="#">Begin New Activity</a>*/}
-                    <button className="button-hover-default button"><span>Begin new activity</span><i className="fa fa-hourglass-start"></i></button>
-                    <br></br>
+                    {/*<button className="button-hover-default button"><span>Begin new activity</span><i className="fa fa-hourglass-start"></i></button>
+                    <br></br>*/}
                     {/*Pulse Button*/}
                     <button id="pulse-button" className="button button-rounded-hover" onClick={this.getLocation} ><img src="assets/images/radio2.png" alt="go" /></button>
                     <div id="pulse-toggle-button" className="switch large">
