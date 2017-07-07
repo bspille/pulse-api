@@ -9,7 +9,9 @@ import Nav from "./nav"
 import Header from "../components/header"
 import Footer from "../components/footer"
 import Splash from './splash'
-import Profile from "./add-contact-form"
+import Contacts from "../components/contacts"
+import About from "../components/about"
+import Faq from "../components/faq"
 import PulseButton from "./pulse-button"
 import { Route, Switch, Redirect } from 'react-router-dom'
 
@@ -31,10 +33,10 @@ import { Route, Switch, Redirect } from 'react-router-dom'
             <div className="container">
               <Switch>
                 <Route exact={true} path="/user" component={PulseButton}/>
-                <Route path="/user/profile" component={Profile}/>
-                <Route path="/user/about" render={() => <h2>"Please wait a monent while I load Master" Loading...</h2>}/>
-                <Route path="/user/faq" render={() => <h2>"Please wait a monent while I load Master" Loading...</h2>}/>
-                <Route path="/user/help" render={() => <h2>"Please wait a monent while I load Master" Loading...</h2>}/>
+                <Route path="/user/contacts" component={Contacts}/>
+                <Route path="/user/about"component={About}/>
+                <Route path="/user/faq" component={Faq}/>
+                {/*<Route path="/user/help" render={() => <h2>"Please wait a monent while I load Master" Loading...</h2>}/>*/}
               </Switch>
             </div>
             <Route component={Footer}/>
