@@ -9,7 +9,7 @@ import Nav from "./nav"
 import Header from "../components/header"
 import Footer from "../components/footer"
 import Splash from './splash'
-import Profile from "../components/profile"
+import Profile from "./add-contact-form"
 import PulseButton from "./pulse-button"
 import { Route, Switch, Redirect } from 'react-router-dom'
 
