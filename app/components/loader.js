@@ -2,6 +2,7 @@ import React from 'react';
 import Contacts from './contacts'
 import PulseButton from '../containers/pulse-button'
 
+
 import { ROOT, HOME, CONTACTS, FAQ, ABOUT, HELP } from '../actions/index'
 
 // add new cases for aditional routes

@@ -14,6 +14,7 @@ import About from "../components/about"
 import Faq from "../components/faq"
 import PulseButton from "./pulse-button"
 import { Route, Switch, Redirect } from 'react-router-dom'
+import NewContact from "./add-contact-form";
 
 
 // exported to the index.js
@@ -33,7 +34,7 @@ import { Route, Switch, Redirect } from 'react-router-dom'
             <div className="container">
               <Switch>
                 <Route exact={true} path="/user" component={PulseButton}/>
-                <Route path="/user/contacts" component={Contacts}/>
+                <Route path="/user/contacts" component={NewContact}/>
                 <Route path="/user/about"component={About}/>
                 <Route path="/user/faq" component={Faq}/>
                 {/*<Route path="/user/help" render={() => <h2>"Please wait a monent while I load Master" Loading...</h2>}/>*/}
