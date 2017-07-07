@@ -9,22 +9,43 @@ class NewContact extends Component {
         console.log(this)
         
     }
+    componentDidMount(){
+        this.props.change("token", this.props.idToken)
+    }
     render() {
-        const { fields: {name, phoneNumber, token}, handleSubmit } = this.props
+        const { fields: {contactName, phoneNumber, token}, handleSubmit } = this.props
         return (
             <div>
                 <form onSubmit={ handleSubmit(this.props.addContact)} >
-                    <input type="hidden" value={this.props.idToken} {...token}/>
+                    <Field
+                        name="token"
+                        component="input"
+                        type="hidden"
+                        value= "token"
+                        {...token}
+                    />
                     <h2>Contacts</h2>
                     <div id="contacts">
                         <div className="contact-form">
                             <div className="floated-label-wrapper">
                                 <label htmlFor="full-name-0">Name</label>
-                                <input type="text" id="full-name-0" name="full name input" placeholder="Full name" {...name} />
+                                <Field
+                                    name="contactName"
+                                    component="input"
+                                    type="text"
+                                    placeholder="Contact Name"
+                                    {...contactName}
+                                />
                             </div>
                             <div className="floated-label-wrapper">
                                 <label htmlFor="tel-0">Phone #</label>
-                                <input type="tel" id="tel-0" name="tel input" placeholder="Phone number" {...phoneNumber}/>
+                                <Field
+                                    name="phoneNumber"
+                                    component="input"
+                                    type="text"
+                                    placeholder="Phone Number (1234567890)"
+                                    {...phoneNumber}
+                                />
                             </div>
                         </div>
                     </div>
@@ -41,7 +62,6 @@ class NewContact extends Component {
         )
     }
 } 
-
 function mapStateToProps(state){
   return Object.assign({},state)
 }
@@ -49,9 +69,9 @@ function mapDispatchToProps(dispatch){
    
     return bindActionCreators(actionCreators, dispatch)
 }
+NewContact = connect(mapStateToProps, mapDispatchToProps)(NewContact)
 NewContact = reduxForm({
     form: 'addNewContact',
-    fields: ["name", "phoneNumber", "token"]
+    fields: ["contactName", "phoneNumber", "token"]
 },)(NewContact)
-NewContact = connect(mapStateToProps, mapDispatchToProps)(NewContact)
 export default NewContact
