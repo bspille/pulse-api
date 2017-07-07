@@ -3,7 +3,7 @@ import { HOME, PROFILE, FAQ, HELP, ABOUT } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actionCreators from '../actions/index';
-
+import { Link } from 'react-router-dom'
 // import { Link } from 'react-router-dom';
 class Nav extends Component {
     constructor(props){
@@ -22,17 +22,21 @@ class Nav extends Component {
                         <div className="nav-bar-left">
                             <ul className="menu"> 
                                 <li>
-                                    <a href="/" onClick={() => this.props.setRoute(ROOT)} className="nav-bar-logo hide-for-small-only"><img className="logo" src="assets/images/pulse-logo.png" alt='pulse' /></a>
+                                    <Link to="/user" >
+                                        <span className="nav-bar-logo hide-for-small-only">
+                                            <img className="logo" src="assets/images/pulse-logo.png" alt='pulse' />
+                                        </span>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>
                         <div id="menu-links" className="row">
                             <ul className="menu menu-hover-lines small-12 columns">
-                                <li><a href="/" onClick={() => this.props.setRoute(ROOT)}>Home</a></li>
-                                <li><a href="#" onClick={() => this.props.setRoute(PROFILE)} >Profile</a></li>
-                                <li><a href="#" onClick={() => this.props.setRoute(ABOUT)} >About</a></li>
-                                <li><a href="#" onClick={() => this.props.setRoute(FAQ)} >FAQ</a></li>
-                                <li><a href="#" onClick={() => this.props.setRoute(HELP)} >Help</a></li>
+                                <li><Link to="/user" >Home</Link></li>
+                                <li><Link to="/user/profile" >Profile</Link></li>
+                                <li><Link to="/user/about">About</Link></li>
+                                <li><Link to="/user/faq" >FAQ</Link></li>
+                                <li><Link to="/user/help" >Help</Link></li>
                             </ul>
                         </div>
                     </div>

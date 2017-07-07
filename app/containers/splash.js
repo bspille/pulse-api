@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actionCreators from '../actions/index';
 import GoogleLogin from '../components/google'
-import { HOME } from '../actions/index'
+
 
 
 class splash extends Component {
@@ -25,7 +25,7 @@ class splash extends Component {
         this.props.getUserData(this.props.idToken);
         this.props.setIsSignedIn(response.isSignedIn());
         if(this.props.isSignedIn){
-            this.props.setRoute(HOME)
+            this.props.history.push("/user")
         }
         // need redirect to happen here for enter app
     }
