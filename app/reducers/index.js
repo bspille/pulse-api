@@ -6,6 +6,7 @@ import isSignedInReducer from './is-signed-in-reducer'
 import { reducer as formReducer } from 'redux-form';
 import userReducer from './user-reducer'
 import routeReducer from './route-reducer'
+import contactsReducer from './contacts-reducer'
 
 const rootReducer = combineReducers({
     idToken: accessTokenReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     isSignedIn: isSignedInReducer,
     form: formReducer,
     user: userReducer,
+    contacts: contactsReducer,
     route: routeReducer,
 
 });

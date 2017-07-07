@@ -6,8 +6,8 @@
 // TODO: 0the forms are going to need to be class components because of the need to have controlled inputs
 
 import React from 'react'
-import UserInfo from "../containers/profile-user-info"
-import ContactInfo from "../containers/profile-contact-info";
+import UserInfo from "../containers/add-user-data"
+import NewContact from "../containers/add-contact-form";
 
 export default () => {
 

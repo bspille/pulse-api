@@ -12,6 +12,7 @@ export const SET_IS_SIGNED_IN = 'SET_IS_SIGNED_IN';
 export const SET_ROUTE = 'SET_ROUTE';
 // user object fields
 export const GET_USER_DATA ='GET_USER_DATA';
+export const UPDATE_USER = 'UPDATE_USER'
 
 // add routes here
 export const HOME = "/home"
@@ -68,3 +69,13 @@ export const setRoute = (route) => {
     }
 }
 
+export const addContact = (props) => {
+    console.log(this)
+    console.log(JSON.stringify(props, null,1))
+    let request = axios.post('/update/', {newContact: props})
+    console.log(request)
+    return{
+        type: UPDATE_USER,
+        payload: request
+    }
+}
