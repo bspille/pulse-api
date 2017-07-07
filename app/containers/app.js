@@ -39,7 +39,7 @@ import { ROOT, PROFILE, FAQ, HELP, ABOUT } from '../actions/index'
                         <li><a href="#" onClick={() => this.props.setRoute(HELP)} >Help</a></li>
                     </ul>
             <div className="container">
-            <Loader route= {this.props.route} />
+            <Loader route= {this.props.route} token= {this.props.idToken}/>
             </div>
             <Footer/>
           </div>

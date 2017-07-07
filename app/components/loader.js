@@ -14,7 +14,7 @@ switch(props.route){
     )
     case PROFILE:
     return (
-        <NewContact/>
+        <NewContact token={props.token}/>
     )
     default:
     return <h2>"Please wait a monent while I load Master" Loading...</h2>
