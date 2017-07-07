@@ -14,28 +14,28 @@ export default () => {
   </div>
   <div className="row align-spaced">
     <div className="small-10 medium-3 columns">
-      <img className="four-up-feature-image" src="assets/images/ben.jpg" alt="ben" />
+      <img className="four-up-feature-image" src="/assets/images/ben.jpg" alt="ben" />
       <h4>Ben Spille</h4>
       <p className="four-up-feature-text"> A few words about Ben
           <br></br><a href="https://github.com/bspille" target="_blank"><i className="fa fa-github fa-3x" aria-hidden="true"></i></a>
       </p>
     </div>
     <div className="small-10 medium-3 columns">
-      <img className="four-up-feature-image" src="assets/images/greg.jpg" alt="greg" />
+      <img className="four-up-feature-image" src="/assets/images/greg.jpg" alt="greg" />
       <h4>Greg Barone</h4>
       <p className="four-up-feature-text">  A few words about Greg
           <br></br><a href="https://github.com/Baronegreg" target="_blank"><i className="fa fa-github fa-3x" aria-hidden="true"></i></a>
       </p>
     </div>
     <div className="small-10 medium-3 columns">
-      <img className="four-up-feature-image" src="assets/images/chris.jpg" alt="chris" />
+      <img className="four-up-feature-image" src="/assets/images/chris.jpg" alt="chris" />
       <h4>Chris Callan</h4>
       <p className="four-up-feature-text"> A few words about Chris
           <br></br><a href="https://github.com/ChrisCallanJr" target="_blank"><i className="fa fa-github fa-3x" aria-hidden="true"></i></a>
       </p>
     </div>
     <div className="small-10 medium-3 columns">
-      <img className="four-up-feature-image" src="assets/images/josh.jpg" alt="josh" />
+      <img className="four-up-feature-image" src="/assets/images/josh.jpg" alt="josh" />
       <h4>Joshua Butler</h4>
       <p className="four-up-feature-text"> A few words about Josh
           <br></br><a href="https://github.com/joshcbutler" target="_blank"><i className="fa fa-github fa-3x" aria-hidden="true"></i></a>
