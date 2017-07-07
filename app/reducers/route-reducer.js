@@ -1,6 +1,6 @@
-import { SET_ROUTE, ROOT} from './../actions/index.js';
+import { SET_ROUTE, HOME} from './../actions/index.js';
 
-export default function(state = ROOT, action) {
+export default function(state = null, action) {
     // console.log(JSON.stringify(action, null, 1));
     switch(action.type){
         
