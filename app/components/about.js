@@ -8,7 +8,7 @@ export default () => {
         <section className="four-up-feature">
           <div className="row four-up-feature-header align-center">
             <div className="medium-8 columns">
-              <h2 id="about-header">Pulse</h2>
+              <h2 className="app-header-font">Pulse</h2>
               <h5 className="app-font"> A robust web application, allowing a user to notify emergency contacts via text messages with their precise location. Built using MongoDB, Node, Express and React. </h5>
             </div>
           </div>

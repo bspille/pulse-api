@@ -24,39 +24,47 @@ class NewContact extends Component {
                         value= "token"
                         {...token}
                     />
-                    <h2>Contacts</h2>
-                    <div id="contacts">
-                        <div className="contact-form">
-                            <div className="floated-label-wrapper">
-                                <label htmlFor="full-name-0">Name</label>
-                                <Field
-                                    name="contactName"
+                    <div id="contacts-header" className="row">
+                    <h2 className="app-header-font">Contacts</h2>
+                    </div>
+                    <div id="contacts" className="row">
+                        <div className="small-11 medium-8 large-6 columns"> 
+                            <div className="contact-form">
+                                <div className="floated-label-wrapper">
+                                    <label htmlFor="full-name-0">Name</label>
+                                    <Field
+                                    name="contactName input"
                                     component="input"
                                     type="text"
                                     placeholder="Contact Name"
                                     {...contactName}
-                                />
-                            </div>
-                            <div className="floated-label-wrapper">
-                                <label htmlFor="tel-0">Phone #</label>
-                                <Field
-                                    name="phoneNumber"
-                                    component="input"
-                                    type="text"
-                                    placeholder="Phone Number (1234567890)"
-                                    {...phoneNumber}
-                                />
+                                    />
+                                </div>
+                                <div className="floated-label-wrapper">
+                                    <label htmlFor="tel-0">Phone #</label>
+                                    <Field
+                                        name="phoneNumber input"
+                                        component="input"
+                                        type="tel"
+                                        placeholder="Phone Number (1234567890)"
+                                        {...phoneNumber}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
                     {/*<!--Add Contact Button-->*/}
                     <br></br>
-                    <a id="add-contact-button" type="button" className="button app-button">
-                        <i className="fa fa-user-plus fa-lg" aria-hidden="true"></i> Add Contact
-                    </a>
-                    {/*<button id="add-contact-button" type="button" className="button-hover-default button"><span>Add contact </span><i className="fa fa-user-plus"></i></button>*/}
+                    <div id="add-contact-button" className="row">
+                        <a type="button" className="button app-button small-11 medium-4 large-2 columns app-font">
+                            <i className="fa fa-user-plus fa-lg" aria-hidden="true"></i> Add Contact
+                        </a>
+                        {/*<button id="add-contact-button" type="button" className="button-hover-default button"><span>Add contact </span><i className="fa fa-user-plus"></i></button>*/}
+                    </div>
                     <br></br>
-                    <input id="save-profile-button" className="button expanded" type="submit" value="Save" />
+                    <div id="save-profile-container" className="row">
+                        <input className="button small-11 medium-4 large-2 columns app-font" type="submit" value="Save" />
+                    </div>
                 </form>
             </div>      
         )

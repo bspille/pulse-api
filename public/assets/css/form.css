@@ -39,3 +39,14 @@
     margin-right: 5%;
     margin-bottom: 5%;
 }
+
+#contacts-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#contacts {
+    display: flex;
+    justify-content: center;
+}
