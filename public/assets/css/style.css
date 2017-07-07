@@ -17,10 +17,20 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-#welcome{
+#welcome {
     /*text-transform: uppercase;*/
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
+}
+
+#about-header {
+    /*text-transform: uppercase;*/
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.app-font {
+    font-family: 'Montserrat', sans-serif;
 }
 
 .main-container {
