@@ -11,8 +11,7 @@ import Footer from "../components/footer"
 import Splash from './splash'
 import Profile from "../components/profile"
 import PulseButton from "./pulse-button"
-import Loader from '../components/loader'
-import { ROOT, HOME, PROFILE, FAQ, HELP, ABOUT } from '../actions/index'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 
 // exported to the index.js
@@ -24,28 +23,22 @@ import { ROOT, HOME, PROFILE, FAQ, HELP, ABOUT } from '../actions/index'
   }
  
   render(){
-    switch(this.props.route){
-    case HOME || PROFILE || ABOUT || FAQ || HELP: 
+  
       return (
-        
           <div className="main-container">
-            <Nav/>
-            <Header/>
+            <Route component={Nav}/>
+            <Route component={Header}/>
             <div className="container">
-            <Loader route= {this.props.route} />
+              <Switch>
+                <Route component={PulseButton}/>
+                <Route path="/user/profile" component={Profile}/>
+              </Switch>
             </div>
-            <Footer setRoute={this.props.setRoute} />
+            <Route component={Footer}/>
           </div>
-       
       )
-      case ROOT:
-        return <h1>Page Loading...</h1>
-        default:
-        return <Splash/>
     }
-  }
-}
-
+ }
 // map the redux state to the props object
 function mapStateToProps(state){
   return Object.assign({},state)

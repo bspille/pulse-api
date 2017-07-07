@@ -1,5 +1,5 @@
 import React from 'react';
-import { ROOT, PROFILE, FAQ, HELP, ABOUT } from '../actions/index'
+
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actionCreators from '../actions/index';
@@ -7,10 +7,12 @@ import * as actionCreators from '../actions/index';
 export default (props) => { 
         return (
         <div className="mobile-bottom-bar">
-        <a href="#" className="footer-link">
-        <a href="#" onClick={() => props.setRoute(ROOT)}><i className="fa fa-sign-out"></i><span className='footer-text'>Log out</span></a>
-        </a>
+                <span className="footer-link">
+                        <a href="/" >
+                                <i className="fa fa-sign-out"></i>
+                                <span className='footer-text'>Log out</span>
+                        </a>
+                </span>
         </div>
 )}    
 
-// export default Footer;
