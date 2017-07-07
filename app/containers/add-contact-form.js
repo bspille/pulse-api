@@ -7,6 +7,7 @@ class NewContact extends Component {
     constructor(props){
         super(props)
         console.log(this)
+        console.log(this.props.fields.contactName)
         
     }
     componentDidMount(){
@@ -14,10 +15,11 @@ class NewContact extends Component {
     }
     render() {
         const { fields: {contactName, phoneNumber, token}, handleSubmit } = this.props
+        console.log(contactName)
         return (
             <div>
                 <form onSubmit={ handleSubmit(this.props.addContact)} >
-                    <input type="hidden" value="token" {...token}/>
+                    <input type="hidden"  {...token}/>
                     <h2>Contacts</h2>
                     <div id="contacts">
                         <div className="contact-form">

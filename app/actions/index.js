@@ -14,16 +14,6 @@ export const SET_ROUTE = 'SET_ROUTE';
 export const GET_USER_DATA ='GET_USER_DATA';
 export const UPDATE_USER = 'UPDATE_USER'
 
-// add routes here
-export const HOME = "/home"
-export const PROFILE = "/profile"
-export const ABOUT = "/about"
-export const FAQ = "/faq"
-export const HELP = "/help"
-export const ROOT = "/"
-
-
-
 // used to get the access token from google signin
 export const setAccessToken = (idToken) =>{
     return {
@@ -70,8 +60,7 @@ export const setRoute = (route) => {
 }
 
 export const addContact = (props) => {
-    console.log(this)
-    console.log(JSON.stringify(props, null,1))
+    console.log(`this is what is being passed the newContact ${JSON.stringify(props, null,1)}`)
     let request = axios.post('/update/', {newContact: props})
     console.log(request)
     return{

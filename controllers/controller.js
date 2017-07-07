@@ -89,12 +89,22 @@ Router.post("/update/", (req, res) =>{
   console.log(JSON.stringify(req.body,null,1))
   console.log("#########################")
   updates = req.body.updates;
-  token = req.body.token;
-
+  if (req.body.newContact){
+    token = req.body.newContact.token;
+  }
+ console.log("#########################")
+  console.log(JSON.stringify(token ,null,1))
+  console.log("#########################")
   // verify the user and return the user object
   google.verifyToken(token, (results) => {
     // check the collection for existing entry
-    user(results);
+    if(results.aud == "904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"){
+      user = {
+      tokenSub: results.sub,
+      givenName: results.given_name,
+      familyName: results.family_name
+    }
+  }
  
 
   // starts the timer and sets the active timer to true
@@ -106,7 +116,7 @@ Router.post("/update/", (req, res) =>{
 
   // if the updates contain contacts run this route
   try {
-    if(updates.hasOwnProperty("addContact")){
+    if(updates.hasOwnProperty("newContact")){
       updates.contacts.map((x) =>{
         update = {contacts: x};
         query = { tokenSub: user.sub, "contacts.phoneNumber": {$ne: update.contacts.phoneNumber}};
