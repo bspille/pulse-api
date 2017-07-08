@@ -236,3 +236,17 @@
     display: flex;
     justify-content: center;
 }
+
+#add-contact-button {
+    display: flex;
+    justify-content: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#save-profile-container {
+    display: flex;
+    justify-content: center;
+    padding-left: 10px;
+    padding-right: 10px
+}
