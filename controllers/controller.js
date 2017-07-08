@@ -103,14 +103,12 @@ Router.post("/update/", (req, res) =>{
     try {
  
       if(updates.hasOwnProperty("newContact")){
-          update = { contacts: [updates.newContact]};
+          update = { contacts: updates.newContact};
    
           // find the user object by tokenSub and only add a new contact if the phoneNumber is not found
-          updateQuery = { tokenSub: user.sub, "contacts.phoneNumber": {$ne: update.contacts[0].phoneNumber}};
+          updateQuery = { tokenSub: user.sub, "contacts.phoneNumber": {$ne: update.contacts.phoneNumber}};
           if(updateQuery != undefined){
-                      console.log("hey this is the query being passed to the crud #########################")
-    console.log(JSON.stringify(updateQuery ,null,1))
-    console.log("#########################")
+   
             crud.update(updateQuery, update, (res) => {
 
               if(res != undefined && user != undefined){

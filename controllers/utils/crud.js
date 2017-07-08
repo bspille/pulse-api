@@ -27,11 +27,7 @@ const crud = {
     let update
       
     // if(updates.hasOwnProperty("contactName")){
-    console.log("hey i am here query below #######################")
-    console.log(JSON.stringify(query,null,1))
-    console.log("hey I am a updates below #########################")
-    console.log(JSON.stringify(updates,null,1))
-    console.log("########################")
+  
       // adjusts update methods for contacts field contacts
       update = {$addToSet: updates};
       opt = {new: true, runValidators: true};
@@ -48,12 +44,19 @@ const crud = {
     //   update = {$set: updates};
     //   opt = {new: true, runValidators: true};
     // }
-
+  console.log("hey i am here query below #######################")
+    console.log(JSON.stringify(query,null,1))
+    console.log("hey I am a updates below #########################")
+    console.log(JSON.stringify(updates,null,1))
+    console.log("hey I am a opt below ########################")
+    console.log(JSON.stringify(opt,null,1))
+    console.log("########################")
     // sets query condition to ne not equal contacts.phoneNumber preventing duplicate entries with the same number
-    User.update(query, update, opt).exec((err, results) => {  
+    User.update(query, update, opt).then((err, results) => {  
       if (err) {
-        console.log(`this is a update error ${err}`)
+        console.log(`this is a update error ${JSON.stringify(err)}`)
       }
+      console.log(`this is the return on the update ${JSON>stringify(results,null,1)}`)
       cb(results)
     });
   },
