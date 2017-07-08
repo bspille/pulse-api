@@ -36,7 +36,7 @@ Router.post("/user/", (req, res) =>{
  
       crud.read(query, (result) => {
         // if there is a entry send it back as json
-        if (results){
+        if (result){
           console.log("found entry for user ");
         
         console.log(`I am sending ${result}`)
@@ -46,14 +46,13 @@ Router.post("/user/", (req, res) =>{
 
       // TODO: test the create new user for bugs
         // if there is no entry create one
-        if(!result && user){
+        if(!result){
           console.log("hit the create route")
           crud.create(user, (result) => {
             console.log("created new user ");
                if(result != undefined){
-        console.log(`I am sending ${result}`)
-        res.json(result)
-        }
+            console.log(`I am sending ${result}`)
+            }
           });
         }
       });
@@ -83,13 +82,6 @@ Router.post("/update/", (req, res) =>{
       responseQuery = {tokenSub: results.sub}
   }
  
-  // if(updates != undefined){
-  //   // starts the timer and sets the active timer to true
-  //   // needs a way to determine when to call stop and set active timeer to false
-  //   if (updates.hasOwnProperty("timeSet") && !activeTimer && user){
-  //     timer.start()
-  //     activeTimer = true;
-  //   }
 
     // if the updates contain contacts run this route
     try {
@@ -106,22 +98,6 @@ Router.post("/update/", (req, res) =>{
             }); // close out crud update
       } // if contacts
 
-      // if the updates contain geoLocation run this route
-      // if (updates.hasOwnProperty("geoLocation"))  {
-      //   update = updates;
-      //   query = { tokenSub: user.sub, "contacts.geoLocation.timeStamp": {$ne: update.geoLocation.timeStamp}};
-      //   crud.update(query, update, (res) => {
-      //     console.log(`this is the update return ${res}`)
-      //   }); // close out crud update
-      // }// close if geoLocation
-              
-      // else{
-      //   update = updates;
-      //   query = {tokenSub: user.sub};
-      //   crud.update(query, update, (res) => {
-      //     console.log(`this is the update return ${res}`)
-      //   }); // close out crud update
-      // } // else
     }
     catch(error){
       
