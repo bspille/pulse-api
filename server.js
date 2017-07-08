@@ -22,9 +22,9 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // mongoose.Promise = global.Promise;
 Promise.promisifyAll(mongoose);
 // localhost connection uncomment for localhost
-mongoose.connect("mongodb://localhost/pulse");
+// mongoose.connect("mongodb://localhost/pulse");
 // heroku mLabs connection uncomment for heroku deployment
-// mongoose.connect("mongodb://heroku_fhfqpr6g:8l7nvjiqnbrb24geffb3ddn04q@ds137882.mlab.com:37882/heroku_fhfqpr6g")
+mongoose.connect("mongodb://heroku_t1bvzddm:ae2stotm309klscmhlvuajjv1g@ds151242.mlab.com:51242/heroku_t1bvzddm")
 var db = mongoose.connection;
 
 // Show any mongoose errors
