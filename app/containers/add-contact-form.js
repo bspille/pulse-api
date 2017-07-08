@@ -35,7 +35,7 @@ class NewContact extends Component {
                                 <div className="floated-label-wrapper">
                                     <label htmlFor="full-name-0">Name</label>
                                     <Field
-                                    name="contactName input"
+                                    name="contactName"
                                     component="input"
                                     type="text"
                                     placeholder="Contact Name"
@@ -45,7 +45,7 @@ class NewContact extends Component {
                                 <div className="floated-label-wrapper">
                                     <label htmlFor="tel-0">Phone #</label>
                                     <Field
-                                        name="phoneNumber input"
+                                        name="phoneNumber"
                                         component="input"
                                         type="tel"
                                         placeholder="Phone Number (1234567890)"
