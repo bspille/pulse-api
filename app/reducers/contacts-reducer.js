@@ -17,7 +17,7 @@ export default function(state = null, action) {
            if (action.payload.data != undefined){
                 return [...state, action.payload.data]
             }
-            return action.payload.data
+            return null
         // return the default state if type is not found
         default:
             return state
