@@ -110,7 +110,7 @@ class GoogleLogin extends Component {
       display: 'inline-block',
       background: '#ffffff',
       cursor: 'pointer',
-      color: 'grey',
+      color: '#383838',
       width: 190,
       paddingTop: 20,
       paddingBottom: 20,
@@ -119,6 +119,9 @@ class GoogleLogin extends Component {
       fontSize: 20,
       fontWeight: 'bold',
       outline: 'none',
+      fontFamily: 'Montserrat',
+      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+
     };
     const styleProp = (() => {
       if (style) {

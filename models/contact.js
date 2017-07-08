@@ -16,7 +16,7 @@ var mongoose = require("mongoose"),
           type: String,
           validate: {
             validator: function(v) {
-              return /\d{3}-\d{3}-\d{4}/.test(v);
+              return /\d{10}/.test(v);
             },
             message: '{VALUE} is not a valid phone number!'
           },
