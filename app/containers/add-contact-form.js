@@ -57,13 +57,12 @@ class NewContact extends Component {
                     </div>
                     {/*<!--Add Contact Button-->*/}
                     <br></br>
-                    <div id="add-contact-button" className="row">
+                    {/*<div id="add-contact-button" className="row">
                         <button type="button" className="button button-hover-default small-11 medium-4 large-2 columns app-font">
                             <span>Add Contact </span><i className="fa fa-user-plus fa-lg" aria-hidden="true"></i>
                         </button>
-                        {/*<button id="add-contact-button" type="button" className="button-hover-default button"><span>Add contact </span><i className="fa fa-user-plus"></i></button>*/}
                     </div>
-                    <br></br>
+                    <br></br>*/}
                     <div id="save-profile-container" className="row">
                         <button className="button button-hover-default small-11 medium-4 large-2 columns app-font" type="submit" value="Save">
                             <span>Save </span><i className="fa fa-floppy-o fa-lg" aria-hidden="true"></i>
