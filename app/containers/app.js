@@ -23,6 +23,8 @@ import NewContact from "./add-contact-form";
     super(props)
    
     console.log(this)
+    
+    
   }
  
   render(){

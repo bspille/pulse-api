@@ -6,14 +6,20 @@ export default function(state = null, action) {
     
         // if the action type is set id token return the payload from the action to state
         case GET_USER_DATA:
-        console.log(`this is the contact data set state ${JSON.stringify(action.payload.data.contacts,null,1)}`)
-        return action.payload.data.contacts
+        console.log(`this is the contacts data set state ${JSON.stringify(action.payload.data.contacts,null,1)}`)
+            if (action.payload.data != undefined){
+                return action.payload.data.contacts
+            }
+            return action.payload.data.contacts
 
         case UPDATE_USER:
-        console.log(`this is the contact data set state ${JSON.stringify(action.payload.data,null,1)}`)
-        return action.payload.data
+            console.log(`this is add to contact data set state ${JSON.stringify(action.payload.data,null,1)}`)
+           if (action.payload.data != undefined){
+                return [...state, action.payload.data]
+            }
+            return action.payload.data
         // return the default state if type is not found
         default:
-        return state
+            return state
     }
 }

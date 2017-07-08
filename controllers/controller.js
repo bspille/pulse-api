@@ -9,34 +9,18 @@ const timer = require("./utils/timer.js")
 const express = require("express")
 const Router = express.Router()  
 const CLIENT_ID = '533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com';
-let token;
-let query;
-let updates;
-let update;
-let user;
-let userData;
-// const userData = (res)=> {
-//   console.log(`this is the response object ${res}`)
-//   return res
-// }
-const ERROR = (error) => {
-  if (error == "complete"){
-    return null
-  }
-  return ERROR.concat([error])
-}
 
 let activeTimer = false;
 
  // route to add new user
 Router.post("/user/", (req, res) =>{
 
-  token = req.body.token;
- 
+ let token = req.body.token;
+ let user;
+ let Query;
   // verify the user and return the user object
   google.verifyToken(token, (results) => {
     
-    console.log(JSON.stringify(results, null, 1))
      if(results.aud == "904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"){
       user = {
       tokenSub: results.sub,
@@ -50,106 +34,108 @@ Router.post("/user/", (req, res) =>{
     // add condition for unverified user here
     try {
  
-      crud.read(query, (res) => {
+      crud.read(query, (result) => {
         // if there is a entry send it back as json
-        if (res){
-          console.log("found entry for user " + JSON.stringify(res, null, 1));
-          userData = res
-        }
+        if (results){
+          console.log("found entry for user ");
+        
+        console.log(`I am sending ${result}`)
+        res.json(result)
+  
+      }
+
+      // TODO: test the create new user for bugs
         // if there is no entry create one
-        if(!res && user){
+        if(!result && user){
           console.log("hit the create route")
-          crud.create(user, (res) => {
-            console.log("created new user " + JSON.stringify(res, null, 1));
-            userData = res
-          });
+          crud.create(user, (result) => {
+            console.log("created new user ");
+               if(result != undefined){
+        console.log(`I am sending ${result}`)
+        res.json(result)
         }
-        else{
-          console.log("error cant create or find user")
+          });
         }
       });
     } 
     catch (error) {
-      ERROR(error);
+     
       console.log(error);
     }
-    finally {
-      // add condition for errors
-      if (userData != undefined){
-        res.json(userData)
-      }
-      ERROR("complete");
-    }
+
   });
 }); // end of post user
 
     // route to update user
 Router.post("/update/", (req, res) =>{
-  console.log("#########################")
-  console.log(JSON.stringify(req.body,null,1))
-  console.log("#########################")
-  updates = req.body.updates;
-  token = req.body.token;
 
+  let updates = req.body.updates;
+  let token = req.body.token;
+  let query;
+  let responseData;
+  let user;
+  let responseQuery;
   // verify the user and return the user object
   google.verifyToken(token, (results) => {
     // check the collection for existing entry
-    user(results);
+    if(results.aud == "904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"){
+      user = results
+      responseQuery = {tokenSub: results.sub}
+  }
  
+  // if(updates != undefined){
+  //   // starts the timer and sets the active timer to true
+  //   // needs a way to determine when to call stop and set active timeer to false
+  //   if (updates.hasOwnProperty("timeSet") && !activeTimer && user){
+  //     timer.start()
+  //     activeTimer = true;
+  //   }
 
-  // starts the timer and sets the active timer to true
-  // needs a way to determine when to call stop and set active timeer to false
-  if (updates.hasOwnPropery("timeSet") && !activeTimer && user){
-    timer.start()
-    activeTimer = true;
-  }
+    // if the updates contain contacts run this route
+    try {
+ 
+      if(updates.hasOwnProperty("newContact")){
+          let update = { contacts: updates.newContact};
+   
+          // find the user object by tokenSub and only add a new contact if the phoneNumber is not found
+          query = { tokenSub: user.sub, "contacts.phoneNumber": {$ne: update.contacts.phoneNumber}};
+  
+            crud.update(query, update, (res) => {
+                responseData = updates.newContact
+                console.log('hey i finish the update can i set a response now')
+            }); // close out crud update
+      } // if contacts
 
-  // if the updates contain contacts run this route
-  try {
-    if(updates.hasOwnProperty("addContact")){
-      updates.contacts.map((x) =>{
-        update = {contacts: x};
-        query = { tokenSub: user.sub, "contacts.phoneNumber": {$ne: update.contacts.phoneNumber}};
-        try {
-          crud.update(query, update, (res) => {
-            console.log(`########## this is the update returned ${res}`)
-            userData = res;
-          }); // close out crud update
-        } 
-        catch (error) {
-          // throw the error up to the parent to catch and continue
-          throw error;
-        }
-      }); // close out map contacts
-    } // if contacts
-
-    // if the updates contain geoLocation run this route
-    if (updates.hasOwnProperty("geoLocation"))  {
-      update = updates;
-      query = { tokenSub: user.sub, "contacts.geoLocation.timeStamp": {$ne: update.geoLocation.timeStamp}};
-      crud.update(query, update, (res) => {
-        console.log(`this is the update return ${res}`)
-      }); // close out crud update
-    }// close if geoLocation
-            
-    else{
-      update = updates;
-      query = {tokenSub: user.sub};
-      crud.update(query, update, (res) => {
-        console.log(`this is the update return ${res}`)
-      }); // close out crud update
-    } // else
-  }
-  catch(error){
-    ERROR(error);
-  }
-  finally{
-    // add condition for errors here
-    if (userData != undefined){
-      res.json(userData)
+      // if the updates contain geoLocation run this route
+      // if (updates.hasOwnProperty("geoLocation"))  {
+      //   update = updates;
+      //   query = { tokenSub: user.sub, "contacts.geoLocation.timeStamp": {$ne: update.geoLocation.timeStamp}};
+      //   crud.update(query, update, (res) => {
+      //     console.log(`this is the update return ${res}`)
+      //   }); // close out crud update
+      // }// close if geoLocation
+              
+      // else{
+      //   update = updates;
+      //   query = {tokenSub: user.sub};
+      //   crud.update(query, update, (res) => {
+      //     console.log(`this is the update return ${res}`)
+      //   }); // close out crud update
+      // } // else
     }
-    ERROR("complete");
-  }
+    catch(error){
+      
+    }
+    finally{
+      // add condition for errors here
+      if(responseData != undefined){
+       console.log(`can I send some thing back now ${responseData}`)
+       res.json(responseData)
+      
+      }
+     
+    }
+  
   }); // end of verify user
 }); // end update route
 

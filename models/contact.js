@@ -6,7 +6,7 @@ var mongoose = require("mongoose"),
     // Create contact schema
     contactSchema = new Schema({
         // contacts name
-        name:{
+        contactName:{
           type: String,
           required: false
         },
@@ -21,6 +21,7 @@ var mongoose = require("mongoose"),
             message: '{VALUE} is not a valid phone number!'
           },
           required: false
+          
         },
 
         // set true for the contact to be pulsed

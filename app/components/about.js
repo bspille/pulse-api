@@ -9,7 +9,7 @@ export default () => {
           <div className="row four-up-feature-header align-center">
             <div className="medium-8 columns">
               <h2 className="app-header-font">Pulse</h2>
-              <h5 className="app-font"> A robust web application, allowing a user to notify emergency contacts via text messages with their precise location. Built using MongoDB, Node, Express and React. </h5>
+              <h5 className="app-font"> A robust web application, allowing a user to notify emergency contacts via text messages with their precise location. Built using MongoDB, Node, Express, React, and Redux. </h5>
             </div>
           </div>
           <div className="row align-spaced">

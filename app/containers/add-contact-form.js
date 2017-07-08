@@ -8,12 +8,14 @@ class NewContact extends Component {
         super(props)
         console.log(this)
         
+     
     }
     componentDidMount(){
         this.props.change("token", this.props.idToken)
     }
     render() {
         const { fields: {contactName, phoneNumber, token}, handleSubmit } = this.props
+        console.log(contactName)
         return (
             <div>
                 <form onSubmit={ handleSubmit(this.props.addContact)} >
@@ -56,14 +58,16 @@ class NewContact extends Component {
                     {/*<!--Add Contact Button-->*/}
                     <br></br>
                     <div id="add-contact-button" className="row">
-                        <a type="button" className="button app-button small-11 medium-4 large-2 columns app-font">
-                            <i className="fa fa-user-plus fa-lg" aria-hidden="true"></i> Add Contact
-                        </a>
+                        <button type="button" className="button button-hover-default small-11 medium-4 large-2 columns app-font">
+                            <span>Add Contact </span><i className="fa fa-user-plus fa-lg" aria-hidden="true"></i>
+                        </button>
                         {/*<button id="add-contact-button" type="button" className="button-hover-default button"><span>Add contact </span><i className="fa fa-user-plus"></i></button>*/}
                     </div>
                     <br></br>
                     <div id="save-profile-container" className="row">
-                        <input className="button small-11 medium-4 large-2 columns app-font" type="submit" value="Save" />
+                        <button className="button button-hover-default small-11 medium-4 large-2 columns app-font" type="submit" value="Save">
+                            <span>Save </span><i className="fa fa-floppy-o fa-lg" aria-hidden="true"></i>
+                        </button>
                     </div>
                 </form>
             </div>      
@@ -82,4 +86,5 @@ NewContact = reduxForm({
     form: 'addNewContact',
     fields: ["contactName", "phoneNumber", "token"]
 },)(NewContact)
+
 export default NewContact
