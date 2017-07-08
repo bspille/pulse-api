@@ -29,7 +29,7 @@ class PulseButton extends Component {
             token: this.props.idToken,
             geoLocation: {
                 latitude: this.state.latitude,
-                userLong: this.state.longitude
+                longitude: this.state.longitude
             }
         });
     }

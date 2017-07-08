@@ -22,7 +22,6 @@ const twilio = {
           // test values left in just in case
           var TESTLat = "40.535434";
           var TESTLong = "-74.52128700000002";
-          // stringing together the users name
           var userDisplayName = `${doc.givenName} ${doc.familyName}`;
           // generating the google map link with a map pin using users geolocation
           var userLocation = "https://www.google.com/maps/place/" + userLat + "," + userLong;
@@ -33,16 +32,14 @@ const twilio = {
           for (var i = 0; i < doc.contacts.length; i++) {
             // grabs emergency contact phone number
             var pulseRecipientNumber = doc.contacts[i].phoneNumber;
-            // grabs emergency contact name
-            var pulseRecipientName = doc.contacts[i].givenName;
             //require the Twilio module and create a REST client
             var client = require('twilio')(accountSid, authToken);
             client.messages.create({
                 to: "+1" + pulseRecipientNumber,
                 from: "+18562194209",
-                body: `Hey ${pulseRecipientName}, ${assistanceMessage} ${userLocation}`,
+                body: `Hey, ${assistanceMessage} ${userLocation}`,
             }, function(err, message) {
-                console.log(message.sid);
+                console.log("sucess!");
             });// end of client.messages.create
           } // end of for loop
         }
