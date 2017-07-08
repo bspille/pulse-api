@@ -7,8 +7,8 @@ class NewContact extends Component {
     constructor(props){
         super(props)
         console.log(this)
-        console.log(this.props.fields.contactName)
         
+     
     }
     componentDidMount(){
         this.props.change("token", this.props.idToken)

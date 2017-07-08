@@ -51,14 +51,18 @@ const crud = {
     console.log("hey I am a opt below ########################")
     console.log(JSON.stringify(opt,null,1))
     console.log("########################")
+   try{
     // sets query condition to ne not equal contacts.phoneNumber preventing duplicate entries with the same number
     User.update(query, update, opt).then((err, results) => {  
-      if (err) {
-        console.log(`this is a update error ${JSON.stringify(err)}`)
-      }
-      console.log(`this is the return on the update ${JSON>stringify(results,null,1)}`)
-      cb(results)
+  
     });
+   }
+   catch(err){
+     console.log(err)
+   }
+   finally{
+    cb("udate route complete")
+   }
   },
 
   delete: (query, deletes, cb) => {

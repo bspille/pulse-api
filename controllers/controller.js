@@ -9,30 +9,18 @@ const timer = require("./utils/timer.js")
 const express = require("express")
 const Router = express.Router()  
 const CLIENT_ID = '533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com';
-let token;
-let readQuery;
-let updateQuery;
-let updates;
-let update;
-let user;
-let userData;
-// const userData = (res)=> {
-//   console.log(`this is the response object ${res}`)
-//   return res
-// }
-
 
 let activeTimer = false;
 
  // route to add new user
 Router.post("/user/", (req, res) =>{
 
-  token = req.body.token;
- 
+ let token = req.body.token;
+ let user;
+ let Query;
   // verify the user and return the user object
   google.verifyToken(token, (results) => {
     
-    console.log(JSON.stringify(results, null, 1))
      if(results.aud == "904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"){
       user = {
       tokenSub: results.sub,
@@ -41,23 +29,31 @@ Router.post("/user/", (req, res) =>{
     }
   }
 
-    readQuery = {tokenSub: results.sub};
+    query = {tokenSub: results.sub};
 
     // add condition for unverified user here
     try {
  
-      crud.read(readQuery, (res) => {
+      crud.read(query, (result) => {
         // if there is a entry send it back as json
-        if (res){
-          console.log("found entry for user " + JSON.stringify(res, null, 1));
-          userData = res
-        }
+        if (results){
+          console.log("found entry for user ");
+        
+        console.log(`I am sending ${result}`)
+        res.json(result)
+  
+      }
+
+      // TODO: test the create new user for bugs
         // if there is no entry create one
-        if(!res && user){
+        if(!result && user){
           console.log("hit the create route")
-          crud.create(user, (res) => {
-            console.log("created new user " + JSON.stringify(res, null, 1));
-            userData = res
+          crud.create(user, (result) => {
+            console.log("created new user ");
+               if(result != undefined){
+        console.log(`I am sending ${result}`)
+        res.json(result)
+        }
           });
         }
       });
@@ -66,29 +62,25 @@ Router.post("/user/", (req, res) =>{
      
       console.log(error);
     }
-    finally {
-      // add condition for errors
-      if (userData != undefined){
-        res.json(userData)
-      }
-    
-    }
+
   });
 }); // end of post user
 
     // route to update user
 Router.post("/update/", (req, res) =>{
-  console.log("#########################")
-  console.log(JSON.stringify(req.body,null,1))
-  console.log("#########################")
-  updates = req.body.updates;
-  token = req.body.token;
- 
+
+  let updates = req.body.updates;
+  let token = req.body.token;
+  let query;
+  let responseData;
+  let user;
+  let responseQuery;
   // verify the user and return the user object
   google.verifyToken(token, (results) => {
     // check the collection for existing entry
     if(results.aud == "904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"){
       user = results
+      responseQuery = {tokenSub: results.sub}
   }
  
   // if(updates != undefined){
@@ -103,27 +95,15 @@ Router.post("/update/", (req, res) =>{
     try {
  
       if(updates.hasOwnProperty("newContact")){
-          update = { contacts: updates.newContact};
+          let update = { contacts: updates.newContact};
    
           // find the user object by tokenSub and only add a new contact if the phoneNumber is not found
-          updateQuery = { tokenSub: user.sub, "contacts.phoneNumber": {$ne: update.contacts.phoneNumber}};
-          if(updateQuery != undefined){
-   
-            crud.update(updateQuery, update, (res) => {
-
-              if(res != undefined && user != undefined){
-                console.log(`this is the update response ${res}`)
-                console.log(`ok i will read the new data and send it to user data`)
-                readQuery = {tokenSub: user.sub}
-                crud.read(readQuery, (results) =>{
-                  console.log(`########## this is the update returned ${results}`)
-                  if(results != undefined){
-                    userData = results
-                  }
-                })
-              }
+          query = { tokenSub: user.sub, "contacts.phoneNumber": {$ne: update.contacts.phoneNumber}};
+  
+            crud.update(query, update, (res) => {
+                responseData = updates.newContact
+                console.log('hey i finish the update can i set a response now')
             }); // close out crud update
-          }
       } // if contacts
 
       // if the updates contain geoLocation run this route
@@ -148,9 +128,10 @@ Router.post("/update/", (req, res) =>{
     }
     finally{
       // add condition for errors here
-      if (userData != undefined){
-        console.log(`Hey this is what I am sending back from a update ${userData}`)
-        res.json(userData)
+      if(responseData != undefined){
+       console.log(`can I send some thing back now ${responseData}`)
+       res.json(responseData)
+      
       }
      
     }
