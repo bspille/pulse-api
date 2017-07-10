@@ -1,0 +1,136 @@
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    /*background-image: url("https://www.toptal.com/designers/subtlepatterns/topography/");*/
+    /*background-image: url("../images/topography.png");*/
+    /*background-image: url("../images/cream_pixels.png");*/
+    background-image: url("../images/greyzz.png");
+    /*background-image: url("../images/pw_pattern.png");*/
+    /*background-image: url("../images/swirl.png");*/
+    font-family: 'Montserrat', sans-serif;
+}
+
+.app-header-font {
+    /*text-transform: uppercase;*/
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.app-font {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.main-container {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1;
+}
+
+#wrapper {
+    min-height: 100%;
+    position: relative;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -60px;
+}
+
+
+
+/*------------------Footer------------------*/
+
+.mobile-bottom-bar {
+    width: 100%;
+    height: 3.778rem;
+    background: #2c3840;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    vertical-align: bottom;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.mobile-bottom-bar .footer-link {
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    text-align: center;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 0.8125rem;
+    font-weight: bold;
+    padding: 0.907rem 1rem;
+}
+
+.mobile-bottom-bar .footer-link i.fa {
+    opacity: 0.8;
+    margin-right: 0.625rem;
+    font-size: 1.5rem;
+    vertical-align: middle;
+}
+
+.mobile-bottom-bar .footer-link:focus,
+.mobile-bottom-bar .footer-link:active {
+    color: #a8b8c3;
+}
+
+.mobile-bottom-bar .footer-text {
+    position: relative;
+    top: 2px;
+    font-weight: bold;
+    font-size: 0.875rem;
+    color: #ffffff;
+}
+
+.mobile-bottom-bar .footer-text:hover {
+    color: #a8b8c3;
+}
+
+.mobile-bottom-bar .footer-icon {
+    color: #ffffff;
+}
+
+.mobile-bottom-bar .footer-icon:hover {
+    color: #a8b8c3;
+}
+
+/*------------------About Page---------------------*/
+
+
+.four-up-feature {
+  text-align: center;
+}
+
+.four-up-feature .four-up-feature-header {
+  margin-bottom: 3rem;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.four-up-feature .four-up-feature-image {
+  margin-bottom: 2rem;
+}
+
+.four-up-feature .four-up-feature-text {
+  margin-bottom: 2rem;
+}
+

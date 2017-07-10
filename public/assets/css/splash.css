@@ -1,0 +1,105 @@
+/*Pulse logo*/
+
+#title-container {
+    display: flex;
+    z-index: 50;
+    position: relative;
+    top: 35%;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
+    color: #fff;
+}
+
+
+/*#splash-logo {
+    position: relative;
+    z-index: 1000;
+    top: 50%;
+    align-content: center;
+    justify-content: center;
+    vertical-align: middle;
+    margin: auto;
+}*/
+
+#pulse-logo-waves {
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    max-width: 75%;
+}
+
+#pulse-logo-big {
+    justify-content: center;
+    position: absolute;
+    max-width: 75%;
+}
+
+.pulse {
+    -webkit-animation-duration: 1.5s;
+    -webkit-animation-iteration-count: infinite;
+}
+
+
+/*Sign in button*/
+
+#signin-button-container {
+    display: flex;
+    z-index: 50;
+    position: relative;
+    top: 65%;
+    margin-top: 10px
+}
+
+
+/*video*/
+
+.homepage-hero-module {
+    border-right: none;
+    border-left: none;
+    position: relative;
+}
+
+.no-video .video-container video,
+.touch .video-container video {
+    display: none;
+}
+
+.no-video .video-container .poster,
+.touch .video-container .poster {
+    display: block !important;
+}
+
+.video-container {
+    position: relative;
+    bottom: 0%;
+    left: 0%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: #000;
+}
+
+.video-container .poster img {
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+}
+
+.video-container .filter {
+    z-index: 0;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
+}
+
+.video-container video {
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+}
+
+.video-container video.fillWidth {
+    width: 100%;
+}

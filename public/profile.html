@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Pulse</title>
+    <meta name="google-signin-scope" content="profile email">
+
+    <!-- <meta name="google-signin-client_id" content="904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"></meta> -->
+    <meta name="google-signin-client_id" content="533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com"></meta>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+    </script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta charset="UTF-8">
+    <!--Bringing in foundation, foundation-flex, jquery, and local style files-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" integrity="sha256-itWEYdFWzZPBG78bJOOiQIn06QCgN/F0wMDcC4nOhxY=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation-flex.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js" integrity="sha256-Nd2xznOkrE9HkrAMi4xWy/hXkQraXioBg9iYsBrcFrs=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/plugins/foundation.offcanvas.min.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/menu.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/form.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/button.css" type="text/css" />
+    <!--Bringing in fontawesome in order to use their icons-->
+    <script src="https://use.fontawesome.com/97f0d0a6dd.js"></script>
+
+    <script type="text/javascript" src="assets/js/myapp.js" async defer></script>
+    <script type="text/javascript" src="assets/js/form.js" async defer></script>
+</head>
+
+<body>
+    <!--Navbar-->
+
+    <!-- Set up Off-canvas -->
+    <div id="wrapper">
+        <div class="multilevel-offcanvas off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+            <ul class="vertical menu">
+                <li class="avatar-wrapper"><img class="avatar" src="assets/images/avatar-female.png" alt="avatar" width="148" height="148" /></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+            <ul class="vertical menu">
+
+                <!--<li><a href="#" data-onsuccess="onSignIn">Sign In</a></li> This button is not necessary. If user needs to sign in, they will be redirected to splash page-->
+                <li><a href="#" data-close="offCanvasLeft" onclick="signOut();">Sign Out</a></li>
+            </ul>
+            <ul class="menu simple social-links">
+                <li><a href="#" target="_blank"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+                <li><a href="#" target="_blank"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+                <li><a href="https://github.com/bspille/pulse" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i></a></li>
+                <li><a href="#" target="_blank"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
+            </ul>
+        </div>
+        <div class="off-canvas-content" data-off-canvas-content>
+            <div class="nav-bar shadow">
+                <div class="nav-bar-left">
+                    <ul class="menu">
+                        <li>
+                            <button class="offcanvas-trigger" type="button" data-open="offCanvasLeft">
+                                 <span class="offcanvas-trigger-text hide-for-small-only">Menu</span>
+                                <div class="hamburger">
+                                    <span class="line"></span>
+                                    <span class="line"></span>
+                                    <span class="line"></span>
+                                </div>
+                            </button>
+                        </li>
+                        <li>
+                            <a class="nav-bar-logo"><img class="logo" src="assets/images/pulse-logo.png"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav-bar-right">
+                    <ul class="menu">
+
+                    </ul>
+                </div>
+            </div>
+
+            <!--Profile Form-->
+            <form id="profile-form" class="callout text-center shadow">
+                <h2>Profile Information</h2>
+                <div class="floated-label-wrapper">
+                    <label for="full-name">Full name</label>
+                    <input type="text" id="full-name" name="full name input" placeholder="Full name">
+                </div>
+                <div class="floated-label-wrapper">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email input" placeholder="Email">
+                </div>
+                <div class="floated-label-wrapper">
+                    <label for="pass">PIN</label>
+                    <input type="password" id="pass" name="password input" placeholder="PIN">
+                </div>
+                <div class="floated-label-wrapper">
+                    <label for="tel">Phone #</label>
+                    <input type="tel" id="tel" name="tel input" placeholder="Phone number">
+                </div>
+                <div class="floated-label-wrapper">
+                    <label for="zip">Zip code</label>
+                    <input type="number" id="zip" name="number input" placeholder="Zip code">
+                </div>
+                <h2>Contacts</h2>
+                <div id="contacts">
+                    <div class="contact-form">
+                        <div class="floated-label-wrapper">
+                            <label for="full-name-0">Full name</label>
+                            <input type="text" id="full-name-0" name="full name input" placeholder="Full name">
+                        </div>
+                        <div class="floated-label-wrapper">
+                            <label for="tel-0">Phone #</label>
+                            <input type="tel" id="tel-0" name="tel input" placeholder="Phone number">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="contact-form">
+                        <div class="floated-label-wrapper">
+                            <label for="full-name-1">Full name</label>
+                            <input type="text" id="full-name-1" name="full name input" placeholder="Full name">
+                        </div>
+                        <div class="floated-label-wrapper">
+                            <label for="tel-1">Phone #</label>
+                            <input type="tel" id="tel-1" name="tel input" placeholder="Phone number">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="contact-form">
+                        <div class="floated-label-wrapper">
+                            <label for="full-name-2">Full name</label>
+                            <input type="text" id="full-name-2" name="full name input" placeholder="Full name">
+                        </div>
+                        <div class="floated-label-wrapper">
+                            <label for="tel-2">Phone #</label>
+                            <input type="tel" id="tel-2" name="tel input" placeholder="Phone number">
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <!--Add Contact Button-->
+                <br>
+                <!--<a id="add-contact-button" type="button" class="button app-button">
+                    <i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Add Contact
+                </a>-->
+                <button id="add-contact-button" type="button" class="button-hover-default button"><span>Add contact </span><i class="fa fa-user-plus"></i></button>
+                <br>
+                <input id="save-profile-button" class="button expanded" type="submit" value="Save">
+            </form>
+        </div>
+        <div class="push">
+        </div>
+    </div>
+    <!--Footer-->
+    <div id="pulse-footer">
+        <p>© Pulse / All Rights Reserved.</p>
+    </div>
+    <script>
+        $(document).foundation();
+    </script>
+</body>
+
+</html>
