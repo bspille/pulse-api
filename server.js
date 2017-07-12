@@ -1,16 +1,15 @@
 // Dependencies
-const Router = require("./controllers/controller")
-const express = require("express")
-const bodyParser = require("body-parser")
-const cors = require("cors")
-const mongoose = require("mongoose")
-const Promise = require("bluebird")
-    // Sets up the Express App
-    app = express(),
-    PORT = process.env.PORT || 3000;
+import { app } from "express"
+import Router from "./controllers/controller"
+import bodyParser from "body-parser"
+import cors from "cors"
+import mongoose from "mongoose"
+import Promise from "bluebird" 
+import path from 'path'   
+const PORT = process.env.PORT || 3000;
 
 // serve public files as static
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.json());
@@ -22,9 +21,9 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // mongoose.Promise = global.Promise;
 Promise.promisifyAll(mongoose);
 // localhost connection uncomment for localhost
-// mongoose.connect("mongodb://localhost/pulse");
+mongoose.connect("mongodb://localhost/pulse");
 // heroku mLabs connection uncomment for heroku deployment
-mongoose.connect("mongodb://heroku_t1bvzddm:ae2stotm309klscmhlvuajjv1g@ds151242.mlab.com:51242/heroku_t1bvzddm")
+// mongoose.connect("mongodb://heroku_t1bvzddm:ae2stotm309klscmhlvuajjv1g@ds151242.mlab.com:51242/heroku_t1bvzddm")
 var db = mongoose.connection;
 
 // Show any mongoose errors
