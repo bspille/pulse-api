@@ -4,7 +4,6 @@
 
 // const twilio = require("./utils/twilio.js")
 // const crud  = require("./utils/crud.js")
-const verifyUser = require("./utils/google.js")
 // const timer = require("./utils/timer.js")
 const Router = require("express").Router()
 const GoogleAuth = require('google-auth-library')
@@ -16,12 +15,14 @@ const client = new auth.OAuth2(CLIENT_ID, '904019024650-uabutl82072at99jkqdpc31m
 
 let activeTimer = false;
 
+
  // route to add new user
 Router.post("/user/", (req, res) =>{
 
  let token = req.body.token;
  let Query;
 
+// google verify user as a promise nested in a try catch
  const verifyUser = new Promise((resolve, reject)=>{
   let user;
   console.log(`this is the token ${token}`)
