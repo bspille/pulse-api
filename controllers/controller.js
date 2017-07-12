@@ -4,11 +4,15 @@
 
 // const twilio = require("./utils/twilio.js")
 // const crud  = require("./utils/crud.js")
-import verifyUser from "./utils/google.js"
+const verifyUser = require("./utils/google.js")
 // const timer = require("./utils/timer.js")
-import { Router } from "express"
+const Router = require("express").Router()
+const GoogleAuth = require('google-auth-library')
+const auth = new GoogleAuth
+const CLIENT_ID = ["904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"]
+const client = new auth.OAuth2(CLIENT_ID, '904019024650-uabutl82072at99jkqdpc31ma8cf3rsj.apps.googleusercontent.com')
 
-const CLIENT_ID = '533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com';
+// const CLIENT_ID = '533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com';
 
 let activeTimer = false;
 
@@ -18,6 +22,25 @@ Router.post("/user/", (req, res) =>{
  let token = req.body.token;
  let Query;
 
+ const verifyUser = new Promise((resolve, reject)=>{
+  let user;
+  console.log(`this is the token ${token}`)
+  try{
+    client.verifyIdToken(token, CLIENT_ID, function(err, googleRes){
+    user = googleRes.getPayload()
+    console.log(`this is the user google returned ${JSON.stringify(user,null,1)}`)
+    })
+  }
+  catch(err){
+    console.log(`ERROR: google threw ${err}`)
+  }
+  finally{
+    if(user && user.aud == "904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"){
+      resolve(user)
+    }
+    reject("ERROR: User could not be verified")
+  }
+})
   // call the promise verify that uses the token to verify the user
   verifyUser.then((user)=>{
     // log the user returned from resolve
@@ -117,4 +140,4 @@ Router.get("/", (req, res) => {
   // res.render("index");
 });
 
-export default Router
+module.exports = Router

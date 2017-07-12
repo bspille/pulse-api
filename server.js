@@ -1,13 +1,13 @@
 // Dependencies
-import { app } from "express"
-import Router from "./controllers/controller"
-import bodyParser from "body-parser"
-import cors from "cors"
-import mongoose from "mongoose"
-import Promise from "bluebird" 
-import path from 'path'   
+const express = require("express")
+const Router = require("./controllers/controller")
+const bodyParser = require("body-parser")
+const cors = require("cors")
+const mongoose = require("mongoose")
+const Promise = require("bluebird") 
+const path = require("path")   
 const PORT = process.env.PORT || 3000;
-
+const app = express()
 // serve public files as static
 app.use(express.static(path.join(__dirname, "public")));
 
