@@ -1,8 +1,8 @@
 // TODO: find ways to make these more re-usable
-const User = require("../../models/master.js")
+const User = require("../../models/user.js")
 
 const crud = {
-  create: (user, cb) => {
+  create(user){
     User.create(user, function (err, results) {
       if (err) {
         console.log(err)
@@ -11,7 +11,7 @@ const crud = {
     })
   },
 
-  read: (readQuery, cb) => {
+  read(query){
     // takes in the token sub (sub) and searches for entries that match
     User.findOne(readQuery).exec((err, results) => {
           // log error if there is a read error

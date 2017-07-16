@@ -1,4 +1,4 @@
-const User = require("./../../models/master.js")
+const User = require("./../../models/user.js")
 const twilio = {
 // TODO: pass in google auth token for referencing user & grabbing contacts
 // TODO: pass in lat and long coords for geolocation

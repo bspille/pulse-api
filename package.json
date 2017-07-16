@@ -4,7 +4,7 @@
   "description": "## file system - script for initial file structure",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nodemon --exec 'mocha -R min'",
     "start": "sudo mongod && nodemon server.js && webpack -w",
     "seed": "(cd test && node firstSeed)"
   },

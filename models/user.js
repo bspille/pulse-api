@@ -13,19 +13,19 @@ const Schema = mongoose.Schema
 const userSchema = new Schema({
 
   // token id hash from authentication token
-  tokenSub: {
+  sub: {
     type: String,
     required: true
   },
 
   // users first name
-  givenName: {
+  given_name: {
     type: String,
     required: false
   },
 
   // users last name
-  familyName: {
+  family_name: {
     type: String,
     required: false
   },

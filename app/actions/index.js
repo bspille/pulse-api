@@ -45,7 +45,7 @@ export const setIsSignedIn = (isSignedIn) => {
 
 export const getUserData = (token) => {
    
-    let request = axios.post("/user/",{token});
+    let request = axios.post("/api/user",{token});
     return {
         type: GET_USER_DATA,
         payload: request
@@ -55,7 +55,7 @@ export const getUserData = (token) => {
 
 export const addContact = (props) => {
     let token = props.token
-    let request = axios.post('/update/', {token: token, updates:{newContact:{contactName: props.contactName, phoneNumber: props.phoneNumber}}})
+    let request = axios.post('/api/contact', {token: token, updates:{newContact:{contactName: props.contactName, phoneNumber: props.phoneNumber}}})
 
     return{
         type: UPDATE_USER,

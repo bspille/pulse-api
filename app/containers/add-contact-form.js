@@ -73,6 +73,9 @@ class NewContact extends Component {
         )
     }
 } 
+
+
+
 function mapStateToProps(state){
   return Object.assign({},state)
 }
