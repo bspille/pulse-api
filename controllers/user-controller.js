@@ -1,12 +1,8 @@
 
 // const twilio = require("./utils/twilio.js")
-const crud  = require("./utils/crud.js")
 // const timer = require("./utils/timer.js")
-
 const User = require("../models/user")
-// const CLIENT_ID = '533524339613-mm3v70onq310vr0qep2it2pj5vcj1t33.apps.googleusercontent.com';
 
-let activeTimer = false;
 
 // TODO: refactor into drier components
  module.exports = {
@@ -45,15 +41,28 @@ let activeTimer = false;
         console.log(err);
         // TODO: add error handling here
       });
-
   },
 
-    // route to update user
-addContacts(req, res, user){
 
-  let updates = req.body.updates;
-  let token = req.body.token;
-  let query;
+// route to update user
+addContacts(req, res, user){
+  // setup variables
+  let { sub } = user;
+  let { newContact, newContact: { phoneNumber } } = req.body;
+  let query = { sub, "contacts.phoneNumber": { $ne:  phoneNumber }}
+  let update = { $addToSet: {contacts: newContact }}
+  let options = { runValidators: true, new: true }
+
+
+  // find and update if there is not already a match in the contacts
+  User.findOneAndUpdate( query, update, options)
+    .then((data)=>{
+      res.status(201).json(data);
+    })
+    .catch((err)=>{
+      // TODO: handle errors here
+      console.log(err)
+    })
 
   
 }, // end update route

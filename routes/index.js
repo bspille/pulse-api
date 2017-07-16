@@ -1,6 +1,6 @@
 const Router = require("express").Router()
 const path = require("path")
-const { authenticate} = require('./auth-routes')
+const { authenticate} = require('../authenticate')
 const { USER, UPDATE, CONTACT, GEOMETRY } = require('./paths')
 
 

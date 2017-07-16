@@ -1,3 +1,4 @@
+// TODO: this reducer needs to be debugged it returns null when it should return state
 import { GET_USER_DATA, UPDATE_USER } from '../actions/index'
 
 export default function(state = null, action) {
@@ -17,7 +18,7 @@ export default function(state = null, action) {
            if (action.payload.data != undefined){
                 return [...state, action.payload.data]
             }
-            return null
+       
         // return the default state if type is not found
         default:
             return state

@@ -1,6 +1,6 @@
 // Dependencies
 const express = require("express")
-const routes = require("./router/routes")
+const routes = require("./routes")
 const bodyParser = require("body-parser")
 const cors = require("cors")
 const mongoose = require("mongoose") 
