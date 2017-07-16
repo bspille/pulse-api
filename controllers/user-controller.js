@@ -6,8 +6,35 @@ const User = require("../models/user")
 
 // TODO: refactor into drier components
  module.exports = {
+  
+// route to update user
+addContacts(req, res, user){
+  // setup variables
+  let { sub } = user;
+  let { newContact, newContact: { phoneNumber } } = req.body;
+  let query = { sub, "contacts.phoneNumber": { $ne:  phoneNumber }}
+  let update = { $addToSet: {contacts: newContact }}
+  let options = { runValidators: true, new: true }
+
+
+  // find and update if there is not already a match in the contacts
+  User.findOneAndUpdate( query, update, options)
+    .then((data)=>{
+      console.log(`this is the user with the new contact added ${data}`)
+      res.status(201).json(data);
+    })
+    .catch((err)=>{
+      // TODO: handle errors here
+      console.log(err)
+    })
+  },
+
+  addGeometry(req, res, user){
+    // TODO: change over to geio json and create iterface here
+    console.log(`welcome to the add geometry handler`)
+  },
+
   checkoutUser(req, res, user){
-    console.log(`this is the user we want to checkout ${user}`)
     let { sub } = user;
      // pass sub to the find
      User.find({ sub })
@@ -25,7 +52,6 @@ const User = require("../models/user")
           // save the new user
           newUser.save()
             .then((userObj)=>{
-
               // return 201 successfully created user to the client
               res.status(201).json(userObj)
             })
@@ -43,35 +69,42 @@ const User = require("../models/user")
       });
   },
 
+  updateContact(req, res, user){
+    console.log(`welcome to the update contact handler`)
+    let { sub } = user;
+    let { key, contactUpdates } = req.body;
+    let query = { sub, "contacts._id": ObjectId(key) }
+    let update = { $set: contactUpdates }
+    let options = { runValidators: true, new: true }
+    User.findOneAndUpdate(query, update, options )
+      .then((data)=>{
+        console.log(`this is the updated contact information ${data}`);
+        res.status(201).json(data);
+      })
+      .catch((err)=>{
+        // TODO: handle errors here
+        console.log(err)
+      });
+    
+  },
 
-// route to update user
-addContacts(req, res, user){
-  // setup variables
-  let { sub } = user;
-  let { newContact, newContact: { phoneNumber } } = req.body;
-  let query = { sub, "contacts.phoneNumber": { $ne:  phoneNumber }}
-  let update = { $addToSet: {contacts: newContact }}
-  let options = { runValidators: true, new: true }
-
-
-  // find and update if there is not already a match in the contacts
-  User.findOneAndUpdate( query, update, options)
-    .then((data)=>{
-      res.status(201).json(data);
-    })
-    .catch((err)=>{
-      // TODO: handle errors here
-      console.log(err)
-    })
-
-  
-}, // end update route
-
-// // route to delete contacts
-// // need to work this in 
-// Router.delete("/delete", (req, res) =>{
-
-// });
+  updateUser(req, res, user){
+    console.log(`welcome to the update user handler`)
+    let { sub } = user;
+    let { userUpdates } = req.body;
+    let query = { sub };
+    let update = { $set: userUpdates };
+    let options = { runValidators: true, new: true };
+    User.findOneAndUpdate(query, update, options)
+      .then((data)=>{
+        console.log(`this is the updated user information ${data}`);
+        res.status(201).json(data)
+      })
+      .catch((err)=>{
+        // TODO: handle errors here
+        console.log(err)
+      })
+  }
 
 // // route to send out pulse
 // Router.post("/pulse", (req, res) =>{

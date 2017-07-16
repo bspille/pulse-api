@@ -1,3 +1,5 @@
+// TODO: change over to geo json here
+
 var mongoose = require("mongoose"),
 
     // Create Schema class

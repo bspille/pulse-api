@@ -9,8 +9,7 @@ class PulseButton extends Component {
     constructor(props){
         super(props)
         this.state = {
-            latitude: "",
-            longitude: ""
+            coords: ""
         }
        this.togglePulseButton = this.togglePulseButton.bind(this); 
        this.getLocation = this.getLocation.bind(this);
@@ -21,16 +20,11 @@ class PulseButton extends Component {
     }
 
     sendPulse() {
-        console.log(`id_token ${this.props.idToken}`);
-        console.log(`latitude ${this.state.latitude}`);
-        console.log(`longitude ${this.state.longitude}`);
-
-        axios.post("/pulse/", {
-            token: this.props.idToken,
-            geoLocation: {
-                latitude: this.state.latitude,
-                longitude: this.state.longitude
-            }
+        let { token } = this.props
+        let { coords } = this.state
+        axios.post("/api/pulse", {
+            token,
+            coords 
         });
     }
     componentDidMount(){
@@ -49,10 +43,9 @@ class PulseButton extends Component {
     }
 
     showPosition(position) {
-        console.log(position)
+        let { coords } = position;
         this.setState({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
+            coords
         });
         this.sendPulse();
     }

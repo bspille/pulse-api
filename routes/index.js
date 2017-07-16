@@ -1,17 +1,22 @@
 const Router = require("express").Router()
 const path = require("path")
 const { authenticate} = require('../authenticate')
-const { USER, UPDATE, CONTACT, GEOMETRY } = require('./paths')
+const {  CONTACT, GEOMETRY, PULSE, UPDATE, UPDATE_CONTACT, USER } = require('./paths')
 
 
-
-Router.post(USER, authenticate);
-
-Router.post(UPDATE, authenticate);
 
 Router.post(CONTACT, authenticate);
 
 Router.post(GEOMETRY, authenticate);
+
+Router.post(PULSE, authenticate);
+
+Router.post(UPDATE, authenticate);
+
+Router.post(UPDATE_CONTACT, authenticate);
+
+Router.post(USER, authenticate);
+
 
 // Router.get("*", (req, res)=> res.sendFile(path.resolve(__dirname, "index")))
 Router.get("*", (req, res) => {

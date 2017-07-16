@@ -1,5 +1,5 @@
 // TODO: needs field validation to ensure data format is consistant
-// validate validator dosen't run by default need to run validators for updates
+
 // Require mongoose
 const mongoose = require("mongoose")
 const Contact = require("./contact.js")
