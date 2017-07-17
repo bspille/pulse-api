@@ -1,0 +1,22 @@
+{
+  "name": "pulse-validation",
+  "description": "Pulse validation in Redux Form.",
+  "version": "0.0.20",
+  "dependencies": {
+    "redux-form-website-template": "0.0.41",
+    "redux-form": "7.0.0",
+    "redux": "3.6.0",
+    "react-redux": "5.0.4",
+    "react-dom": "15.5.3",
+    "react": "15.5.3"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
