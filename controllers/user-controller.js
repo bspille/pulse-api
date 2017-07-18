@@ -44,7 +44,7 @@ addContacts(req, res, next, user){
   },
 
   checkoutUser(req, res, next, user){
-    let { sub } = user;
+    let { sub , given_name, family_name } = user;
      // pass sub to the find
      User.find({ sub })
       .then((data)=>{
