@@ -20,7 +20,9 @@ const { apiController } = require('../controllers')
             catch(err){
                 // TODO: handle errors here
                 // catches errors here if verification fails
+            
                 console.log(`ERROR: google threw ${err}`)
+                next()
             }
             finally{
                 // check the client Id returned matches our google client Id and resolves or rejects
@@ -35,12 +37,12 @@ const { apiController } = require('../controllers')
         // call the promise verify that uses the token to verify the user
         verifyUser.then((user)=>{
             // pass arguments to the api controller
-           apiController(req, res, user);
+           apiController(req, res, next, user);
         
-        }).catch((reason)=>{
+        }).catch((err)=>{
             // TODO: add error handling here
-            // log the reason writen in the promise
-            console.log(reason)
+            // call the next middleware passing the err
+            next()
             
             
         });

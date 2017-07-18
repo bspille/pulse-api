@@ -56,8 +56,7 @@ app.use('/', routes);
 
 // follow up middleware set to handle errors
 app.use((err, req, res, next)=>{
-   console.log("################################# MIDDLEWARE AFTER THE ROUTES #################################")
-  console.log(err)
+  res.status(400).json(`ERROR: ${ err.message }`)
 })
 
 

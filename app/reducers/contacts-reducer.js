@@ -1,26 +1,29 @@
 // TODO: this reducer needs to be debugged it returns null when it should return state
+// TODO: if the contact phone number exists the payload data is reurned null
+
 import { GET_USER_DATA, UPDATE_USER } from '../actions/index'
-
+const initialState = {};
 export default function(state = null, action) {
-    // console.log(JSON.stringify(action, null, 1));
-    switch(action.type){
+        
+        switch(action.type){
+            // if the action type is set id token return the payload from the action to state
+            case GET_USER_DATA:
+                    return action.payload.data
+                
+                
+            case UPDATE_USER:
+                console.log(JSON.stringify(action.payload,null,1))
+                if(action.payload.data){
+                    return action.payload.data
+                }
+                else{
+                    return state
+                }  
+                
+            // return the default state if type is not found
+            default:
+                return state
+        }
     
-        // if the action type is set id token return the payload from the action to state
-        case GET_USER_DATA:
-        console.log(`this is the contacts data set state ${JSON.stringify(action.payload.data.contacts,null,1)}`)
-            if (action.payload.data != undefined){
-                return action.payload.data.contacts
-            }
-            return action.payload.data.contacts
-
-        case UPDATE_USER:
-            console.log(`this is add to contact data set state ${JSON.stringify(action.payload.data,null,1)}`)
-           if (action.payload.data != undefined){
-                return [...state, action.payload.data]
-            }
-       
-        // return the default state if type is not found
-        default:
-            return state
-    }
+   
 }

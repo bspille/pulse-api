@@ -1,3 +1,6 @@
+// TODO: try to use a map reducer to grab only the active contacts from the data collection
+// TODO: test this controller
+
 const User = require("../models/user");
 const accountSid = 'AC28a7d147997ae94957f97fde9d4e8697';
 const authToken = '5b6559e6ef0997f8cf151165fc9e4559';

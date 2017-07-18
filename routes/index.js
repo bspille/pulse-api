@@ -1,3 +1,5 @@
+// TODO: initial failure 404 on /api/user route not found ???? backing out and re-enter clears issue
+
 const Router = require("express").Router()
 const path = require("path")
 const { authenticate} = require('../authenticate')
