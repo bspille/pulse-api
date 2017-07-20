@@ -55,7 +55,9 @@ export const getUserData = (token) => {
 export const addContact = (props) => {
     let token = props.token
     let request = axios.post('/api/contact', {token: token, newContact:{contactName: props.contactName, phoneNumber: props.phoneNumber}})
-
+    if(request.response.status === 200 || 201){
+        console.log(request.response.status)
+    }
     return{
         type: UPDATE_USER,
         payload: request

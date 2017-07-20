@@ -4,26 +4,21 @@
 import { GET_USER_DATA, UPDATE_USER } from '../actions/index'
 const initialState = {};
 export default function(state = null, action) {
+        let { type, payload } = action;
         
         switch(action.type){
             // if the action type is set id token return the payload from the action to state
             case GET_USER_DATA:
-                    return action.payload.data
-                
-                
+                    console.log(`get user data payload ${JSON.stringify(payload,null,1)}`)
+                    return payload.data.contacts
             case UPDATE_USER:
-                console.log(JSON.stringify(action.payload,null,1))
-                if(action.payload.data){
-                    return action.payload.data
-                }
-                else{
-                    return state
-                }  
-                
+                    console.log(`add contact payload ${JSON.stringify(payload,null,1)}`)
+                    return payload.data.contacts  
             // return the default state if type is not found
             default:
                 return state
         }
     
+  
    
 }
