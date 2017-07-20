@@ -12,22 +12,22 @@ class NewContact extends Component {
      
     }
     renderField ({ input, label, type, meta: { touched, error, warning } }){
+    return(
     <div>
         <label>{label}</label>
         <div>
         <input {...input} placeholder={label} type={type}/>
         {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
         </div>
-    </div>
+    </div>)
     }
     componentDidMount(){
         this.props.change("token", this.props.idToken)
     }
     render() {
-        const { handleSubmit, pristine, reset, submitting } = this.props
-        console.log(contactName)
+        const { addContact, handleSubmit, pristine, reset, submitting } = this.props
     return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(addContact)}>
       <Field name="contactName" 
       type="text"
       component={this.renderField} 
@@ -46,14 +46,14 @@ class NewContact extends Component {
     )
     }
 }
-function validate(values){
+function validate({ contactName, phoneNumber }){
     const errors = {};
-
+    
     //Validate the inputs from 'values'
-    if (!values.contactName){
+    if (!contactName){
         errors.contactName = "Required";
     }
-    if (!values.phoneNumber || !/^D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/i.test(value) ){
+    if (!phoneNumber || !/^D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/i.test(phoneNumber) ){
         errors.phoneNumber = "Invalid Phone Number";
     }
 
@@ -69,10 +69,9 @@ function mapDispatchToProps(dispatch){
    
     return bindActionCreators(actionCreators, dispatch)
 }
-NewContact = connect(mapStateToProps, mapDispatchToProps)(NewContact)
-NewContact = reduxForm({
+
+export default reduxForm({
     validate,
     form: 'addNewContact'
-},)(NewContact)
+},)(connect(mapStateToProps, mapDispatchToProps)(NewContact))
 
-export default NewContact
