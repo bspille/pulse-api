@@ -10,67 +10,49 @@ class NewContact extends Component {
         
      
     }
+required = value => value ? undefined : 'Required'
+maxLength = max => value =>
+  value && value.length > max ? `Must be ${max} characters or less` : undefined
+maxLength15 = maxLength(15)
+
+name = value => 
+  value ? undefined : 'Required'
+
+phone = value =>
+  value && !/^D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/i.test(value) ?
+  'Invalid Phone Number' : undefined
+
+    renderField ({ input, label, type, meta: { touched, error, warning } }){
+    <div>
+        <label>{label}</label>
+        <div>
+        <input {...input} placeholder={label} type={type}/>
+        {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+        </div>
+    </div>
+    }
     componentDidMount(){
         this.props.change("token", this.props.idToken)
     }
     render() {
-        const { fields: {contactName, phoneNumber, token}, handleSubmit } = this.props
+        const { fields: {contactName, phoneNumber, token}, handleSubmit, pristine, reset, submitting } = this.props
         console.log(contactName)
-        return (
-            <div>
-                <form onSubmit={ handleSubmit(this.props.addContact)} >
-                    <Field
-                        name="token"
-                        component="input"
-                        type="hidden"
-                        value= "token"
-                        {...token}
-                    />
-                    <div id="contacts-header" className="row">
-                    <h2 className="app-header-font">Contacts</h2>
-                    </div>
-                    <div id="contacts" className="row">
-                        <div className="small-11 medium-8 large-6 columns"> 
-                            <div className="contact-form">
-                                <div className="floated-label-wrapper">
-                                    <label htmlFor="full-name-0">Name</label>
-                                    <Field
-                                    name="contactName"
-                                    component="input"
-                                    type="text"
-                                    placeholder="Contact Name"
-                                    {...contactName}
-                                    />
-                                </div>
-                                <div className="floated-label-wrapper">
-                                    <label htmlFor="tel-0">Phone #</label>
-                                    <Field
-                                        name="phoneNumber"
-                                        component="input"
-                                        type="tel"
-                                        placeholder="Phone Number (1234567890)"
-                                        {...phoneNumber}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {/*<!--Add Contact Button-->*/}
-                    <br></br>
-                    {/*<div id="add-contact-button" className="row">
-                        <button type="button" className="button button-hover-default small-11 medium-4 large-2 columns app-font">
-                            <span>Add Contact </span><i className="fa fa-user-plus fa-lg" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                    <br></br>*/}
-                    <div id="save-profile-container" className="row">
-                        <button className="button button-hover-default small-11 medium-4 large-2 columns app-font" type="submit" value="Save">
-                            <span>Save </span><i className="fa fa-floppy-o fa-lg" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>      
-        )
+return (
+    <form onSubmit={handleSubmit}>
+      <Field name="contactname" type="text"
+        component={renderField} label="Contact Name"
+        validate={[ this.required, this.maxLength15, this.name ]}
+      />
+      <Field name="phone" type="phone"
+        component={renderField} label="Phone Number"
+        validate={this.phone}
+      />
+      <div>
+        <button type="submit" disabled={this.submitting}>Submit</button>
+        <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+      </div>
+    </form>
+  )
     }
 } 
 function mapStateToProps(state){
