@@ -6,75 +6,61 @@ import { connect } from 'react-redux'
 class NewContact extends Component {
     constructor(props){
         super(props)
+        this.renderField = this.renderField.bind(this);
         console.log(this)
         
      
+    }
+    renderField ({ input, label, type, meta: { touched, error, warning } }){
+    <div>
+        <label>{label}</label>
+        <div>
+        <input {...input} placeholder={label} type={type}/>
+        {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+        </div>
+    </div>
     }
     componentDidMount(){
         this.props.change("token", this.props.idToken)
     }
     render() {
-        const { fields: {contactName, phoneNumber, token}, handleSubmit } = this.props
+        const { handleSubmit, pristine, reset, submitting } = this.props
         console.log(contactName)
-        return (
-            <div>
-                <form onSubmit={ handleSubmit(this.props.addContact)} >
-                    <Field
-                        name="token"
-                        component="input"
-                        type="hidden"
-                        value= "token"
-                        {...token}
-                    />
-                    <div id="contacts-header" className="row">
-                    <h2 className="app-header-font">Contacts</h2>
-                    </div>
-                    <div id="contacts" className="row">
-                        <div className="small-11 medium-8 large-6 columns"> 
-                            <div className="contact-form">
-                                <div className="floated-label-wrapper">
-                                    <label htmlFor="full-name-0">Name</label>
-                                    <Field
-                                    name="contactName"
-                                    component="input"
-                                    type="text"
-                                    placeholder="Contact Name"
-                                    {...contactName}
-                                    />
-                                </div>
-                                <div className="floated-label-wrapper">
-                                    <label htmlFor="tel-0">Phone #</label>
-                                    <Field
-                                        name="phoneNumber"
-                                        component="input"
-                                        type="tel"
-                                        placeholder="Phone Number (1234567890)"
-                                        {...phoneNumber}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {/*<!--Add Contact Button-->*/}
-                    <br></br>
-                    {/*<div id="add-contact-button" className="row">
-                        <button type="button" className="button button-hover-default small-11 medium-4 large-2 columns app-font">
-                            <span>Add Contact </span><i className="fa fa-user-plus fa-lg" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                    <br></br>*/}
-                    <div id="save-profile-container" className="row">
-                        <button className="button button-hover-default small-11 medium-4 large-2 columns app-font" type="submit" value="Save">
-                            <span>Save </span><i className="fa fa-floppy-o fa-lg" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>      
-        )
+    return (
+    <form onSubmit={handleSubmit}>
+      <Field name="contactName" 
+      type="text"
+      component={this.renderField} 
+      label="Contact Name"
+      />
+      <Field name="phoneNumber" 
+      type="phone"
+      component={this.renderField} 
+      label="Phone Number"
+      />
+      <div>
+        <button type="submit" disabled={submitting}>Submit</button>
+        <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+      </div>
+    </form>
+    )
     }
-} 
+}
+function validate(values){
+    const errors = {};
 
+    //Validate the inputs from 'values'
+    if (!values.contactName){
+        errors.contactName = "Required";
+    }
+    if (!values.phoneNumber || !/^D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/i.test(value) ){
+        errors.phoneNumber = "Invalid Phone Number";
+    }
 
+    //If errors is empty, the form is fine to submit
+    //If errors has *any* properties, redux form assumes form us invalid
+    return errors;
+}
 
 function mapStateToProps(state){
   return Object.assign({},state)
@@ -85,8 +71,8 @@ function mapDispatchToProps(dispatch){
 }
 NewContact = connect(mapStateToProps, mapDispatchToProps)(NewContact)
 NewContact = reduxForm({
-    form: 'addNewContact',
-    fields: ["contactName", "phoneNumber", "token"]
+    validate,
+    form: 'addNewContact'
 },)(NewContact)
 
 export default NewContact
