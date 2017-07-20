@@ -3,6 +3,8 @@ import { Field, reduxForm } from 'redux-form'
 import * as actionCreators from '../actions/index';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import  ContactList  from './contact-list'
+
 class NewContact extends Component {
     constructor(props){
         super(props)
@@ -26,6 +28,7 @@ class NewContact extends Component {
     render() {
         const { addContact, handleSubmit, pristine, reset, submitting } = this.props
     return (
+   <div>
     <form onSubmit={handleSubmit(addContact)}>
       <Field name="contactName" 
       type="text"
@@ -42,6 +45,8 @@ class NewContact extends Component {
         <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
       </div>
     </form>
+    <ContactList/>
+   </div>
     )
     }
 }

@@ -15,6 +15,7 @@ const rootReducer = combineReducers({
     form: formReducer,
     user: userReducer,
     contacts: contactsReducer,
+   
     
 
 });
