@@ -1,11 +1,10 @@
 import React, { Component} from "react";
 import { Field, reduxForm } from 'redux-form'
 import * as actionCreators from '../actions/index';
-import { ContactList } from './contact-list.js';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import  ContactList  from './contact-list'
 
-console.log(ContactList)
 class NewContact extends Component {
     constructor(props){
         super(props)
@@ -30,25 +29,25 @@ class NewContact extends Component {
     render() {
         const { addContact, handleSubmit, pristine, reset, submitting } = this.props
     return (
-    <div className ="ContactPage">
-        <form onSubmit={handleSubmit(addContact)}>
-        <Field name="contactName" 
-        type="text"
-        component={this.renderField} 
-        label="Contact Name"
-        />
-        <Field name="phoneNumber" 
-        type="phone"
-        component={this.renderField} 
-        label="Phone Number"
-        />
-        <div>
-            <button type="submit" disabled={submitting}>Submit</button>
-            <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
-        </div>
-        </form>
-    <ContactList />
-    </div>
+   <div>
+    <form onSubmit={handleSubmit(addContact)}>
+      <Field name="contactName" 
+      type="text"
+      component={this.renderField} 
+      label="Contact Name"
+      />
+      <Field name="phoneNumber" 
+      type="phone"
+      component={this.renderField} 
+      label="Phone Number"
+      />
+      <div>
+        <button type="submit" disabled={submitting}>Submit</button>
+        <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+      </div>
+    </form>
+    <ContactList/>
+   </div>
     )
     }
 }
