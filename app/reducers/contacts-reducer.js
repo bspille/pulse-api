@@ -13,7 +13,7 @@ export default function(state = null, action) {
                     return payload.data.contacts
             case UPDATE_USER:
                     console.log(`add contact payload ${JSON.stringify(payload,null,1)}`)
-                    return payload.data.contacts  
+                    return payload.data
             // return the default state if type is not found
             default:
                 return state
