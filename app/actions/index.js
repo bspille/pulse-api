@@ -3,17 +3,12 @@
 // select and unselect toggle is active contact
 // contacts will need a key value to reference them
 import axios from 'axios'
-
-// set on login
-export const SET_ID_TOKEN = 'SET_ID_TOKEN';
-export const SET_NAME = 'SET_NAME';
-export const SET_IMAGE_URL = 'SET_IMAGE_URL';
-export const SET_IS_SIGNED_IN = 'SET_IS_SIGNED_IN';
-export const SET_ROUTE = 'SET_ROUTE';
-// user object fields
-export const GET_USER_DATA ='GET_USER_DATA';
-export const UPDATE_USER = 'UPDATE_USER'
-
+import { GET_USER_DATA, 
+        SET_ID_TOKEN,
+        SET_IMAGE_URL, 
+        SET_IS_SIGNED_IN, 
+        SET_NAME, 
+        UPDATE_USER } from './types.js'
 // used to get the access token from google signin
 export const setAccessToken = (idToken) =>{
     return {

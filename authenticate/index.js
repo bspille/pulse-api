@@ -8,6 +8,7 @@ const { apiController } = require('../controllers')
  module.exports = {
     authenticate(req, res, next){
         let { token } = req.body;
+        console.log(req.body)
         // google verify user as a promise nested in a try catch
         const verifyUser = new Promise((resolve, reject)=>{
             let user;
@@ -39,12 +40,8 @@ const { apiController } = require('../controllers')
             // pass arguments to the api controller
            apiController(req, res, next, user);
         
-        }).catch((err)=>{
-            // TODO: add error handling here
-            // call the next middleware passing the err
-            next()
-            
-            
-        });
+        })
+        // send error to the next middleware
+        .catch(next);
     }
 }

@@ -1,4 +1,4 @@
-import { SET_NAME } from './../actions/index.js';
+import { SET_NAME } from '../actions/types.js';
 
 export default function(state = null, action) {
     // console.log(JSON.stringify(action, null, 1));

@@ -1,7 +1,7 @@
 // TODO: this reducer needs to be debugged it returns null when it should return state
 // TODO: if the contact phone number exists the payload data is reurned null
 
-import { GET_USER_DATA, UPDATE_USER } from '../actions/index'
+import { GET_USER_DATA, UPDATE_USER } from '../actions/types.js'
 const initialState = {};
 export default function(state = null, action) {
         let { type, payload } = action;

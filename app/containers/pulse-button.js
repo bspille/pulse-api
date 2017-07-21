@@ -22,10 +22,12 @@ class PulseButton extends Component {
     sendPulse() {
         let { token } = this.props
         let { coords } = this.state
-        axios.post("/api/pulse", {
-            token,
-            coords 
-        });
+        let body = { token }
+        console.log(coords)
+        
+        axios.post("/api/pulse/", body)
+            .then((res)=> console.log(res))
+            .catch((err)=> console.log(err))
     }
     componentDidMount(){
         let pulseButton = document.getElementById('pulse-button');
@@ -33,7 +35,7 @@ class PulseButton extends Component {
     }
 
     getLocation() {
-        console.log('getting geolocation')
+        console.log('getting geolocation');
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(this.showPosition);
         } 
@@ -43,6 +45,7 @@ class PulseButton extends Component {
     }
 
     showPosition(position) {
+        
         let { coords } = position;
         this.setState({
             coords

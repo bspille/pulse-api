@@ -4,6 +4,7 @@ const { addContacts, addGeometry, checkoutUser, updateContact, updateUser,  } = 
  module.exports = {
      apiController(req, res, next, user){
         let { path } = req;
+        console.log(path)
         // route the request with the verified user to the  api controller
         switch(path){
             case CONTACT:

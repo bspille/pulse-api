@@ -1,4 +1,4 @@
-import { SET_IS_SIGNED_IN } from './../actions/index.js';
+import { SET_IS_SIGNED_IN } from '../actions/types.js';
 
 export default function(state = false, action) {
     // console.log(JSON.stringify(action, null, 1));

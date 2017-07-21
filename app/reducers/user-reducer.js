@@ -1,4 +1,4 @@
-import { GET_USER_DATA } from '../actions/index'
+import { GET_USER_DATA } from '../actions/types.js'
 
 export default function(state = null, action) {
     let { type, payload } = action

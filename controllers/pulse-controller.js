@@ -21,16 +21,17 @@ module.exports = {
                 let body = `Hey ${ given_name } ${ message } ${ point }`;
                 userObj.contacts.map((contact)=>{
                     if(contact.active){
-                        let { phoneNumber } = contact      
-                        client.messages.create({
-                            to: `+1${ phoneNumber }`,
-                            from: "+18562194209",
-                            body,
-                        })
-                        .then((message)=>{
-                            console.log(`this is the return from the twilio message ${message}`)
-                            res.status(200).json("message sent")
-                        })
+                        let { phoneNumber } = contact    
+                        res.status(200).json('pulse message sent')  
+                        // client.messages.create({
+                        //     to: `+1${ phoneNumber }`,
+                        //     from: "+18562194209",
+                        //     body,
+                        // })
+                        // .then((message)=>{
+                        //     console.log(`this is the return from the twilio message ${message}`)
+                        //     res.status(200).json("message sent")
+                        // })
                         .catch((err)=>{
                             // TODO: handle errors here
                             console.log(err)
