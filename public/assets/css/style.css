@@ -134,3 +134,48 @@ body {
   margin-bottom: 2rem;
 }
 
+/*------------------Contacts Box---------------------*/
+ .boxes{
+    float: left;
+    margin: 10px;
+
+} 
+
+.ContactListBox{
+    /* display: flex;
+    justify-content: center; */
+    height: 150px;
+    width: 200px;
+    border: 0px solid black; 
+    background-color: #2C3840;
+    color: #FFFFFF;
+    
+}
+#name{
+    margin-left: 35%;
+    padding-top: 8%;
+}
+#number{
+    margin-left: 12%;
+}
+
+.alert-callout-subtle.small .close-button {
+  font-size: 1.5rem;
+}
+
+.alert-callout-subtle.large {
+  font-size: 150%;
+}
+
+.alert-callout-subtle.large .close-button {
+  font-size: 3rem;
+}
+
+.alert-callout-subtle .close-button {
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+}

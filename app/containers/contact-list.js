@@ -10,9 +10,24 @@ class ContactList extends Component{
     }
     
     render(){
+        const Contacts = this.props.contacts.map(contact => {
+            return (
+                <div>
+                    
+                    <div className="boxes shadow">
+                        <div className="ContactListBox">
+                            <h4 id="name">{contact.contactName}</h4>
+                            <br></br>
+                            <h4 id="number">{contact.phoneNumber}</h4>
+                        </div>
+                    </div>
+                </div>
+            )
+        } 
+        )
         return(
             <div className ={"ContactList"}>
-                <p>Hello World</p>
+                {Contacts}
             </div> 
         )
     }
