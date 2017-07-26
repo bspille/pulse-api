@@ -3,13 +3,14 @@ import reactDOM from 'react-dom'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import ReduxPromise from 'redux-promise';
+// import ReduxPromise from 'redux-promise';
 import Splash from './containers/splash';
 import App from './containers/app.js';
 import reducers from './reducers/index';
+import Async from '../middlewares/async'
 
 // console.log(App)
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(Async)(createStore);
 export const store = createStoreWithMiddleware(reducers)
 
 reactDOM.render(

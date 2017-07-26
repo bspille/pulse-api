@@ -1,13 +1,8 @@
 
 // const twilio = require("./utils/twilio.js")
 // const timer = require("./utils/timer.js")
-const User = require("../models/user")
-
-// exception constructor
-function Exception(message){
-  this.message = message,
-  this.name = "ERROR: "
-}
+const User = require("../models/user");
+const Exception = require("../utils/exceptions");
 
 
  module.exports = {

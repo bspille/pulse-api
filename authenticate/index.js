@@ -1,47 +1,30 @@
-const GoogleAuth = require('google-auth-library')
-const auth = new GoogleAuth
-const CLIENT_ID = ["904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"]
-const client = new auth.OAuth2(CLIENT_ID, '904019024650-uabutl82072at99jkqdpc31ma8cf3rsj.apps.googleusercontent.com')
-const { apiController } = require('../controllers')
-
+const GoogleAuth = require('google-auth-library');
+const auth = new GoogleAuth;
+const CLIENT_ID = ["904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"];
+const client = new auth.OAuth2(CLIENT_ID, '904019024650-uabutl82072at99jkqdpc31ma8cf3rsj.apps.googleusercontent.com');
+const { apiController } = require('../controllers');
+const Exception = require("../utils/exceptions");
 
  module.exports = {
     authenticate(req, res, next){
         let { token } = req.body;
         console.log(req.body)
-        // google verify user as a promise nested in a try catch
-        const verifyUser = new Promise((resolve, reject)=>{
-            let user;
-            try{
-                // trys to run the verify token from google
-                client.verifyIdToken(token, CLIENT_ID, function(err, googleRes){
-                user = googleRes.getPayload()
-                })
-            }
-            catch(err){
-                // TODO: handle errors here
-                // catches errors here if verification fails
-            
-                console.log(`ERROR: google threw ${err}`)
-                next()
-            }
-            finally{
+        let user;
+        // trys to run the verify token from google
+        client.verifyIdToken(token, CLIENT_ID)
+            .then((user)=>{
                 // check the client Id returned matches our google client Id and resolves or rejects
-                if(user && user.aud == "904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"){
-                resolve(user)
+                if(user.aud == "904019024650-eaprlckr58veqebrbnlssik6uap05rl8.apps.googleusercontent.com"){
+                    console.log(user)
+                    // pass arguments to the api controller
+                    qapiController(req, res, next, user);
                 }
                 else{
-                reject("ERROR: User could not be verified")
+                   throw new Exception("Invalid Client ID") 
                 }
-            }
-        })
-        // call the promise verify that uses the token to verify the user
-        verifyUser.then((user)=>{
-            // pass arguments to the api controller
-           apiController(req, res, next, user);
-        
-        })
-        // send error to the next middleware
-        .catch(next);
+            })
+            // send error to the next middleware
+            .catch(next);
+                
     }
 }
