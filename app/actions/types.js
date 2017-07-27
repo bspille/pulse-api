@@ -6,3 +6,4 @@ export const SET_ROUTE = 'SET_ROUTE';
 export const GET_USER_DATA ='GET_USER_DATA';
 export const UPDATE_USER = 'UPDATE_USER'
 export const ERROR = 'ERROR'
+export const ADD_CONTACT = 'ADD_CONTACT'

@@ -1,7 +1,7 @@
-import { GET_USER_DATA } from '../actions/types.js'
+import { GET_USER_DATA } from '../actions/types.js';
 
-export default function(state = null, action) {
-    let { type, payload } = action
+export default function(state = null, { type, payload }) {
+    
     // console.log(JSON.stringify(action, null, 1));
         console.log(payload)
         switch(type){
@@ -12,7 +12,7 @@ export default function(state = null, action) {
             // return the default state if type is not found
             default:
                 return state
-        }
+        };
     
 
-}
+};
